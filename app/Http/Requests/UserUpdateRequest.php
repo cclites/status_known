@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use phpDocumentor\Reflection\Types\Boolean;
 
 
 class UserUpdateRequest extends FormRequest
@@ -12,9 +13,9 @@ class UserUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Boolean $authorize = null)
     {
-        return false;
+        return $authorize;
     }
 
     /**
@@ -24,6 +25,8 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        \Log::info($this->request->all());
+
         return [
             'id' => 'required|numeric',
             'name' => 'required|string|max:100',

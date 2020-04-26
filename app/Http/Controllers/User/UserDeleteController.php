@@ -8,5 +8,7 @@ use Illuminate\Http\Request;
 
 class UserDeleteController extends Controller
 {
-    public function destroy(UserUpdateRequest $request){}
+    public function destroy(\App\User $user){
+
+    }
 }
