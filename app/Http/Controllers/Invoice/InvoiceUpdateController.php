@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class InvoiceUpdateController extends Controller
 {
     public function update(InvoiceUpdateRequest $request){
-
+        $data = $request->validated();
     }
 }

@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class InvoiceDeleteController extends Controller
 {
     public function destroy(InvoiceUpdateRequest $request){
-
+        $data = $request->validated();
     }
 }

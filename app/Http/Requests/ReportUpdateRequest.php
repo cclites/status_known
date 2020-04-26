@@ -24,7 +24,10 @@ class ReportUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'business_id' => 'required|numeric',
+            'record_id' => 'required|numeric',
+            'requested_by_id' => 'required|numeric',
+            'tracking' => 'required|string|max:32',
         ];
     }
 }

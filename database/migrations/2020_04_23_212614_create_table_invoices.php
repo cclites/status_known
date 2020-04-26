@@ -18,6 +18,7 @@ class CreateTableInvoices extends Migration
             $table->unsignedBigInteger('business_id');
             $table->double('amount');
             $table->string('tracking', 32);
+            $table->dateTime('created_on')->nullable();
             $table->timestamps();
 
             $table->foreign('business_id')->references('id')->on('businesses');

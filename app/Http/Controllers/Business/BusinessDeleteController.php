@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class BusinessDeleteController extends Controller
 {
     public function destroy(BusinessUpdateRequest $request){
-
+        $data = $request->validated();
     }
 }

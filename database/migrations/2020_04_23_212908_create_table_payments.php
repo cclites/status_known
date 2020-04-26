@@ -20,6 +20,7 @@ class CreateTablePayments extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->string('tracking', 32);
             $table->boolean('approved')->default(false);
+            $table->dateTime('finalized_on')->nullable();
 
             $table->timestamps();
 

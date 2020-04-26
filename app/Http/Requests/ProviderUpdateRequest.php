@@ -24,7 +24,11 @@ class ProviderUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'contact_name' => 'required|string|max:100',
+            'company_name' => 'required|string|max:100',
+            'provider_name' => 'required|string|max:100',
+            'phone' => 'required|string|max:12',
+            'email' => 'required|string|max:50',
         ];
     }
 }

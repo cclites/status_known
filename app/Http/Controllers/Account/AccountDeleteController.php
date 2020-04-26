@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class AccountDeleteController extends Controller
 {
     public function destroy(AccountUpdateRequest $request){
-
+        $data = $request->validated();
     }
 }

@@ -10,6 +10,6 @@ class AccountUpdateController extends Controller
 {
     public function update(AccountUpdateRequest $request){
 
-        //get validated data from $request and use Create to create a new account
+        $data = $request->validated();
     }
 }

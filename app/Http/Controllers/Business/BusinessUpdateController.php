@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class BusinessUpdateController extends Controller
 {
     public function update(BusinessUpdateRequest $request){
-
+        $data = $request->validated();
     }
 }

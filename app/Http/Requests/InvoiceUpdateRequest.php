@@ -24,7 +24,10 @@ class InvoiceUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'business_id' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'tracking' => 'required|string|max:32',
+            'created_at' => 'nullable|date'
         ];
     }
 }

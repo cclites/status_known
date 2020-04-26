@@ -24,7 +24,9 @@ class AccountUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'account_number' => 'required|string|max:25',
+            'card_number' => 'required|string|max:25',
+            'tracking' => 'required|string|max:32',
         ];
     }
 }

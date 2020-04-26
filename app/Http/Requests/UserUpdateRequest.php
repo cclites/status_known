@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class UserUpdateRequest extends FormRequest
 {
     /**
@@ -24,7 +25,9 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'required|numeric',
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|max:50',
         ];
     }
 }

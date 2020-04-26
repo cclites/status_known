@@ -24,7 +24,12 @@ class PaymentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'amount' => 'required|numeric',
+            'business_id' => 'required|numeric',
+            'invoice_id' => 'required|numeric',
+            'tracking' => 'required|string|max:32',
+            'approved' => 'boolean',
+            'finalized_on' => 'nullable|date'
         ];
     }
 }

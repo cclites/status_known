@@ -24,7 +24,13 @@ class RecordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'created_by_id' => 'required|numeric',
+            'provider_id' => 'required|numeric',
+            'invoice_id' => 'required|numeric',
+            'business_id' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'data' => 'required',
+            'tracking' => 'required|string|max:32',
         ];
     }
 }

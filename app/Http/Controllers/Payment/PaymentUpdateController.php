@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class PaymentUpdateController extends Controller
 {
     public function update(PaymentUpdateRequest $request){
-
+        $data = $request->validated();
     }
 }
