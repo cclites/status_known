@@ -1,7 +1,7 @@
 <?php
 
-Route::get('invoice', 'Invoice\InvoiceController@index');
-Route::get('invoice/{invoice}', 'Invoice\InvoiceShowController@show');
-Route::post('invoice', 'Invoice\InvoiceAddController@store');
-Route::patch('invoice', 'Invoice\InvoiceUpdateController@update');
-Route::delete('invoice', 'Invoice\InvoiceDeleteController@destroy');
+Route::get('invoices', 'Invoice\InvoiceController@index');
+Route::get('invoices/{invoice}', 'Invoice\InvoiceShowController@show');
+Route::post('invoices', 'Invoice\InvoiceAddController@store');
+Route::patch('invoices', 'Invoice\InvoiceUpdateController@update');
+Route::delete('invoices', 'Invoice\InvoiceDeleteController@destroy');

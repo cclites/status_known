@@ -7,16 +7,19 @@ use Tests\TestCase;
 use Faker\Factory as Faker;
 use Illuminate\Support\Str;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
+use App\Role as R;
+use APp\Permission as P;
 
 class UserTest extends TestCase
 {
 
-    use WithoutMiddleware;
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public $user;
 
@@ -26,49 +29,36 @@ class UserTest extends TestCase
      */
     public function testUserCanBeCreated()
     {
-        $this->user = $this->createUser();
-        $this->assertIsArray($this->user);
+        $this->user = factory(\App\User::class)->create();
+        $this->assertIsObject($this->user);
     }
 
-    public function testUserCanBeSaved(){
-
-
-        $user = $this->user;
-
-        //$response = $this->get('/');
-
-        //$response->assertStatus(200);
-
-        /*
-        $response = $this->post(route('users_store', [$user]));
-
-        $response->assertStatus(200);*/
-
-        $this->postJson(route('users_store', [$user]))
-            //->assertStatus(200)
-        ->dump();
-
+    public function testCanAddRoleToUser()
+    {
+        $user = factory(\App\User::class)->create();
+        $user->assignRole(R::ADMIN);
+        $this->assertTrue($user->hasRole('admin'));
     }
 
-    public function createUser(){
+    public function testCanRemoveRoleFromUser()
+    {
+        $user = factory(\App\User::class)->create();
+        $user->assignRole(R::ADMIN);
+        $this->assertTrue($user->hasRole('admin'));
 
-        $faker = Faker::create();
-
-        $data = [
-            'name' => $faker->name,
-            'email' => $faker->unique()->safeEmail,
-            'email_verified_at' => \Carbon\Carbon::now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-        ];
-
-        return $data;
-
-        //return new User($data);
+        $user->removeRole(R::ADMIN);
+        $this->assertFalse($user->hasRole('admin'));
     }
-/*
-$this->putJson(route('users_store', ['user' => $this->user]))
-->assertStatus(200);
-*/
+
+    public function testCanAddPermissionToUserRole()
+    {
+        $user = factory(\App\User::class)->create();
+        $user->assignRole(R::ADMIN);
+
+        $role = Role::findByName('admin');
+        $role->givePermissionTo(P::CAN_READ);
+
+        $this->assertTrue($user->hasPermissionTo(P::CAN_READ));
+    }
 
 }

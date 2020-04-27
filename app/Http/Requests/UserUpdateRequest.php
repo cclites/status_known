@@ -25,7 +25,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        \Log::info($this->request->all());
+        \Log::info($this);
 
         return [
             'id' => 'required|numeric',

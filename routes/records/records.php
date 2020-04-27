@@ -1,7 +1,7 @@
 <?php
 
-Route::get('record', 'Record\RecordController@index');
-Route::get('record/{record}', 'Record\RecordShowController@show');
-Route::post('record', 'Record\RecordAddController@store');
-Route::patch('record', 'Record\RecordUpdateController@update');
-Route::delete('record', 'Record\RecordDeleteController@destroy');
+Route::get('records', 'Record\RecordController@index');
+Route::get('records/{record}', 'Record\RecordShowController@show');
+Route::post('records', 'Record\RecordAddController@store');
+Route::patch('records', 'Record\RecordUpdateController@update');
+Route::delete('records', 'Record\RecordDeleteController@destroy');

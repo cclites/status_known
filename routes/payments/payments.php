@@ -1,7 +1,7 @@
 <?php
 
-Route::get('payment', 'Payment\PaymentController@index');
-Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
-Route::post('payment', 'Payment\PaymentAddController@store');
-Route::patch('payment', 'Payment\PaymentUpdateController@update');
-Route::delete('payment', 'Payment\PaymentDeleteController@destroy');
+Route::get('payments', 'Payment\PaymentController@index');
+Route::get('payments/{payment}', 'Payment\PaymentShowController@show');
+Route::post('payments', 'Payment\PaymentAddController@store');
+Route::patch('payments', 'Payment\PaymentUpdateController@update');
+Route::delete('payments', 'Payment\PaymentDeleteController@destroy');
