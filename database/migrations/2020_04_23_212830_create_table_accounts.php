@@ -15,11 +15,14 @@ class CreateTableAccounts extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('business_id');
             $table->string('account_number', 25);
             $table->string('card_number', 25);
             //TODO: update once payment processor is determined
             $table->string('tracking', 32);
             $table->timestamps();
+
+            $table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 

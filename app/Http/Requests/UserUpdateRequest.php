@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Permission as P;
+use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -13,9 +15,13 @@ class UserUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Boolean $authorize = null)
+    public function authorize()
     {
-        return $authorize;
+        if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
+            Auth::user()->hasAnyPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+        {
+            return true;
+        }
     }
 
     /**
@@ -25,8 +31,6 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        \Log::info($this);
-
         return [
             'id' => 'required|numeric',
             'name' => 'required|string|max:100',

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Permission as P;
+use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RecordRequest extends FormRequest
@@ -13,6 +15,12 @@ class RecordRequest extends FormRequest
      */
     public function authorize()
     {
+        if(Auth::user()->hasRole([R::ADMIN,R::SYSTEM]) &&
+            Auth::user()->hasAnyPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+        {
+            return true;
+        }
+
         return false;
     }
 
