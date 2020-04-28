@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Account;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountUpdateRequest;
 use Illuminate\Http\Request;
@@ -13,5 +14,6 @@ class AccountAddController extends Controller
         $data = $request->validated();
 
         //get validated data from $request and use Create to create a new account
+        $account = Account::create($data);
     }
 }

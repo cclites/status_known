@@ -12,12 +12,30 @@ class UserAddController extends Controller
 {
     public function store(Request $request)
     {
+        \Log::info("Add User");
+        \Log::info(print_r($request->all(), true));
 
-        \Log::info($request);
+        //$data = $request->all();
 
-        //$request->authorize(true);
+        try{
+            $user = new User;
 
-        //\Log::info("Store the results");
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = $request->password;
+
+            $user->save();
+
+            return response(200);
+        }catch(\Exception $e){
+            \Log::info($e->getMessage());
+            return response(500);
+        }
+
+        //get validated data from $request and use Create to create a new account
+        //
+
+
 
     }
 }

@@ -19,7 +19,7 @@ foreach ($directories as $directory)
 {
     $baseName = basename($directory);
 
-    require_once $directory . "/" . $baseName . ".php";
+    require $directory . "/" . $baseName . ".php";
 }
 
 Route::get('/', function () {
@@ -84,9 +84,14 @@ Route::delete('report', 'Report/ReportDeleteController@destroy');
 */
 
 /*
-Route::get('user', 'User/UserController@index');
-Route::get('user/{user}', 'User/UserShowController@show');
-Route::post('user', 'User/UserAddController@store');
-Route::patch('user', 'User/UserUpdateController@update');
-Route::delete('user', 'User/UserDeleteController@destroy');
+Route::get('users', 'User/UserController@index');
+Route::get('users/{user}', 'User/UserShowController@show');
+Route::post('users', 'User/UserAddController@store');
+Route::patch('users', 'User/UserUpdateController@update');
+Route::delete('users', 'User/UserDeleteController@destroy');
 */
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
