@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});*/
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('api_loader', function(){
+        \Log::info("Called API Loader.");
+    });
+
+    Route::get('api_loader', 'ApiAccessController@loadForm');
+
 });
