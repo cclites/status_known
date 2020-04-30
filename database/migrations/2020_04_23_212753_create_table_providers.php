@@ -17,7 +17,7 @@ class CreateTableProviders extends Migration
             $table->string('contact_name', 100)->unique();
             $table->string('company_name', 100)->unique();
             $table->string('provider_name', 100)->unique();
-            $table->string('phone', 12);
+            $table->string('phone', 32);
             $table->string('email', 50);
 
             $table->timestamps();

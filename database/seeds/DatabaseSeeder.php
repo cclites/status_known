@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(BusinessesTableSeeder::class);
+        $this->call(AccountsTableSeeder::class);
+        $this->call(InvoicesTableSeeder::class);
+        $this->call(PaymentsTableSeeder::class);
+        $this->call(ProvidersTableSeeder::class);
+        $this->call(RecordsTableSeeder::class);
+        $this->call(ReportsTableSeeder::class);
     }
 }

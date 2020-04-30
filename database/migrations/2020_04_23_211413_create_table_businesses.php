@@ -23,7 +23,7 @@ class CreateTableBusinesses extends Migration
             $table->string('city', 50);
             $table->string('state', 25);
             $table->string('zip', 12);
-            $table->string('phone', 12);
+            $table->string('phone', 32);
             $table->timestamps();
 
             $table->foreign('responsible_agent_id')->references('id')->on('users');
