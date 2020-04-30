@@ -29,8 +29,8 @@ class AddPermissionsToDb extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
+
         Permission::truncate();
-        Schema::enableForeignKeyConstraints();
+
     }
 }

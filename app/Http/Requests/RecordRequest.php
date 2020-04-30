@@ -15,8 +15,8 @@ class RecordRequest extends FormRequest
      */
     public function authorize()
     {
-        if(Auth::user()->hasRole([R::ADMIN,R::SYSTEM]) &&
-            Auth::user()->hasAnyPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+        if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
+            \Auth::user()->hasAnyPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
         {
             return true;
         }
@@ -32,13 +32,20 @@ class RecordRequest extends FormRequest
     public function rules()
     {
         return [
-            'created_by_id' => 'required|numeric',
-            'provider_id' => 'required|numeric',
-            'invoice_id' => 'required|numeric',
-            'business_id' => 'required|numeric',
-            'amount' => 'required|numeric',
-            'data' => 'required',
-            'tracking' => 'required|string|max:32',
+            'first_name' => 'required|string|max:32',
+            'middle_name' => 'string|max:32',
+            'last_name' => 'required|string|max:32',
+            'dob' => 'required|string|max:10',
+            'ssn' => 'required|string|max:11',
+            'tracking' => 'required|string'
         ];
     }
 }
+
+/*
+ * first_name: '',
+                    middle_name: '',
+                    last_name: '',
+                    dob: '',
+                    ssn: '',
+ */

@@ -20,8 +20,8 @@ class CreateTableRecords extends Migration
             $table->unsignedBigInteger('provider_id');
             $table->unsignedBigInteger('business_id');
             $table->unsignedBigInteger('invoice_id')->nullable();
-            $table->double('amount');
-            $table->binary('data');
+            $table->double('amount')->nullable();
+            $table->binary('data')->nullable();
             $table->string('tracking', 32);
 
             $table->timestamps();

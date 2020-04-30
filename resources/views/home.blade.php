@@ -27,11 +27,4 @@
     </div>
 </div>
 
-{{--
-    In the real world, this would be a full route with
-    authentication parameter of some sort.
-
-    This also needs to call a route.
---}}
-<script src="api/api_loader?token=RFlK~2|WlJm5uS"></script>
 @endsection

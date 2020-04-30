@@ -15,14 +15,14 @@ class ApiAccess
      */
     public function handle($request, Closure $next)
     {
-        if($user = \App\User::where('token', $request->token)->where('active', true)){
-            \Log::info("user is valid");
+        $user = \App\User::where('token', $request->token)->where('active', true)->first();
+
+        //TODO:: create scopes in user model
+        if($user){
+            \Auth::login($user, true);
             return $next($request);
         }else{
-            \Log::info("User is not valid");
-            //Clear out the form, or leave a message indicating that the business is no longer active
-            return "";
+            abort(500, 'Unable to authenticate API');
         }
-
     }
 }

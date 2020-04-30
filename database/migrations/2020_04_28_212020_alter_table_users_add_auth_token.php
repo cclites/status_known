@@ -27,7 +27,12 @@ class AlterTableUsersAddAuthToken extends Migration
     public function down()
     {
         Schema::table('users', function(Blueprint $table){
+
+            Schema::disableForeignKeyConstraints();
+
             $table->dropIfExists(['token', 'active']);
+
+            Schema::enableForeignKeyConstraints();
         });
     }
 }
