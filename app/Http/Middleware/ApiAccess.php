@@ -22,7 +22,8 @@ class ApiAccess
             \Auth::login($user, true);
             return $next($request);
         }else{
-            abort(500, 'Unable to authenticate API');
+            //TODO:: return a blank view of some sort.
+            abort(403, 'Unable to authenticate API');
         }
     }
 }

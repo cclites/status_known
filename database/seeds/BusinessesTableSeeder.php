@@ -9,7 +9,7 @@ class BusinessesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(\App\User $user)
     {
         factory(App\Business::class)->create();
     }

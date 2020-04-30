@@ -24,6 +24,12 @@ class CreateTableRecords extends Migration
             $table->binary('data')->nullable();
             $table->string('tracking', 32);
 
+            $table->string('first_name', 32);
+            $table->string('middle_name', 32)->nullable();
+            $table->string('last_name', 32);
+            $table->string('ssn', 32);
+            $table->string('dob', 32);
+
             $table->timestamps();
 
             $table->foreign('created_by_id')->references('id')->on('users');

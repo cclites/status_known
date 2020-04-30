@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
 {
+    protected $fillable = [
+
+    ];
+
     public function provider(){
         return $this->belongsTo(\App\Provider::class);
     }
@@ -16,5 +20,10 @@ class Record extends Model
 
     public function createdBy(){
         return $this->hasOne(\App\User::class, 'id', 'created_by_id');
+    }
+
+    public function resolveChildRouteBinding($childType, $value, $field)
+    {
+        // TODO: Implement resolveChildRouteBinding() method.
     }
 }

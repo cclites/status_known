@@ -1976,8 +1976,8 @@ __webpack_require__.r(__webpack_exports__);
         middle_name: '',
         last_name: '',
         dob: '',
-        ssn: '',
-        token: this.token
+        ssn: '' //token: this.token
+
       },
       formattedSSN: '',
       formattedDOB: ''
@@ -1987,7 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submitRequest: function submitRequest() {
       //console.log("Submitting request");
-      axios.post('request-record', this.form).then(function (response) {
+      axios.post('request-record?token=' + this.token, this.form).then(function (response) {
         console.log(response);
       });
     }

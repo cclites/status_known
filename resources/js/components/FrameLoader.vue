@@ -72,7 +72,7 @@
                     last_name: '',
                     dob: '',
                     ssn: '',
-                    token: this.token
+                    //token: this.token
                 },
                 formattedSSN: '',
                 formattedDOB: ''
@@ -87,7 +87,7 @@
         methods: {
             submitRequest(){
                 //console.log("Submitting request");
-                axios.post('request-record', this.form)
+                axios.post('request-record?token=' + this.token, this.form)
                     .then((response)=>{
                         console.log(response);
                     })

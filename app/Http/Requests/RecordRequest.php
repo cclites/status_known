@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use App\Permission as P;
 use App\Role as R;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class RecordRequest extends FormRequest
@@ -16,7 +20,7 @@ class RecordRequest extends FormRequest
     public function authorize()
     {
         if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->hasAnyPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+            \Auth::user()->checkPermissionTo(P::CAN_CREATE))
         {
             return true;
         }
@@ -37,7 +41,7 @@ class RecordRequest extends FormRequest
             'last_name' => 'required|string|max:32',
             'dob' => 'required|string|max:10',
             'ssn' => 'required|string|max:11',
-            'tracking' => 'required|string'
+            'tracking' => 'nullable|string'
         ];
     }
 }
