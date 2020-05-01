@@ -1,6 +1,6 @@
-/*
- * This is the JS to load the iframe
- */
+/************************************************
+ * JS to load the inject an iframe into the page.
+ ***********************************************/
 
 console.log("*** Load the iFrame");
 let frame= '<iframe id="frame-panel" src="http://192.168.10.10/api/gateway?token=%TOKEN%"></iframe>';

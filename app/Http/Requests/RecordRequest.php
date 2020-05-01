@@ -20,7 +20,7 @@ class RecordRequest extends FormRequest
     public function authorize()
     {
         if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->checkPermissionTo(P::CAN_CREATE))
+            \Auth::user()->checkPermissionTo(P::CAN_CREATE)) //TODO::add all permissions
         {
             return true;
         }
@@ -41,15 +41,9 @@ class RecordRequest extends FormRequest
             'last_name' => 'required|string|max:32',
             'dob' => 'required|string|max:10',
             'ssn' => 'required|string|max:11',
-            'tracking' => 'nullable|string'
+            'tracking' => 'nullable|string',
+            'provider_id' => 'required|numeric',
+            'business_id' => 'required|numeric',
         ];
     }
 }
-
-/*
- * first_name: '',
-                    middle_name: '',
-                    last_name: '',
-                    dob: '',
-                    ssn: '',
- */

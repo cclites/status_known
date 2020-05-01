@@ -4,37 +4,50 @@ namespace App\Http\Controllers\Record;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RecordRequest;
-use App\Permission as P;
+use App\Jobs\RequestRecordJob;
 use App\Record;
-use App\Role as R;
 use Illuminate\Http\Request;
 
 class RecordCreateController extends Controller
 {
-    public function create(RecordRequest $request){
+    /**
+     * create a new record request
+     *
+     * @param RecordRequest $request
+     */
+    public function create(RecordRequest $request)
+    {
+        $record = new Record();
 
-        $record = new Record($request->all());
+        /* Record request info */
+        $record->first_name = $request->first_name;
+        $record->middle_name = $request->middle_name;
+        $record->last_name = $request->last_name;
+        $record->dob = $request->dob;
+        $record->ssn = $request->ssn;
 
-        //\Log::info("Hit the request controller");
-        \Log::info(json_encode($record));
+        /* Add additional record info */
+        $record->created_by_id = \Auth::user()->id;
+        $record->business_id = \Auth::user()->business_id;
+        $record->provider_id = $request->provider_id;
+        $record->tracking = \Str::random(16);
 
-        //Here we create and save a Record record, populated with
-        //provider id (there will only be one), business_id, and tracking.
-        //The request object only has the search parameters. In order to save
-        //the record, need to append other things there.
+        $record->save();
 
-        /*
-'created_by_id' => 'required|numeric',
-'provider_id' => 'required|numeric',
-'invoice_id' => 'nullable|numeric',
-'business_id' => 'required|numeric',
-'amount' => 'nullable|numeric',
-'data' => 'nullable',
-'tracking' => 'nullable|string|max:32',
+        /* TODO:: Add record to job queue */
+        RequestRecordJob::dispatch($record);
 
-        {"first_name":"wqeqwe","middle_name":"qweqwe","last_name":"qweqweq","dob":"2020-04-10","ssn":"123121325","token":"$2y$10$6tNghZbPaxdQ9qFTx3G3hOsCwt6R.Xb5YlaWVj68LJbI2QUHerMMG"}
+        /* TODO: Return a success or error message */
+        return response()->json($record);
+    }
 
-*/
+    /**
+     * add a record to the job queue
+     *
+     * @param Record $record
+     */
+    public function addJobToQueue(Record $record)
+    {
 
     }
 }

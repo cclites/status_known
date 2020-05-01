@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_messages_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/messages.js */ "./resources/js/mixins/messages.js");
+/* harmony import */ var _mixins_messages_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_mixins_messages_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1959,40 +1961,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    token: ''
+    token: '',
+    business: {}
   },
   components: {},
-  mixins: [],
+  mixins: [_mixins_messages_js__WEBPACK_IMPORTED_MODULE_0___default.a],
   data: function data() {
     return {
       form: {
-        first_name: '',
-        middle_name: '',
-        last_name: '',
+        first_name: 'awd',
+        middle_name: 'afafe',
+        last_name: 'dtyhhfygy',
         dob: '',
-        ssn: '' //token: this.token
-
+        ssn: '123456789',
+        provider_id: 1,
+        business_id: 1
       },
       formattedSSN: '',
-      formattedDOB: ''
+      formattedDOB: '',
+      businessData: ''
     };
   },
   computed: {},
   methods: {
     submitRequest: function submitRequest() {
+      var _this = this;
+
       //console.log("Submitting request");
-      axios.post('request-record?token=' + this.token, this.form).then(function (response) {
-        console.log(response);
+      axios.post('records?token=' + this.token, this.form).then(function (response) {
+        _this.responseMessage(response);
       });
     }
   },
-  mounted: function mounted() {//console.log(this.token);
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      this.businessData = JSON.parse(this.business);
+      this.form.business_id = this.businessData.id;
+    });
   },
   watch: {
     'form.ssn': function formSsn(oldVal, newVal) {
@@ -92309,6 +92317,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FrameLoader_vue_vue_type_template_id_39d14ac5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/mixins/messages.js":
+/*!*****************************************!*\
+  !*** ./resources/js/mixins/messages.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var Messages = {
+  methods: {
+    responseMessage: function responseMessage(response) {
+      console.log(response);
+    }
+  }
+};
 
 /***/ }),
 

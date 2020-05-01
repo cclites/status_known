@@ -11,6 +11,11 @@ $factory->define(\App\Record::class, function (Faker $faker) {
         'provider_id' => 1,
         'business_id' => 1,
         'data' => $faker->text(200),
-        'tracking' => Str::random(16),
+        'tracking' => \Str::random(16),
+        'first_name' => $faker->firstName,
+        'middle_name' => $faker->firstNameFemale,
+        'last_name' => $faker->lastName,
+        'dob' => $faker->date(),
+        'ssn' => \Str::random(9)
     ];
 });
