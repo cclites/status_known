@@ -32,22 +32,12 @@ class RecordCreateController extends Controller
         $record->provider_id = $request->provider_id;
         $record->tracking = \Str::random(16);
 
-        $record->save();
+        if(!$record->save()){
+            return response()->json(['error'=>'Unable to dispatch request.', 500]);
+        }
 
-        /* TODO:: Add record to job queue */
         RequestRecordJob::dispatch($record);
-
-        /* TODO: Return a success or error message */
-        return response()->json($record);
-    }
-
-    /**
-     * add a record to the job queue
-     *
-     * @param Record $record
-     */
-    public function addJobToQueue(Record $record)
-    {
+        return response()->json($record, 200);
 
     }
 }

@@ -1982,7 +1982,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       formattedSSN: '',
       formattedDOB: '',
-      businessData: ''
+      businessData: '',
+      disabled: false
     };
   },
   computed: {},
@@ -1990,10 +1991,25 @@ __webpack_require__.r(__webpack_exports__);
     submitRequest: function submitRequest() {
       var _this = this;
 
-      //console.log("Submitting request");
+      this.disabled = true;
+      var self = this;
       axios.post('records?token=' + this.token, this.form).then(function (response) {
-        _this.responseMessage(response);
+        _this.clearForm(); //TODO: Display a nice looking status message.
+
+      })["catch"](function (error) {
+        console.log(error);
+      }).then(function () {
+        self.disabled = false;
       });
+    },
+    clearForm: function clearForm() {
+      return; //TODO: Remove in production
+
+      this.form.first_name = '';
+      this.form.middle_name = '';
+      this.form.last_name = '';
+      this.form.dob = '';
+      this.form.ssn = '';
     }
   },
   mounted: function mounted() {
@@ -2002,16 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.business_id = this.businessData.id;
     });
   },
-  watch: {
-    'form.ssn': function formSsn(oldVal, newVal) {
-      console.log(oldVal);
-      console.log(newVal);
-    },
-    'form.dob': function formDob(oldVal, newVal) {
-      console.log(oldVal);
-      console.log(newVal);
-    }
-  }
+  watch: {}
 });
 
 /***/ }),
@@ -79974,7 +79981,7 @@ var render = function() {
                     "b-btn",
                     {
                       staticClass: "submitRequest",
-                      attrs: { variant: "info" },
+                      attrs: { variant: "info", disabled: _vm.disabled },
                       on: {
                         click: function($event) {
                           return _vm.submitRequest()

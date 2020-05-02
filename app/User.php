@@ -27,7 +27,9 @@ class User extends Authenticatable
         'remember_token',
         'created_at',
         'updated_at',
-        'business_id'
+        'business_id',
+        'id',
+        'responsible_agent_id'
     ];
 
     /**

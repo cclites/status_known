@@ -32,10 +32,12 @@ class CreateTableRecords extends Migration
 
             $table->timestamps();
 
+            /*
             $table->foreign('created_by_id')->references('id')->on('users');
             $table->foreign('provider_id')->references('id')->on('providers');
             $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->foreign('business_id')->references('id')->on('businesses');
+            */
 
         });
     }

@@ -26,8 +26,6 @@ class CreateTableBusinesses extends Migration
             $table->string('phone', 32);
             $table->timestamps();
 
-            $table->foreign('responsible_agent_id')->references('id')->on('users');
-
         });
     }
 

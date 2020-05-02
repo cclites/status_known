@@ -22,10 +22,11 @@ class CreateTableReports extends Migration
 
             $table->timestamps();
 
+            /*
             $table->foreign('business_id')->references('id')->on('businesses');
             $table->foreign('record_id')->references('id')->on('records');
             $table->foreign('requested_by_id')->references('id')->on('users');
-
+            */
         });
     }
 

@@ -39,7 +39,7 @@
                     </b-form-group>
                 </b-col>
                 <b-col class="">
-                    <b-btn @click="submitRequest()" class="submitRequest" variant="info">Submit Request</b-btn>
+                    <b-btn @click="submitRequest()" class="submitRequest" variant="info" :disabled="disabled">Submit Request</b-btn>
                 </b-col>
             </b-row>
 
@@ -78,6 +78,7 @@
                 formattedSSN: '',
                 formattedDOB: '',
                 businessData: '',
+                disabled: false,
             }
         },
 
@@ -86,16 +87,35 @@
 
         methods: {
             submitRequest(){
-                //console.log("Submitting request");
+
+                this.disabled = true;
+                let self = this;
+
                 axios.post('records?token=' + this.token, this.form)
                     .then((response)=>{
-                        this.responseMessage(response);
+                        this.clearForm();
+                        //TODO: Display a nice looking status message.
+                    }).catch(function (error) {
+                        console.log(error);
                     })
+                    .then(function () {
+                        self.disabled = false;
+                    });
             },
+
+            clearForm(){
+
+                return;  //TODO: Remove in production
+
+                this.form.first_name = '';
+                this.form.middle_name = '';
+                this.form.last_name = '';
+                this.form.dob = '';
+                this.form.ssn = '';
+            }
         },
 
         mounted() {
-
             this.$nextTick(
                 function()
                 {
@@ -103,22 +123,9 @@
                     this.form.business_id = this.businessData.id;
                 }
             );
-
         },
 
         watch: {
-
-            'form.ssn'(oldVal, newVal){
-                console.log(oldVal);
-                console.log(newVal);
-
-            },
-
-            'form.dob'(oldVal, newVal){
-                console.log(oldVal);
-                console.log(newVal);
-
-            }
         },
     }
 </script>

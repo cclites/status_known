@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Business extends Model
 {
-    public function invoice(){
+    public function invoices(){
         return $this->hasMany(\App\Invoice::class);
     }
 
@@ -28,5 +28,9 @@ class Business extends Model
 
     public function payments(){
         return $this->hasMany(Payment::class);
+    }
+
+    public function users(){
+        return $this->hasMany(User::class);
     }
 }

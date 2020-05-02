@@ -22,7 +22,7 @@ class Record extends Model
     ];
 
     public function provider(){
-        return $this->belongsTo(\App\Provider::class);
+        return $this->hasOne(\App\Provider::class);
     }
 
     public function invoice(){
@@ -33,8 +33,8 @@ class Record extends Model
         return $this->hasOne(\App\User::class, 'id', 'created_by_id');
     }
 
-    public function resolveChildRouteBinding($childType, $value, $field)
-    {
-        // TODO: Implement resolveChildRouteBinding() method.
+    public function business(){
+        return $this->belongsTo(\App\Business::class);
     }
+
 }
