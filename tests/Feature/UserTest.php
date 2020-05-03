@@ -25,11 +25,10 @@ class UserTest extends TestCase
 
     protected function setUp() : void
     {
+        echo "\nUser tests\n";
+
         parent::setUp();
         $this->user = factory(\App\User::class)->create();
-
-        echo "User tests\n";
-
     }
 
     public function testUserCanBeCreated()

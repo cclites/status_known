@@ -21,20 +21,26 @@ class Record extends Model
         'tracking'
     ];
 
+    public function business(){
+        return $this->belongsTo('\App\Business');
+    }
+
+    public function reports(){
+        return $this->hasOne('\App\Report', 'tracking', 'tracking');
+    }
+
     public function provider(){
-        return $this->hasOne(\App\Provider::class, 'id', 'provider_id');
+        return $this->hasOne('\App\Provider', 'id', 'provider_id');
     }
 
     public function invoice(){
-        return $this->hasOne(\App\Invoice::class, 'id', 'invoice_id');
+        return $this->hasOne('\App\Invoice', 'tracking', 'tracking');
     }
 
-    public function createdBy(){
-        return $this->hasOne(\App\User::class, 'id', 'created_by_id');
+    public function created_by(){
+        return $this->hasOne('\App\User', 'id', 'created_by_id');
     }
 
-    public function business(){
-        return $this->belongsTo(\App\Business::class);
-    }
+
 
 }
