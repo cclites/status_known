@@ -48,7 +48,7 @@ class AddAdminDemoUser extends Command
         $user = new \App\User();
 
         $user->name = "Demo Admin";
-        $user->password = \Hash::make('demo');
+        $user->password = Hash::make('demo');
         $user->business_id = 0;
         $user->email = 'demoAdmin@acctix.com';
 
