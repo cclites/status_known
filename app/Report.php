@@ -6,20 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
     public function business(){
-        return $this->belongsTo(\App\Business::class);
+        return $this->belongsTo('\App\Business');
     }
 
-    /*
     public function record(){
-        return $this->hasOne(\App\Record::class, 'id', 'record_id');
-    }*/
-
-    public function requestedBy(){
-        return $this->hasOne(\App\User::class, 'requested_by_id', 'id' );
+        return $this->hasOne('\App\Record', 'id', 'record_id');
     }
 
-    public function invoice(){
-        return $this->belongsTo(\App\Invoice::class);
+    public function requested_by(){
+        return $this->hasOne('\App\User', 'id', 'requested_by_id' );
     }
 }

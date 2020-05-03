@@ -7,9 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Report::class, function (Faker $faker) {
     return [
-        'business_id' => 1,
+        'business_id' => 999,
         'tracking' => Str::random(16),
-        'record_id' => 1,
-        'requested_by_id' => 1
+        'record_id' => 999,
+        'requested_by_id' => 999
     ];
 });

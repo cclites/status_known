@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Invoice::class, function (Faker $faker) {
     return [
-        'business_id' => 1,
+        'business_id' => 999,
         'tracking' => Str::random(16),
         'amount' => $faker->randomFloat()
     ];
