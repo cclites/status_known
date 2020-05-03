@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
+
     public function business(){
         return $this->belongsTo('\App\Business');
     }

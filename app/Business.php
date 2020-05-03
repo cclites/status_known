@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Business extends Model
 {
+
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
     public function invoices(){
         return $this->hasMany(\App\Invoice::class);
     }

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
+
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
     public function business(){
         return $this->belongsTo(\App\Business::class);
     }

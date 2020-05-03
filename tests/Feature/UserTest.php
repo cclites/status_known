@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 use App\Role as R;
-use APp\Permission as P;
+use App\Permission as P;
 
 class UserTest extends TestCase
 {

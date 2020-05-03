@@ -47,7 +47,6 @@ class BusinessRelationsTest extends TestCase
         $this->assertNotNull($this->business['responsible_agent_id']);
     }
 
-
     public function testBusinessHasRecords(){
         $this->business->load('records');
         $this->assertNotNull($this->business['records']);

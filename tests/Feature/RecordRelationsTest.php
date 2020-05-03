@@ -32,18 +32,6 @@ class RecordRelationsTest extends TestCase
         $this->report = factory(\App\Report::class)->create(['business_id'=> $this->business['id'],  'requested_by_id' => $this->user['id'], 'tracking' => $this->record['tracking'], 'record_id' => $this->record['id']]);
 
         $this->invoice = factory(\App\Invoice::class)->create(['business_id'=> $this->business['id'], 'tracking' => $this->record['tracking']]);
-
-        \Log::info("This business");
-        \Log::info(json_encode($this->business));
-        \Log::info("This user");
-        \Log::info(json_encode($this->user));
-        \Log::info("This record");
-        \Log::info(json_encode($this->record));
-        \Log::info("This report");
-        \Log::info(json_encode($this->report));
-        \Log::info("This invoice");
-        \Log::info(json_encode($this->invoice));
-        \Log::info("*******************************************************\n\n");
     }
 
     public function testRecordHasBusiness(){

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasPermission;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
@@ -13,6 +14,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+
 
     /**
      * The attributes that are mass assignable.
@@ -50,8 +52,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function resolveChildRouteBinding($childType, $value, $field)
-    {
-        // TODO: Implement resolveChildRouteBinding() method.
-    }
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
 }

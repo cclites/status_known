@@ -21,6 +21,10 @@ class Record extends Model
         'tracking'
     ];
 
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
+
     public function business(){
         return $this->belongsTo('\App\Business');
     }
