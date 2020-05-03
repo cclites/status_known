@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
-class ReportFactory extends Command
+class ReportFactory extends BaseCommand
 {
     /**
      * The name and signature of the console command.
@@ -46,76 +46,27 @@ class ReportFactory extends Command
     {
         $report = $this->argument('report');
 
-        $lowercaseClassName = strtolower($report);
-        $formattedClassName = ucfirst($lowercaseClassName);
+        $lowerCase = strtolower($report);
+        $upperCase = ucfirst($lowerCase);
 
-        $path = base_path("App/Reports/");
+        /***********************************/
 
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }
+        $this->addReportModel($upperCase, $lowerCase);
 
-        //Create Report Handler
-        $report = file_get_contents(resource_path('stubs/report.stub'));
-        $report = str_replace('%MODEL%', $formattedClassName, $report);
-        $report = str_replace('%model%', $lowercaseClassName, $report);
-        file_put_contents(app_path("Reports/{$formattedClassName}Report.php"), $report);
+        $this->addReportController($upperCase, $lowerCase);
 
-        $path = app_path("Http/Controllers/Reports/");
+        $this->addRequest($upperCase, $lowerCase);
 
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }
+        $this->addRoute($upperCase, $lowerCase);
 
-        //Create Controller
-        $controller = file_get_contents(resource_path('stubs/report_controller.stub'));
-        $controller = str_replace('%MODEL%', $formattedClassName, $controller);
-        $controller = str_replace('%model%', $lowercaseClassName, $controller);
-        file_put_contents(app_path("Http/Controllers/Reports/{$formattedClassName}ReportController.php"), $controller);
+        $this->addResource($upperCase, $lowerCase);
 
-        //Create Request
-        Artisan::call("make:request {$formattedClassName}Request");
+        $this->addPrintBlade($upperCase, $lowerCase);
 
-        //Add Route
-        $contents = file_get_contents(base_path('routes/web.php'));
-        $contents .= "\r\n";
-        $contents .= "Route::get('{$lowercaseClassName}Report', 'Reports/{$formattedClassName}ReportController@index');\r\n";
-        file_put_contents(base_path('routes/web.php'), $contents);
+        $this->addReportView($upperCase, $lowerCase);
 
-        $path = resource_path("views/Reports/");
-
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }
-
-        //Create the blade
-        $fileName = $path . "/" . $lowercaseClassName . '_report.blade.php';
-        $blade = file_get_contents(resource_path('stubs/report_blade.stub'));
-
-        $blade = str_replace('%model%', $lowercaseClassName, $blade);
-        file_put_contents($fileName, $blade);
+        $this->registerPrintComponents($upperCase, $lowerCase);
 
         /****************************************************************/
-        //Create the vue stub
-        $path = resource_path('js/components/reports');
-
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }
-
-        $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "/{$lowercaseClassName}Report.vue";
-        file_put_contents($path, $vue);
-
-        //Register the component.
-        $appJs = file_get_contents(resource_path('js/app.js'));
-        $placeholder = $this->placeholder;
-
-        $component = "\r\nVue.component('{$lowercaseClassName}-report', require('./components/reports/{$lowercaseClassName}Report.vue'));\r\n";
-        $component .= $placeholder;
-
-        $appJs = str_replace($placeholder, $component, $appJs);
-
-        file_put_contents(resource_path('js/app.js'), $appJs);
     }
 }

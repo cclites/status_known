@@ -2,21 +2,21 @@
 
 namespace App\Console\Commands;
 
-class ClassFactory extends BaseCommand
+class ViewFactory extends BaseCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'factory:class {class}';
+    protected $signature = 'factory:vue {vue}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate boilerplate for a class';
+    protected $description = 'Create a vue module and boiler plate';
 
     public $placeholder = "//------- CONTENT -------//";
 
@@ -33,31 +33,34 @@ class ClassFactory extends BaseCommand
     /**
      * Execute the console command.
      *
-     * TODO: This should not all be in one function
-     *
      * @return mixed
      */
     public function handle()
     {
-        $class = $this->argument('class');
+        $vue = $this->argument('vue');
 
-        $lowerCase = strtolower($class);
+        $lowerCase = strtolower($vue);
         $upperCase = ucfirst($lowerCase);
 
-        //Make a model
-        $this->addModel($upperCase, $lowerCase);
+        //Create vue component
+        $this->addComponent($upperCase, $lowerCase);
 
-        //make a controller
-        $this->addController($upperCase, $lowerCase);
-
-        //make a vue
-        $this->addVue($upperCase, $lowerCase);
-
-        //Add Route
+        //create route
         $this->addRoute($upperCase, $lowerCase);
 
         //register component
         $this->registerComponent($upperCase, $lowerCase);
+
+        //create view controller
+        $this->registerComponent($upperCase, $lowerCase);
+
+        //add view controller
+        $this->addViewController($upperCase, $lowerCase);
+
+        //Make a model
+        $this->addModel($upperCase, $lowerCase);
+
+
 
     }
 }

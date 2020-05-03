@@ -15,7 +15,8 @@ Vue.use(BootstrapVue);
 //Components
 Vue.component('frame-loader', require('./components/FrameLoader.vue').default);
 
-Vue.component('Testclass3-vue', require('./components/Testclass3.vue'));
+
+Vue.component('dashboard-vue', require('./components/Dashboard.vue'));
 //------- CONTENT -------//
 
 const app = new Vue({
