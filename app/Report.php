@@ -10,12 +10,13 @@ class Report extends Model
         return $this->belongsTo(\App\Business::class);
     }
 
+    /*
     public function record(){
-        return $this->hasOne(\App\Record::class);
-    }
+        return $this->hasOne(\App\Record::class, 'id', 'record_id');
+    }*/
 
     public function requestedBy(){
-        return $this->hasOne(\App\User::class, 'id', 'requested_by_id');
+        return $this->hasOne(\App\User::class, 'requested_by_id', 'id' );
     }
 
     public function invoice(){

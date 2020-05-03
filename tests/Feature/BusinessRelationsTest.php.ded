@@ -10,7 +10,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 use Tests\TestCase;
 
-class TestBusinessRelations extends TestCase
+class BusinessRelationsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -35,7 +35,7 @@ class TestBusinessRelations extends TestCase
         $this->invoice = factory(\App\Invoice::class)->create(['business_id'=> $this->business->id, 'tracking' => $this->record['tracking']]);
         $this->account = factory(\App\Account::class)->create(['business_id'=> $this->business->id, 'tracking' => $this->record['tracking']]);
 
-        $this->assertNotNull($this->business, "Setup Failed");
+        echo "Business Relations Test\n";
     }
 
     public function testBusinessHasUser(){

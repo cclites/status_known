@@ -22,11 +22,11 @@ class Record extends Model
     ];
 
     public function provider(){
-        return $this->hasOne(\App\Provider::class);
+        return $this->hasOne(\App\Provider::class, 'id', 'provider_id');
     }
 
     public function invoice(){
-        return $this->belongsTo(\App\Invoice::class);
+        return $this->hasOne(\App\Invoice::class, 'id', 'invoice_id');
     }
 
     public function createdBy(){

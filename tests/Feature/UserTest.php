@@ -28,6 +28,8 @@ class UserTest extends TestCase
         parent::setUp();
         $this->user = factory(\App\User::class)->create();
 
+        echo "User tests\n";
+
     }
 
     public function testUserCanBeCreated()
