@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers\%MODEL%;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\%MODEL%UpdateRequest;
+use Illuminate\Http\Request;
+
+class %MODEL%AddController extends Controller
+{
+    public function store(%MODEL%UpdateRequest $request){
+
+        $data = $request->validated();
+
+    }
+}

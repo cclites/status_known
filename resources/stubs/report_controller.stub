@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers\Report;
+
+use Illuminate\Http\Request;
+use App\Reports\%MODEL%Report;
+use App\Http\Controllers\Controller;
+
+class %MODEL%ReportController extends Controller
+{
+    public function index(Request $request, %MODEL%Report $report){
+
+        if ($request->filled('json')) {
+
+            $timezone = '';
+
+            $data = $report->setTimezone($timezone)
+                            ->applyFilters(
+                                $request->all()
+                            )
+                            ->rows();
+
+            return response()->json(['data'=>$data]);
+        }
+
+        return view_component('%model%-report', '%MODEL% Report', [], []);
+
+    }
+
+}
