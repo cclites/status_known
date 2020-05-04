@@ -18,8 +18,6 @@ class ClassFactory extends BaseCommand
      */
     protected $description = 'Generate boilerplate for a class';
 
-    public $placeholder = "//------- CONTENT -------//";
-
     /**
      * Create a new command instance.
      *
@@ -33,31 +31,28 @@ class ClassFactory extends BaseCommand
     /**
      * Execute the console command.
      *
-     * TODO: This should not all be in one function
-     *
      * @return mixed
      */
     public function handle()
     {
+        /** @var  $class represents the name of a class*/
         $class = $this->argument('class');
 
         $lowerCase = strtolower($class);
         $upperCase = ucfirst($lowerCase);
-
-        //Make a model
+        
         $this->addModel($upperCase, $lowerCase);
 
-        //make a controller
         $this->addController($upperCase, $lowerCase);
 
-        //make a vue
         $this->addVue($upperCase, $lowerCase);
 
-        //Add Route
         $this->addRoute($upperCase, $lowerCase);
 
-        //register component
         $this->registerComponent($upperCase, $lowerCase);
+
+        $this->makeMigration($upperCase, $lowerCase);
+
 
     }
 }

@@ -23,8 +23,6 @@ class ReportFactory extends BaseCommand
      */
     protected $description = 'Generate boilerplate for a report';
 
-    public $placeholder = "//------- CONTENT -------//";
-
     /**
      * Create a new command instance.
      *
@@ -37,8 +35,6 @@ class ReportFactory extends BaseCommand
 
     /**
      * Execute the console command.
-     *
-     * TODO: This should not all be in one function
      *
      * @return mixed
      */

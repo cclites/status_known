@@ -18,8 +18,6 @@ class ViewFactory extends BaseCommand
      */
     protected $description = 'Create a vue module and boiler plate';
 
-    public $placeholder = "//------- CONTENT -------//";
-
     /**
      * Create a new command instance.
      *
@@ -56,6 +54,8 @@ class ViewFactory extends BaseCommand
 
         //Make a model
         $this->addViewModel($upperCase, $lowerCase);
+
+        $this->addBlade($upperCase, $lowerCase);
 
 
 
