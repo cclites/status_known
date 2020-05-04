@@ -18,7 +18,6 @@ $directories = glob( $path , GLOB_ONLYDIR);
 foreach ($directories as $directory)
 {
     $baseName = basename($directory);
-
     require $directory . "/" . $baseName . ".php";
 }
 
@@ -34,4 +33,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('dashboard', 'DashboardController@index');

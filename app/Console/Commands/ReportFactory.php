@@ -55,17 +55,15 @@ class ReportFactory extends BaseCommand
 
         $this->addReportController($upperCase, $lowerCase);
 
-        $this->addRequest($upperCase, $lowerCase);
+        $this->addReportRequest($upperCase, $lowerCase);
 
-        $this->addRoute($upperCase, $lowerCase);
+        $this->addReportRoute($upperCase, $lowerCase);
 
-        $this->addResource($upperCase, $lowerCase);
+        $this->addReportBlade($upperCase, $lowerCase);
 
-        $this->addPrintBlade($upperCase, $lowerCase);
+        $this->addReportVue($upperCase, $lowerCase);
 
-        $this->addReportView($upperCase, $lowerCase);
-
-        $this->registerPrintComponents($upperCase, $lowerCase);
+        $this->registerReportComponent($upperCase, $lowerCase);
 
         /****************************************************************/
     }

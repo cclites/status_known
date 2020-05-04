@@ -43,22 +43,19 @@ class ViewFactory extends BaseCommand
         $upperCase = ucfirst($lowerCase);
 
         //Create vue component
-        $this->addComponent($upperCase, $lowerCase);
+        $this->addViewComponent($upperCase, $lowerCase);
 
         //create route
-        $this->addRoute($upperCase, $lowerCase);
+        $this->addViewRoute($upperCase, $lowerCase);
 
         //register component
-        $this->registerComponent($upperCase, $lowerCase);
-
-        //create view controller
-        $this->registerComponent($upperCase, $lowerCase);
+        $this->registerViewComponent($upperCase, $lowerCase);
 
         //add view controller
         $this->addViewController($upperCase, $lowerCase);
 
         //Make a model
-        $this->addModel($upperCase, $lowerCase);
+        $this->addViewModel($upperCase, $lowerCase);
 
 
 

@@ -104,10 +104,33 @@ class BaseCommand extends Command
         file_put_contents(app_path("/Reports/{$upperCase}Report.php"), $class);
     }
 
+    public function addViewModel(string $upperCase, string $lowerCase){
+
+        $this->hasDirectory(app_path('Views'));
+
+        $class = file_get_contents(resource_path('stubs/class.stub'));
+        $class = str_replace('%MODEL%', $upperCase, $class);
+        file_put_contents(app_path("Views/{$upperCase}.php"), $class);
+    }
+
     public function addComponent(string $upperCase, string $lowerCase){
         $path = resource_path('js/components');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
         $path .= "/{$upperCase}.vue";
+        file_put_contents($path, $vue);
+    }
+
+    public function addReportComponent(string $upperCase, string $lowerCase){
+        $path = resource_path('js/components');
+        $vue = file_get_contents(resource_path('stubs/vue.stub'));
+        $path .= "/reports/{$upperCase}.vue";
+        file_put_contents($path, $vue);
+    }
+
+    public function addViewComponent(string $upperCase, string $lowerCase){
+        $path = resource_path('js/components');
+        $vue = file_get_contents(resource_path('stubs/vue.stub'));
+        $path .= "/views/{$upperCase}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -123,7 +146,7 @@ class BaseCommand extends Command
         file_put_contents(resource_path('js/app.js'), $appJs);
     }
 
-    public function registerPrintComponent(string $upperCase, string $lowerCase){
+    public function registerReportComponent(string $upperCase, string $lowerCase){
 
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
@@ -135,6 +158,19 @@ class BaseCommand extends Command
         file_put_contents(resource_path('js/app.js'), $appJs);
     }
 
+    public function registerViewComponent(string $upperCase, string $lowerCase){
+
+        $appJs = file_get_contents(resource_path('js/app.js'));
+        $placeholder = $this->placeholder;
+
+        $component = "\r\nVue.component('{$lowerCase}-vue', require('./components/views/{$upperCase}.vue'));\r\n";
+        $component .= $placeholder;
+
+        $appJs = str_replace($placeholder, $component, $appJs);
+        file_put_contents(resource_path('js/app.js'), $appJs);
+    }
+
+
     public function addBlade(string $upperCase, string $lowerCase){
         //Create the blade
         $fileName = resource_path("views/") . $lowerCase . '.blade.php';
@@ -144,12 +180,24 @@ class BaseCommand extends Command
         file_put_contents($fileName, $blade);
     }
 
-    public function addPrintBlade(string $upperCase, string $lowerCase){
+    public function addReportBlade(string $upperCase, string $lowerCase){
 
         $this->hasDirectory(resource_path("views/Reports/"));
 
         //Create the blade
         $fileName = resource_path("views/Reports/") . $lowerCase . '_report.blade.php';
+        $blade = file_get_contents(resource_path('stubs/report_blade.stub'));
+
+        $blade = str_replace('%model%', $lowerCase, $blade);
+        file_put_contents($fileName, $blade);
+    }
+
+    public function addViewBlade(string $upperCase, string $lowerCase){
+
+        $this->hasDirectory(resource_path("views/Views/"));
+
+        //Create the blade
+        $fileName = resource_path("views/Views/") . $lowerCase . '_view.blade.php';
         $blade = file_get_contents(resource_path('stubs/report_blade.stub'));
 
         $blade = str_replace('%model%', $lowerCase, $blade);
@@ -165,11 +213,35 @@ class BaseCommand extends Command
         Artisan::call("make:request {$upperCase}Request");
     }
 
+    public function addReportRequest(string $upperCase, string $lowerCase){
+        Artisan::call("make:request {$upperCase}Request");
+    }
+
+    public function addViewRequest(string $upperCase, string $lowerCase){
+        Artisan::call("make:request {$upperCase}Request");
+    }
+
     public function addRoute(string $upperCase, string $lowerCase){
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
+        $contents .= "Route::get('{$lowerCase}', '{$upperCase}Controller@index');\r\n";
+        file_put_contents(base_path('routes/web.php'), $contents);
+    }
+
+    public function addViewRoute(string $upperCase, string $lowerCase){
+
+        $contents = file_get_contents(base_path('routes/web.php'));
+        $contents .= "\r\n";
         $contents .= "Route::get('{$lowerCase}', '{$upperCase}ViewController@index');\r\n";
+        file_put_contents(base_path('routes/web.php'), $contents);
+    }
+
+    public function addReportRoute(string $upperCase, string $lowerCase){
+
+        $contents = file_get_contents(base_path('routes/web.php'));
+        $contents .= "\r\n";
+        $contents .= "Route::get('{$lowerCase}', 'Reports/{$upperCase}ViewController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 

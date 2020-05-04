@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\%MODEL%;
+namespace App;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\%MODEL%UpdateRequest;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
-class %MODEL% extends Controller
+class %MODEL% extends Model
 {
 
 }
