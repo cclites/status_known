@@ -18,7 +18,7 @@ class ModelFactory extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Generate framework for a model with single-responsibility controllers, requests, and routes';
+    protected $description = 'Generate framework for a model with single-responsibility controllers, requests, and routes. Includes migration';
 
     public $model;
 

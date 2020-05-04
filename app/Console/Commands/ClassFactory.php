@@ -16,7 +16,7 @@ class ClassFactory extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Generate boilerplate for a class';
+    protected $description = 'Generate boilerplate for a class. Creates a migration. No vue components';
 
     /**
      * Create a new command instance.
@@ -40,7 +40,7 @@ class ClassFactory extends BaseCommand
 
         $lowerCase = strtolower($class);
         $upperCase = ucfirst($lowerCase);
-        
+
         $this->addModel($upperCase, $lowerCase);
 
         $this->addController($upperCase, $lowerCase);

@@ -16,7 +16,7 @@ class ViewFactory extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Create a vue module and boiler plate';
+    protected $description = 'Create a vue module and boiler plate. Does not include a migration';
 
     /**
      * Create a new command instance.
