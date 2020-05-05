@@ -2,6 +2,6 @@
 
 @section('content')
 
-<report-vue></report-report>
+<businessview-vue></businessview-report>
 
 @endsection

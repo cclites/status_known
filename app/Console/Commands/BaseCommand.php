@@ -225,7 +225,7 @@ class BaseCommand extends Command
 
         $path = resource_path('js/components/views/');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "{$this->itemName}.vue";
+        $path .= "{$this->upperCase}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -306,10 +306,10 @@ class BaseCommand extends Command
      */
     public function addReportBlade(){
 
-        $this->hasDirectory(resource_path("views/Reports/"));
+        $this->hasDirectory(resource_path("views/reports/"));
 
         //Create the blade
-        $fileName = resource_path("views/Reports/") . $this->lowerCase . '_report.blade.php';
+        $fileName = resource_path("views/reports/") . $this->lowerCase . '_report.blade.php';
         $blade = file_get_contents(resource_path('stubs/report_blade.stub'));
 
         $blade = str_replace('%model%', $this->lowerCase, $blade);
@@ -324,10 +324,10 @@ class BaseCommand extends Command
      */
     public function addViewBlade(){
 
-        $this->hasDirectory(resource_path("views/Views/"));
+        $this->hasDirectory(resource_path("views/views/"));
 
         //Create the blade
-        $fileName = resource_path("views/Views/") . $this->lowerCase . '_view.blade.php';
+        $fileName = resource_path("views/views/") . $this->lowerCase . '_view.blade.php';
         $blade = file_get_contents(resource_path('stubs/view_blade.stub'));
 
         $blade = str_replace('%model%', $this->lowerCase, $blade);
@@ -406,7 +406,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->lowerCase}', 'Reports/{$this->upperCase}ReportController@index');\r\n";
+        $contents .= "Route::get('{$this->lowerCase}-report', 'Reports/{$this->upperCase}ReportController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 

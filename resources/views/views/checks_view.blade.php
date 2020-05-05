@@ -2,6 +2,6 @@
 
 @section('content')
 
-<business-vue></business-report>
+<checksview-vue></checksview-report>
 
 @endsection
