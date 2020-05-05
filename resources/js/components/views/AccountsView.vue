@@ -1,8 +1,7 @@
 <template>
     <div>
-        UsersView.vue has been loaded
+        AccountsView.vue Has Been Loaded
     </div>
-
 </template>
 
 <script>
@@ -20,6 +19,7 @@
         },
 
         computed: {},
+
 
         methods: {},
 

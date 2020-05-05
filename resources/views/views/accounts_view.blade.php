@@ -2,6 +2,6 @@
 
 @section('content')
 
-<users-view></users-view>
+<accounts-view></accounts-view>
 
 @endsection

@@ -2,6 +2,6 @@
 
 @section('content')
 
-<checksview-vue></checksview-report>
+<checks-view></checks-view>
 
 @endsection

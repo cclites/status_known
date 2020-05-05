@@ -42,9 +42,12 @@ Route::get('checks-view', 'Views\ChecksViewController@index');
 Route::get('business-view', 'Views\BusinessViewController@index');
 Route::get('invoices-view', 'Views\InvoicesViewController@index');
 Route::get('users-view', 'Views\UsersViewController@index');
+Route::get('accounts', 'Views\AccountsViewController@index');
 
 //Reports
 Route::get('checks-report', 'Reports\ChecksReportController@index');
 Route::get('businesses-report', 'Reports\BusinessesReportController@index');
 Route::get('invoices-report', 'Reports\InvoicesReportController@index');
 Route::get('users-report', 'Reports\UsersReportController@index');
+
+Route::get('reports', 'Views\ReportsViewController@index');

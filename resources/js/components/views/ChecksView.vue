@@ -1,16 +1,7 @@
 <template>
     <div>
-        <b-row>
-            <b-card header=""
-                    header-text-variant="white"
-                    header-bg-variant="info"
-            >
-                STUB DATA
-
-            </b-card>
-        </b-row>
+        ChecksView.vue Has Been Loaded
     </div>
-
 </template>
 
 <script>

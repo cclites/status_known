@@ -1,8 +1,7 @@
 <template>
     <div>
-        UsersView.vue has been loaded
+        ReportsView.vue has been loaded
     </div>
-
 </template>
 
 <script>

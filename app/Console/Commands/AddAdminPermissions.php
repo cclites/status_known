@@ -4,12 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-
-use App\Role as R;
-use App\Permission as P;
-
 class AddAdminPermissions extends Command
 {
     /**

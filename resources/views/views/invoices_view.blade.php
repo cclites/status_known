@@ -2,6 +2,6 @@
 
 @section('content')
 
-<invoicesview-vue></invoicesview-report>
+<invoices-view></invoices-view>
 
 @endsection

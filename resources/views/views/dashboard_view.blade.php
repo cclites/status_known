@@ -2,6 +2,6 @@
 
 @section('content')
 
-<dashboard-vue role="{{ $role }}"></dashboard-vue>
+<dashboard-vue user="{{ json_encode($user) }}"></dashboard-vue>
 
 @endsection

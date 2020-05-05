@@ -231,7 +231,7 @@ class BaseCommand extends Command
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$this->kebabCase}', require('./components/{$this->lowerCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->kebabCase}', require('./components/{$this->lowerCase}.vue').default);\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -249,7 +249,7 @@ class BaseCommand extends Command
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$this->kebabCase}-report', require('./components/reports/{$this->upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->kebabCase}-report', require('./components/reports/{$this->upperCase}.vue').default);\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -267,7 +267,7 @@ class BaseCommand extends Command
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$this->kebabCase}-vue', require('./components/views/{$this->upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->kebabCase}-vue', require('./components/views/{$this->upperCase}.vue').default);\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -479,7 +479,7 @@ class BaseCommand extends Command
         $this->lowerCase = strtolower($this->itemName);
         $this->upperCase = ucfirst($this->itemName);
         $this->kebabCase = Str::kebab($this->itemName);
-        $this->snakeCase = Str::sname($this->itemName);
+        $this->snakeCase = Str::snake($this->itemName);
     }
 
     public function camelCaseToKebabCase($itemName){

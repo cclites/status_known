@@ -2,6 +2,6 @@
 
 @section('content')
 
-<admin-dashboard-vue></admindashboard-report>
+<admin-dashboard-vue></admin-dashboard-vue>
 
 @endsection
