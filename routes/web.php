@@ -31,19 +31,20 @@ Route::get('test', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Views\DashboardViewController@index')->name('dashboard');
 
 //Views
-Route::get('dashboard', 'DashboardViewController@index');
-Route::get('admin-dashboard', 'AdminDashboardViewController@index');
-Route::get('business-dashboard', 'BusinessDashboardViewController@index');
-Route::get('checks-view', 'ChecksViewController@index');
-Route::get('business-view', 'BusinessViewController@index');
-Route::get('invoices-view', 'InvoicesViewController@index');
-Route::get('users-view', 'UsersViewController@index');
+Route::get('dashboard-view', 'Views\DashboardViewController@index');
+Route::get('admin-dashboard-view', 'Views\AdminDashboardViewController@index');
+Route::get('business-dashboard-view', 'Views\BusinessDashboardViewController@index');
+Route::get('checks-view', 'Views\ChecksViewController@index');
+Route::get('business-view', 'Views\BusinessViewController@index');
+Route::get('invoices-view', 'Views\InvoicesViewController@index');
+Route::get('users-view', 'Views\UsersViewController@index');
 
 //Reports
-Route::get('checks-report', 'Reports/ChecksReportController@index');
-Route::get('businesses-report', 'Reports/BusinessesReportController@index');
-Route::get('invoices-report', 'Reports/InvoicesReportController@index');
-Route::get('users-report', 'Reports/UsersReportController@index');
+Route::get('checks-report', 'Reports\ChecksReportController@index');
+Route::get('businesses-report', 'Reports\BusinessesReportController@index');
+Route::get('invoices-report', 'Reports\InvoicesReportController@index');
+Route::get('users-report', 'Reports\UsersReportController@index');

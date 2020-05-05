@@ -34,7 +34,7 @@ class BaseCommand extends Command
 
     /** Used as placeholder in app.js */
     public $placeholder = "//------- CONTENT -------//";
-    
+
     /**
      * Create a new command instance.
      *
@@ -373,7 +373,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->kebabCase}', '{$this->upperCase}ViewController@index');\r\n";
+        $contents .= "Route::get('{$this->kebabCase}', 'Views/{$this->upperCase}ViewController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 

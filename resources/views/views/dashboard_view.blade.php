@@ -2,6 +2,6 @@
 
 @section('content')
 
-<dashboard-vue></dashboard-report>
+<dashboard-vue :auth="{{ Auth::user() }}"></dashboard-vue>
 
 @endsection

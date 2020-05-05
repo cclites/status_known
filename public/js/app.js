@@ -2193,16 +2193,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
@@ -2227,16 +2217,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2344,31 +2324,45 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'views/AdminDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'views/BusinessDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+//import AdminDashboard from './components/views/AdminDashboard';
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {},
-  components: {},
+  props: {
+    'auth': {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
+  components: {
+    AdminDashboard: !(function webpackMissingModule() { var e = new Error("Cannot find module 'views/AdminDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+    BusinessDashboard: !(function webpackMissingModule() { var e = new Error("Cannot find module 'views/BusinessDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  },
   mixins: [],
   data: function data() {
-    return {};
+    return {
+      role: {
+        admin: true,
+        business: true
+      }
+    };
   },
   computed: {},
   methods: {},
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    //TODO: Get auth-user role
+    console.log(JSON.stringify(this.auth));
+  },
   watch: {}
 });
 
@@ -80638,29 +80632,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-row",
-        [
-          _c(
-            "b-card",
-            {
-              attrs: {
-                header: "",
-                "header-text-variant": "white",
-                "header-bg-variant": "info"
-              }
-            },
-            [_vm._v("\n            STUB DATA\n\n        ")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80684,29 +80656,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-row",
-        [
-          _c(
-            "b-card",
-            {
-              attrs: {
-                header: "",
-                "header-text-variant": "white",
-                "header-bg-variant": "info"
-              }
-            },
-            [_vm._v("\n            STUB DATA\n\n        ")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80822,29 +80772,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-row",
-        [
-          _c(
-            "b-card",
-            {
-              attrs: {
-                header: "",
-                "header-text-variant": "white",
-                "header-bg-variant": "info"
-              }
-            },
-            [_vm._v("\n            STUB DATA\n\n        ")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _vm.role.admin
+    ? _c("admin-dashboard-vue")
+    : _vm.role.business
+    ? _c("business-dashboard-vue")
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -93124,22 +93056,25 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]); //Components
 
 Vue.component('frame-loader', __webpack_require__(/*! ./components/FrameLoader.vue */ "./resources/js/components/FrameLoader.vue")["default"]);
-Vue.component('dashboard-vue', __webpack_require__(/*! ./components/views/Dashboard.vue */ "./resources/js/components/views/Dashboard.vue"));
-Vue.component('admin-dashboard-vue', __webpack_require__(/*! ./components/views/AdminDashboard.vue */ "./resources/js/components/views/AdminDashboard.vue"));
-Vue.component('business-dashboard-vue', __webpack_require__(/*! ./components/views/BusinessDashboard.vue */ "./resources/js/components/views/BusinessDashboard.vue"));
-Vue.component('checks-vue', __webpack_require__(/*! ./components/views/ChecksView.vue */ "./resources/js/components/views/ChecksView.vue"));
-Vue.component('business-vue', __webpack_require__(/*! ./components/views/BusinessView.vue */ "./resources/js/components/views/BusinessView.vue"));
-Vue.component('invoices-vue', __webpack_require__(/*! ./components/views/InvoicesView.vue */ "./resources/js/components/views/InvoicesView.vue"));
-Vue.component('users-vue', __webpack_require__(/*! ./components/views/UsersView.vue */ "./resources/js/components/views/UsersView.vue")); //Reports
+Vue.component('dashboard-vue', __webpack_require__(/*! ./components/views/Dashboard.vue */ "./resources/js/components/views/Dashboard.vue")["default"]);
+Vue.component('admin-dashboard-vue', __webpack_require__(/*! ./components/views/AdminDashboard.vue */ "./resources/js/components/views/AdminDashboard.vue")["default"]);
+Vue.component('business-dashboard-vue', __webpack_require__(/*! ./components/views/BusinessDashboard.vue */ "./resources/js/components/views/BusinessDashboard.vue")["default"]);
+Vue.component('checks-vue', __webpack_require__(/*! ./components/views/ChecksView.vue */ "./resources/js/components/views/ChecksView.vue")["default"]);
+Vue.component('business-vue', __webpack_require__(/*! ./components/views/BusinessView.vue */ "./resources/js/components/views/BusinessView.vue")["default"]);
+Vue.component('invoices-vue', __webpack_require__(/*! ./components/views/InvoicesView.vue */ "./resources/js/components/views/InvoicesView.vue")["default"]);
+Vue.component('users-vue', __webpack_require__(/*! ./components/views/UsersView.vue */ "./resources/js/components/views/UsersView.vue")["default"]); //Reports
 
-Vue.component('checks-report', __webpack_require__(/*! ./components/reports/Checks.vue */ "./resources/js/components/reports/Checks.vue"));
-Vue.component('businesses-report', __webpack_require__(/*! ./components/reports/Businesses.vue */ "./resources/js/components/reports/Businesses.vue"));
-Vue.component('invoices-report', __webpack_require__(/*! ./components/reports/Invoices.vue */ "./resources/js/components/reports/Invoices.vue"));
-Vue.component('users-report', __webpack_require__(/*! ./components/reports/Users.vue */ "./resources/js/components/reports/Users.vue")); //------- CONTENT -------//
+Vue.component('checks-report', __webpack_require__(/*! ./components/reports/Checks.vue */ "./resources/js/components/reports/Checks.vue")["default"]);
+Vue.component('businesses-report', __webpack_require__(/*! ./components/reports/Businesses.vue */ "./resources/js/components/reports/Businesses.vue")["default"]);
+Vue.component('invoices-report', __webpack_require__(/*! ./components/reports/Invoices.vue */ "./resources/js/components/reports/Invoices.vue")["default"]);
+Vue.component('users-report', __webpack_require__(/*! ./components/reports/Users.vue */ "./resources/js/components/reports/Users.vue")["default"]); //------- CONTENT -------//
 
-var app = new Vue({
-  el: '#request-input'
-});
+/*
+const app = new Vue({
+    el: '#app',
+});*/
+
+new Vue(App).$mount('#app');
 
 /***/ }),
 
