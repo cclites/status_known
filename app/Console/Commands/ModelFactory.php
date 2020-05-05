@@ -40,21 +40,18 @@ class ModelFactory extends BaseCommand
     public function handle()
     {
 
-        $this->model = $this->argument('model');
+        $this->itemName($this->argument('model'));
 
-        $lowerCase = strtolower($this->model);
-        $upperCase = ucfirst($lowerCase);
+        Artisan::call("make:model $this->upperCase");
 
-        Artisan::call("make:model $upperCase");
+        Artisan::call("make:request {$this->upperCase}Request");
+        Artisan::call("make:request {$this->upperCase}UpdateRequest");
 
-        Artisan::call("make:request {$upperCase}Request");
-        Artisan::call("make:request {$upperCase}UpdateRequest");
+        $this->generateSingleUseControllers($this->upperCase, $this->lowerCase);
 
-        $this->generateSingleUseControllers($upperCase, $lowerCase);
+        $this->generateSingleUseRoutes($this->upperCase, $this->lowerCase);
 
-        $this->generateSingleUseRoutes($upperCase, $lowerCase);
-
-        $this->makeMigration($upperCase, $lowerCase);
+        $this->makeMigration($this->upperCase, $this->lowerCase);
 
     }
 

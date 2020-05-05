@@ -32,3 +32,22 @@ Route::get('test', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Views
+Route::get('dashboard', 'DashboardViewController@index');
+Route::get('business', 'BusinessViewController@index');
+Route::get('report', 'ReportViewController@index');
+
+//Reports
+Route::get('checks', 'Reports/ChecksReportController@index');
+Route::get('businesses', 'Reports/BusinessesReportController@index');
+
+Route::get('invoices', 'Reports/InvoicesReportController@index');
+
+Route::get('users', 'Reports/UsersReportController@index');
+
+Route::get('', 'ViewController@index');
+
+Route::get('', 'ViewController@index');
+
+Route::get('', 'ViewController@index');

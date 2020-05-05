@@ -40,26 +40,21 @@ class ReportFactory extends BaseCommand
      */
     public function handle()
     {
-        $report = $this->argument('report');
+        $this->itemName($this->argument('report'));
 
-        $lowerCase = strtolower($report);
-        $upperCase = ucfirst($lowerCase);
+        $this->addReportModel();
 
-        /***********************************/
+        $this->addReportController();
 
-        $this->addReportModel($upperCase, $lowerCase);
+        $this->addReportRequest();
 
-        $this->addReportController($upperCase, $lowerCase);
+        $this->addReportRoute();
 
-        $this->addReportRequest($upperCase, $lowerCase);
+        $this->addReportBlade();
 
-        $this->addReportRoute($upperCase, $lowerCase);
+        $this->addReportVue();
 
-        $this->addReportBlade($upperCase, $lowerCase);
-
-        $this->addReportVue($upperCase, $lowerCase);
-
-        $this->registerReportComponent($upperCase, $lowerCase);
+        $this->registerReportComponent();
 
         /****************************************************************/
     }

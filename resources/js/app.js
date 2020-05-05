@@ -14,6 +14,22 @@ Vue.use(BootstrapVue);
 
 //Components
 Vue.component('frame-loader', require('./components/FrameLoader.vue').default);
+
+//Views
+Vue.component('dashboard-vue', require('./components/views/Dashboard.vue'));
+Vue.component('business-vue', require('./components/views/Business.vue'));
+Vue.component('report-vue', require('./components/views/Report.vue'));
+
+Vue.component('checks-report', require('./components/reports/Checks.vue'));
+Vue.component('businesses-report', require('./components/reports/Businesses.vue'));
+Vue.component('invoices-report', require('./components/reports/Invoices.vue'));
+Vue.component('users-report', require('./components/reports/Users.vue'));
+
+Vue.component('-vue', require('./components/views/.vue'));
+
+Vue.component('-vue', require('./components/views/.vue'));
+
+Vue.component('-vue', require('./components/views/.vue'));
 //------- CONTENT -------//
 
 const app = new Vue({

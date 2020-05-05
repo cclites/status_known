@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,9 +9,7 @@ class %MODEL%Controller extends Controller
 {
     public function index(Request $request){
 
-
-        return view_component('%model%-vue', '%MODEL%', [], []);
-
+        return view_component('%model%', '%MODEL%', [], []);
     }
 
 }

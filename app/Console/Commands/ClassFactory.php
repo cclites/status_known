@@ -35,23 +35,19 @@ class ClassFactory extends BaseCommand
      */
     public function handle()
     {
-        /** @var  $class represents the name of a class*/
-        $class = $this->argument('class');
+        $this->itemName($this->argument('class'));
 
-        $lowerCase = strtolower($class);
-        $upperCase = ucfirst($lowerCase);
+        $this->addModel();
 
-        $this->addModel($upperCase, $lowerCase);
+        $this->addController();
 
-        $this->addController($upperCase, $lowerCase);
+        $this->addVue();
 
-        $this->addVue($upperCase, $lowerCase);
+        $this->addRoute();
 
-        $this->addRoute($upperCase, $lowerCase);
+        $this->registerComponent();
 
-        $this->registerComponent($upperCase, $lowerCase);
-
-        $this->makeMigration($upperCase, $lowerCase);
+        $this->makeMigration();
 
 
     }

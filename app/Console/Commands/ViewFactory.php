@@ -35,27 +35,24 @@ class ViewFactory extends BaseCommand
      */
     public function handle()
     {
-        $vue = $this->argument('vue');
-
-        $lowerCase = strtolower($vue);
-        $upperCase = ucfirst($lowerCase);
+        $this->itemName($this->argument('vue'));
 
         //Create vue component
-        $this->addViewComponent($upperCase, $lowerCase);
+        $this->addViewComponent();
 
         //create route
-        $this->addViewRoute($upperCase, $lowerCase);
+        $this->addViewRoute();
 
         //register component
-        $this->registerViewComponent($upperCase, $lowerCase);
+        $this->registerViewComponent();
 
         //add view controller
-        $this->addViewController($upperCase, $lowerCase);
+        $this->addViewController();
 
         //Make a model
-        $this->addViewModel($upperCase, $lowerCase);
+        $this->addViewModel();
 
-        $this->addBlade($upperCase, $lowerCase);
+        $this->addViewBlade();
 
 
 

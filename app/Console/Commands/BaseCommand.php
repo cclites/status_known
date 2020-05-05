@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\File;
 class BaseCommand extends Command
 {
     /** @var string */
+    public $itemName;
+
+    /** @var string */
     public $upperCase;
 
     /** @var string */
@@ -67,11 +70,11 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addVue(string $upperCase, string $lowerCase){
+    public function addVue(){
 
         $path = resource_path('js/components');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "/{$upperCase}.vue";
+        $path .= "/{$this->upperCase}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -81,11 +84,13 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportVue(string $upperCase, string $lowerCase){
+    public function addReportVue(){
+
+        $this->hasDirectory(resource_path('js/components/reports'));
 
         $path = resource_path('js/components/reports');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "/{$upperCase}.vue";
+        $path .= "/{$this->upperCase}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -95,14 +100,14 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addViewController(string $upperCase, string $lowerCase){
+    public function addViewController(){
 
         $this->hasDirectory(app_path('Http/Controllers/Views'));
 
-        $controller = file_get_contents(resource_path('stubs/controller.stub'));
-        $controller = str_replace('%MODEL%', $upperCase, $controller);
-        $controller = str_replace('%model%', $lowerCase, $controller);
-        file_put_contents(app_path("Http/Controllers/Views/{$upperCase}ViewController.php"), $controller);
+        $controller = file_get_contents(resource_path('stubs/view_controller.stub'));
+        $controller = str_replace('%MODEL%', $this->upperCase, $controller);
+        $controller = str_replace('%model%', $this->lowerCase, $controller);
+        file_put_contents(app_path("Http/Controllers/Views/{$this->itemName}ViewController.php"), $controller);
     }
 
     /**
@@ -111,14 +116,14 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportController(string $upperCase, string $lowerCase){
+    public function addReportController(){
 
         $this->hasDirectory(app_path('Http/Controllers/Reports'));
 
-        $controller = file_get_contents(resource_path('stubs/controller.stub'));
-        $controller = str_replace('%MODEL%', $upperCase, $controller);
-        $controller = str_replace('%model%', $lowerCase, $controller);
-        file_put_contents(app_path("Http/Controllers/Reports/{$upperCase}ViewController.php"), $controller);
+        $controller = file_get_contents(resource_path('stubs/report_controller.stub'));
+        $controller = str_replace('%MODEL%', $this->upperCase, $controller);
+        $controller = str_replace('%model%', $this->lowerCase, $controller);
+        file_put_contents(app_path("Http/Controllers/Reports/{$this->itemName}ReportController.php"), $controller);
     }
 
     /**
@@ -127,15 +132,15 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addController(string $upperCase, string $lowerCase){
+    public function addController(){
         $controller = file_get_contents(resource_path('stubs/controller.stub'));
-        $controller = str_replace('%MODEL%', $upperCase, $controller);
-        $controller = str_replace('%model%', $lowerCase, $controller);
-        file_put_contents(app_path("Http/Controllers/{$upperCase}Controller.php"), $controller);
+        $controller = str_replace('%MODEL%', $this->itemName, $controller);
+        $controller = str_replace('%model%', $this->lowerCase, $controller);
+        file_put_contents(app_path("Http/Controllers/{$this->itemName}Controller.php"), $controller);
     }
 
     //replaced by add model
-    public function addClass(string $upperCase, string $lowerCase){}
+    public function addClass(){}
 
     /**
      * Add a model to App
@@ -143,10 +148,10 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addModel(string $upperCase, string $lowerCase){
+    public function addModel(){
         $class = file_get_contents(resource_path('stubs/class.stub'));
-        $class = str_replace('%MODEL%', $upperCase, $class);
-        file_put_contents(app_path("{$upperCase}.php"), $class);
+        $class = str_replace('%MODEL%', $this->itemName, $class);
+        file_put_contents(app_path("{$this->itemName}.php"), $class);
     }
 
     /**
@@ -155,13 +160,13 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportModel(string $upperCase, string $lowerCase){
+    public function addReportModel(){
 
         $this->hasDirectory(base_path("App/Reports/"));
 
-        $class = file_get_contents(resource_path('stubs/class.stub'));
-        $class = str_replace('%MODEL%', $upperCase, $class);
-        file_put_contents(app_path("/Reports/{$upperCase}Report.php"), $class);
+        $class = file_get_contents(resource_path('stubs/report_class.stub'));
+        $class = str_replace('%MODEL%', $this->itemName, $class);
+        file_put_contents(app_path("/Reports/{$this->itemName}Report.php"), $class);
     }
 
     /**
@@ -170,13 +175,13 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addViewModel(string $upperCase, string $lowerCase){
+    public function addViewModel(){
 
         $this->hasDirectory(app_path('Views'));
 
         $class = file_get_contents(resource_path('stubs/class.stub'));
-        $class = str_replace('%MODEL%', $upperCase, $class);
-        file_put_contents(app_path("Views/{$upperCase}.php"), $class);
+        $class = str_replace('%MODEL%', $this->itemName, $class);
+        file_put_contents(app_path("Views/{$this->itemName}.php"), $class);
     }
 
     /**
@@ -185,10 +190,10 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addComponent(string $upperCase, string $lowerCase){
+    public function addComponent(){
         $path = resource_path('js/components');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "/{$upperCase}.vue";
+        $path .= "/{$this->itemName}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -198,13 +203,13 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportComponent(string $upperCase, string $lowerCase){
+    public function addReportComponent(){
 
         $this->hasDirectory(resource_path('js/components/reports/'));
 
         $path = resource_path('js/components');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "/reports/{$upperCase}.vue";
+        $path .= "/reports/{$this->itemName}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -214,13 +219,13 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addViewComponent(string $upperCase, string $lowerCase){
+    public function addViewComponent(){
 
         $this->hasDirectory(resource_path('js/components/views/'));
 
         $path = resource_path('js/components/views/');
         $vue = file_get_contents(resource_path('stubs/vue.stub'));
-        $path .= "{$upperCase}.vue";
+        $path .= "{$this->itemName}.vue";
         file_put_contents($path, $vue);
     }
 
@@ -230,12 +235,12 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function registerComponent(string $upperCase, string $lowerCase){
+    public function registerComponent(){
 
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$lowerCase}-vue', require('./components/{$upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->lowerCase}', require('./components/{$this->lowerCase}.vue'));\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -248,12 +253,12 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function registerReportComponent(string $upperCase, string $lowerCase){
+    public function registerReportComponent(){
 
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$lowerCase}-vue', require('./components/reports/{$upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->lowerCase}-report', require('./components/reports/{$this->upperCase}.vue'));\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -266,12 +271,12 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function registerViewComponent(string $upperCase, string $lowerCase){
+    public function registerViewComponent(){
 
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$lowerCase}-vue', require('./components/views/{$upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->lowerCase}-vue', require('./components/views/{$this->upperCase}.vue'));\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -284,12 +289,12 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addBlade(string $upperCase, string $lowerCase){
+    public function addBlade(){
         //Create the blade
-        $fileName = resource_path("views/") . $lowerCase . '.blade.php';
+        $fileName = resource_path("views/") . $this->lowerCase . '.blade.php';
         $blade = file_get_contents(resource_path('stubs/blade.stub'));
 
-        $blade = str_replace('%model%', $lowerCase, $blade);
+        $blade = str_replace('%model%', $this->lowerCase, $blade);
         file_put_contents($fileName, $blade);
     }
 
@@ -299,15 +304,15 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportBlade(string $upperCase, string $lowerCase){
+    public function addReportBlade(){
 
         $this->hasDirectory(resource_path("views/Reports/"));
 
         //Create the blade
-        $fileName = resource_path("views/Reports/") . $lowerCase . '_report.blade.php';
+        $fileName = resource_path("views/Reports/") . $this->lowerCase . '_report.blade.php';
         $blade = file_get_contents(resource_path('stubs/report_blade.stub'));
 
-        $blade = str_replace('%model%', $lowerCase, $blade);
+        $blade = str_replace('%model%', $this->lowerCase, $blade);
         file_put_contents($fileName, $blade);
     }
 
@@ -317,19 +322,19 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addViewBlade(string $upperCase, string $lowerCase){
+    public function addViewBlade(){
 
         $this->hasDirectory(resource_path("views/Views/"));
 
         //Create the blade
-        $fileName = resource_path("views/Views/") . $lowerCase . '_view.blade.php';
-        $blade = file_get_contents(resource_path('stubs/report_blade.stub'));
+        $fileName = resource_path("views/Views/") . $this->lowerCase . '_view.blade.php';
+        $blade = file_get_contents(resource_path('stubs/view_blade.stub'));
 
-        $blade = str_replace('%model%', $lowerCase, $blade);
+        $blade = str_replace('%model%', $this->lowerCase, $blade);
         file_put_contents($fileName, $blade);
     }
 
-    public function addReportHandler(string $upperCase, string $lowerCase){
+    public function addReportHandler(){
 
     }
 
@@ -339,8 +344,8 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addRequest(string $upperCase, string $lowerCase){
-        Artisan::call("make:request {$upperCase}Request");
+    public function addRequest(){
+        Artisan::call("make:request {$this->upperCase}Request");
     }
 
     /**
@@ -349,8 +354,8 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportRequest(string $upperCase, string $lowerCase){
-        Artisan::call("make:request {$upperCase}Request");
+    public function addReportRequest(){
+        Artisan::call("make:request {$this->upperCase}ReportRequest");
     }
 
     /**
@@ -359,8 +364,8 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addViewRequest(string $upperCase, string $lowerCase){
-        Artisan::call("make:request {$upperCase}Request");
+    public function addViewRequest(){
+        Artisan::call("make:request {$this->upperCase}ViewRequest");
     }
 
     /**
@@ -369,11 +374,11 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addRoute(string $upperCase, string $lowerCase){
+    public function addRoute(){
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$lowerCase}', '{$upperCase}Controller@index');\r\n";
+        $contents .= "Route::get('{$this->lowerCase}', '{$this->upperCase}Controller@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -383,11 +388,11 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addViewRoute(string $upperCase, string $lowerCase){
+    public function addViewRoute(){
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$lowerCase}', '{$upperCase}ViewController@index');\r\n";
+        $contents .= "Route::get('{$this->lowerCase}', '{$this->upperCase}ViewController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -397,11 +402,11 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function addReportRoute(string $upperCase, string $lowerCase){
+    public function addReportRoute(){
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$lowerCase}', 'Reports/{$upperCase}ReportController@index');\r\n";
+        $contents .= "Route::get('{$this->lowerCase}', 'Reports/{$this->upperCase}ReportController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -411,8 +416,8 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function makeMigration(string $upperCase, string $lowerCase){
-        Artisan::call("make:migration make_table_{$lowerCase}s  --table={$lowerCase}s");
+    public function makeMigration(){
+        Artisan::call("make:migration make_table_{$this->lowerCase}s  --table={$this->lowerCase}s");
     }
 
     /**
@@ -433,50 +438,54 @@ class BaseCommand extends Command
      * @param string $upperCase
      * @param string $lowerCase
      */
-    public function generateSingleUseRoutes($upperCase, $lowerCase){
+    public function generateSingleUseRoutes(){
 
         $contents = file_get_contents(base_path('routes/web.php'));
 
         $contents .= "\r\n";
-        $contents .= "Route::get('{$lowerCase}s', '{$upperCase}/{$upperCase}Controller@index');\r\n";
-        $contents .= "Route::get('{$lowerCase}s/{ $lowerCase }', '{$upperCase}/{$upperCase}ShowController@show');\r\n";
-        $contents .= "Route::post('{$lowerCase}s', '{$upperCase}/{$upperCase}AddController@store');\r\n";
-        $contents .= "Route::patch('{$lowerCase}s', '{$upperCase}/{$upperCase}UpdateController@update');\r\n";
-        $contents .= "Route::delete('{$lowerCase}s', '{$upperCase}/{$upperCase}DeleteController@delete');\r\n";
+        $contents .= "Route::get('{$this->lowerCase}s', '{$this->upperCase}/{$this->upperCase}Controller@index');\r\n";
+        $contents .= "Route::get('{$this->lowerCase}s/{ $this->lowerCase }', '{$this->upperCase}/{$this->upperCase}ShowController@show');\r\n";
+        $contents .= "Route::post('{$this->lowerCase}s', '{$this->upperCase}/{$this->upperCase}AddController@store');\r\n";
+        $contents .= "Route::patch('{$this->lowerCase}s', '{$this->upperCase}/{$this->upperCase}UpdateController@update');\r\n";
+        $contents .= "Route::delete('{$this->lowerCase}s', '{$this->upperCase}/{$this->upperCase}DeleteController@delete');\r\n";
 
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
     /**
      * Add single-use controllers
-     *
-     * @param string $upperCase
-     * @param string $lowerCase
-     */
-    public function generateSingleUseControllers($upperCase, $lowerCase){
 
-        $this->hasDirectory(base_path("App/Http/Controllers/{$upperCase}"));
+     */
+    public function generateSingleUseControllers(){
+
+        $this->hasDirectory(base_path("App/Http/Controllers/{$this->upperCase}"));
 
         $index = file_get_contents(resource_path('stubs/index.stub'));
-        $index = str_replace('%MODEL%', $upperCase, $index);
-        file_put_contents(app_path("Http/Controllers/{$upperCase}/{$upperCase}Controller.php"), $index);
+        $index = str_replace('%MODEL%', $this->upperCase, $index);
+        file_put_contents(app_path("Http/Controllers/{$this->upperCase}/{$this->upperCase}Controller.php"), $index);
 
         $show = file_get_contents(resource_path('stubs/show.stub'));
-        $show = str_replace('%MODEL%', $upperCase, $show);
-        $show = str_replace('%model%', $lowerCase, $show);
-        file_put_contents(app_path("Http/Controllers/{$upperCase}/{$upperCase}ShowController.php"), $show);
+        $show = str_replace('%MODEL%', $this->upperCase, $show);
+        $show = str_replace('%model%', $this->lowerCase, $show);
+        file_put_contents(app_path("Http/Controllers/{$this->upperCase}/{$this->upperCase}ShowController.php"), $show);
 
         $add = file_get_contents(resource_path('stubs/create.stub'));
-        $add = str_replace('%MODEL%', $upperCase, $add);
-        file_put_contents(app_path("Http/Controllers/{$upperCase}/{$upperCase}AddController.php"), $add);
+        $add = str_replace('%MODEL%', $this->upperCase, $add);
+        file_put_contents(app_path("Http/Controllers/{$this->upperCase}/{$this->upperCase}AddController.php"), $add);
 
         $update = file_get_contents(resource_path('stubs/update.stub'));
-        $update = str_replace('%MODEL%', $upperCase, $update);
-        file_put_contents(app_path("Http/Controllers/{$upperCase}/{$upperCase}UpdateController.php"), $update);
+        $update = str_replace('%MODEL%', $this->upperCase, $update);
+        file_put_contents(app_path("Http/Controllers/{$this->upperCase}/{$this->upperCase}UpdateController.php"), $update);
 
         $destroy = file_get_contents(resource_path('stubs/destroy.stub'));
-        $destroy = str_replace('%MODEL%', $upperCase, $destroy);
-        file_put_contents(app_path("Http/Controllers/{$upperCase}/{$upperCase}UpdateController.php"), $destroy);
+        $destroy = str_replace('%MODEL%', $this->upperCase, $destroy);
+        file_put_contents(app_path("Http/Controllers/{$this->upperCase}/{$this->upperCase}UpdateController.php"), $destroy);
+    }
+
+    public function itemName($itemName){
+        $this->itemName = $itemName;
+        $this->lowerCase = strtolower($this->itemName);
+        $this->upperCase = ucfirst($this->itemName);
     }
 
     /*
