@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 
 /**
@@ -23,27 +24,17 @@ class BaseCommand extends Command
     public $lowerCase;
 
     /** @var string */
+    public $kebabCase;
+
+    /** @var string */
+    public $snakeCase;
+
+    /** @var string */
     public $name;
 
     /** Used as placeholder in app.js */
     public $placeholder = "//------- CONTENT -------//";
-
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'command:name';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
-
-
-
+    
     /**
      * Create a new command instance.
      *
@@ -52,16 +43,6 @@ class BaseCommand extends Command
     public function __construct()
     {
         parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        //
     }
 
     /**
@@ -240,7 +221,7 @@ class BaseCommand extends Command
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$this->lowerCase}', require('./components/{$this->lowerCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->kebabCase}', require('./components/{$this->lowerCase}.vue'));\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -258,7 +239,7 @@ class BaseCommand extends Command
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$this->lowerCase}-report', require('./components/reports/{$this->upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->kebabCase}-report', require('./components/reports/{$this->upperCase}.vue'));\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -276,7 +257,7 @@ class BaseCommand extends Command
         $appJs = file_get_contents(resource_path('js/app.js'));
         $placeholder = $this->placeholder;
 
-        $component = "\r\nVue.component('{$this->lowerCase}-vue', require('./components/views/{$this->upperCase}.vue'));\r\n";
+        $component = "\r\nVue.component('{$this->kebabCase}-vue', require('./components/views/{$this->upperCase}.vue'));\r\n";
         $component .= $placeholder;
 
         $appJs = str_replace($placeholder, $component, $appJs);
@@ -378,7 +359,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->lowerCase}', '{$this->upperCase}Controller@index');\r\n";
+        $contents .= "Route::get('{$this->kebabCase}', '{$this->upperCase}Controller@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -392,7 +373,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->lowerCase}', '{$this->upperCase}ViewController@index');\r\n";
+        $contents .= "Route::get('{$this->kebabCase}', '{$this->upperCase}ViewController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -406,7 +387,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->lowerCase}-report', 'Reports/{$this->upperCase}ReportController@index');\r\n";
+        $contents .= "Route::get('{$this->kebabCase}-report', 'Reports/{$this->upperCase}ReportController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -483,17 +464,20 @@ class BaseCommand extends Command
     }
 
     public function itemName($itemName){
+
         $this->itemName = $itemName;
         $this->lowerCase = strtolower($this->itemName);
         $this->upperCase = ucfirst($this->itemName);
+        $this->kebabCase = Str::kebab($this->itemName);
+        $this->snakeCase = Str::sname($this->itemName);
     }
 
-    /*
-    public function setName(string $name){
-
+    public function camelCaseToKebabCase($itemName){
+        return Str::kebab($itemName);
     }
-    public function setUpperCaseName(){}
-    public function setLowerCaseName(){}
-    */
+
+    public function camelCaseToSnakeCase($itemName){
+        return Str::snake($itemName);
+    }
 }
 
