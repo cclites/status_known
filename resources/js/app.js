@@ -31,9 +31,7 @@ Vue.component('invoices-report', require('./components/reports/Invoices.vue').de
 Vue.component('users-report', require('./components/reports/Users.vue').default);
 //------- CONTENT -------//
 
-/*
+
 const app = new Vue({
     el: '#app',
-});*/
-
-new Vue(App).$mount('#app');
+}).$mount();

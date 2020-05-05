@@ -30,7 +30,17 @@ class BaseCommand extends Command
     public $snakeCase;
 
     /** @var string */
-    public $name;
+    //public $name;
+
+    protected $signature = 'base-command';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Create Demo Admin';
+
 
     /** Used as placeholder in app.js */
     public $placeholder = "//------- CONTENT -------//";
@@ -373,7 +383,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->kebabCase}', 'Views/{$this->upperCase}ViewController@index');\r\n";
+        $contents .= "Route::get('{$this->kebabCase}', 'Views\{$this->upperCase}ViewController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
@@ -387,7 +397,7 @@ class BaseCommand extends Command
 
         $contents = file_get_contents(base_path('routes/web.php'));
         $contents .= "\r\n";
-        $contents .= "Route::get('{$this->kebabCase}-report', 'Reports/{$this->upperCase}ReportController@index');\r\n";
+        $contents .= "Route::get('{$this->kebabCase}-report', 'Reports\{$this->upperCase}ReportController@index');\r\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 

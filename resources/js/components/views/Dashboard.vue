@@ -1,35 +1,29 @@
 <template>
-    <admin-dashboard-vue v-if="role.admin"></admin-dashboard-vue>
-    <business-dashboard-vue v-else-if="role.business"></business-dashboard-vue>
+    <div>
+        <h3 class="text-center">Main Dashboard</h3>
 
+        <admin-dashboard-vue v-if="role == 'admin'"></admin-dashboard-vue>
+        <business-dashboard-vue v-if="role == 'business'"></business-dashboard-vue>
+    </div>
 </template>
 
 <script>
-    //import AdminDashboard from './components/views/AdminDashboard';
-    import AdminDashboard from 'views/AdminDashboard.vue';
-    import BusinessDashboard from 'views/BusinessDashboard.vue';
 
     export default {
 
         props: {
-            'auth': {
-                type: Object,
-                default: function(){
-                    return {}
-                }
+            'role': {
+                type: String,
+                default: ''
             }
         },
 
-        components: {AdminDashboard, BusinessDashboard},
+        //components: {AdminDashboard, BusinessDashboard},
 
         mixins: [],
 
         data() {
             return {
-                role: {
-                    admin: true,
-                    business: true
-                },
             }
         },
 
@@ -40,8 +34,7 @@
         },
 
         mounted() {
-            //TODO: Get auth-user role
-            console.log(JSON.stringify(this.auth));
+
         },
 
         watch: {},

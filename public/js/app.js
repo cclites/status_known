@@ -2193,6 +2193,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
@@ -2217,6 +2225,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2324,45 +2340,30 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'views/AdminDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'views/BusinessDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
 //
 //
 //
-//import AdminDashboard from './components/views/AdminDashboard';
-
-
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    'auth': {
-      type: Object,
-      "default": function _default() {
-        return {};
-      }
+    'role': {
+      type: String,
+      "default": ''
     }
   },
-  components: {
-    AdminDashboard: !(function webpackMissingModule() { var e = new Error("Cannot find module 'views/AdminDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-    BusinessDashboard: !(function webpackMissingModule() { var e = new Error("Cannot find module 'views/BusinessDashboard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
-  },
+  //components: {AdminDashboard, BusinessDashboard},
   mixins: [],
   data: function data() {
-    return {
-      role: {
-        admin: true,
-        business: true
-      }
-    };
+    return {};
   },
   computed: {},
   methods: {},
-  mounted: function mounted() {
-    //TODO: Get auth-user role
-    console.log(JSON.stringify(this.auth));
-  },
+  mounted: function mounted() {},
   watch: {}
 });
 
@@ -80632,9 +80633,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "rows" }, [
+      _vm._v("\n    Admin Dashboard Users\n        "),
+      _c("ul", [
+        _c("li", [_vm._v("Reports")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Businesses")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Users")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Invoices")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Accounts")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -80656,9 +80677,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "rows" }, [
+      _vm._v("\n    Admin Dashboard Users\n    "),
+      _c("ul", [
+        _c("li", [_vm._v("Reports")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Users")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Invoices")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Accounts")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -80772,11 +80811,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.role.admin
-    ? _c("admin-dashboard-vue")
-    : _vm.role.business
-    ? _c("business-dashboard-vue")
-    : _vm._e()
+  return _c(
+    "div",
+    [
+      _c("h3", { staticClass: "text-center" }, [_vm._v("Main Dashboard")]),
+      _vm._v(" "),
+      _vm.role == "admin" ? _c("admin-dashboard-vue") : _vm._e(),
+      _vm._v(" "),
+      _vm.role == "business" ? _c("business-dashboard-vue") : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -93069,12 +93114,9 @@ Vue.component('businesses-report', __webpack_require__(/*! ./components/reports/
 Vue.component('invoices-report', __webpack_require__(/*! ./components/reports/Invoices.vue */ "./resources/js/components/reports/Invoices.vue")["default"]);
 Vue.component('users-report', __webpack_require__(/*! ./components/reports/Users.vue */ "./resources/js/components/reports/Users.vue")["default"]); //------- CONTENT -------//
 
-/*
-const app = new Vue({
-    el: '#app',
-});*/
-
-new Vue(App).$mount('#app');
+var app = new Vue({
+  el: '#app'
+}).$mount();
 
 /***/ }),
 

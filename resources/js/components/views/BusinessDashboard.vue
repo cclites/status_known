@@ -1,5 +1,13 @@
 <template>
-    <div></div>
+    <div class="rows">
+        Admin Dashboard Users
+        <ul>
+            <li>Reports</li>
+            <li>Users</li>
+            <li>Invoices</li>
+            <li>Accounts</li>
+        </ul>
+    </div>
 
 </template>
 
@@ -7,7 +15,8 @@
 
     export default {
 
-        props: {},
+        props: {
+        },
 
         components: {},
 
