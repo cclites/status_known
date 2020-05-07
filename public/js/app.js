@@ -2306,9 +2306,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -80812,7 +80809,6 @@ var render = function() {
     "div",
     { staticClass: "rows" },
     [
-      _vm._v("\n    Business Dashboard Users\n\n    "),
       _c(
         "b-tabs",
         [
