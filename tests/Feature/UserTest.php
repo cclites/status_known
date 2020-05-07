@@ -57,9 +57,7 @@ class UserTest extends TestCase
     {
         $user = $this->user;
         $user->assignRole(R::ADMIN);
-
-        $role = Role::findByName('admin');
-        $role->givePermissionTo(P::CAN_READ);
+        $user->givePermissionTo(P::CAN_READ);
 
         $this->assertTrue($user->hasPermissionTo(P::CAN_READ));
     }

@@ -19,6 +19,7 @@ class AddRolesToDb extends Migration
         Role::create(['name' => R::ADMIN]);
         Role::create(['name' => R::BUSINESS]);
         Role::create(['name' => R::SYSTEM]);
+        Role::create(['name' => R::GUEST]);
     }
 
     /**

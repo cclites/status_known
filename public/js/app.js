@@ -2327,9 +2327,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  //Not sure if I need to pass roles or permissions to anything. Seems like I could just stick with
+  //auth()->user().
   props: {
-    roles: [],
-    permissions: []
+    roles: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    permissions: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
   },
   components: {
     InvoicesView: _views_InvoicesView__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -2433,6 +2445,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -80886,24 +80902,8 @@ var render = function() {
         [
           _c(
             "b-tab",
-            { attrs: { title: "Reports", active: "" } },
-            [_c("reports-view")],
-            1
-          ),
-          _vm._v(" "),
-          _c("b-tab", { attrs: { title: "Users" } }, [_c("users-view")], 1),
-          _vm._v(" "),
-          _c(
-            "b-tab",
             { attrs: { title: "Invoices" } },
             [_c("invoices-view")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-tab",
-            { attrs: { title: "Accounts" } },
-            [_c("accounts-view")],
             1
           )
         ],
@@ -80990,18 +80990,17 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h3", { staticClass: "text-center" }, [_vm._v("Main Dashboard")]),
-      _vm._v(" "),
       this.role == "admin"
         ? _c("admin-dashboard-vue")
         : this.role == "business"
-        ? _c("business-dashboard-vue", {
-            attrs: {
-              roles: "userObj.roles",
-              permissions: "'userObject.permissions"
-            }
-          })
-        : _vm._e()
+        ? _c("business-dashboard-vue")
+        : _c("div", [
+            _c("h4", { staticClass: "text-center mt-5" }, [
+              _vm._v(
+                "\n            You have not yet been given permission to use this app. Please contact your manager\n            or your representative for further details.\n        "
+              )
+            ])
+          ])
     ],
     1
   )

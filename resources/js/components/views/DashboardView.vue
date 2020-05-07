@@ -1,10 +1,14 @@
 <template>
     <div>
-        <h3 class="text-center">Main Dashboard</h3>
-
         <admin-dashboard-vue v-if="this.role == 'admin'"></admin-dashboard-vue>
-        <business-dashboard-vue v-else-if="this.role == 'business'" roles="userObj.roles" permissions="'userObject.permissions"></business-dashboard-vue>
+        <business-dashboard-vue v-else-if="this.role == 'business'"></business-dashboard-vue>
 
+        <div v-else>
+            <h4 class="text-center mt-5">
+                You have not yet been given permission to use this app. Please contact your manager
+                or your representative for further details.
+            </h4>
+        </div>
     </div>
 </template>
 

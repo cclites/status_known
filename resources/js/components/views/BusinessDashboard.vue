@@ -1,18 +1,18 @@
 <template>
     <div class="rows">
         <b-tabs>
-            <b-tab title="Reports" active>
+            <!--b-tab title="Reports" active>
                 <reports-view></reports-view>
             </b-tab>
             <b-tab title="Users">
                 <users-view></users-view>
-            </b-tab>
+            </b-tab-->
             <b-tab title="Invoices">
                 <invoices-view></invoices-view>
             </b-tab>
-            <b-tab title="Accounts">
+            <!--b-tab title="Accounts">
                 <accounts-view></accounts-view>
-            </b-tab>
+            </b-tab-->
         </b-tabs>
     </div>
 </template>
@@ -26,9 +26,22 @@
 
     export default {
 
+        //Not sure if I need to pass roles or permissions to anything. Seems like I could just stick with
+        //auth()->user().
+
         props: {
-            roles: [],
-            permissions: [],
+            roles: {
+                type: Array,
+                default: function(){
+                    return []
+                }
+            },
+            permissions: {
+                type: Array,
+                default: function(){
+                    return []
+                }
+            },
         },
 
         components: {InvoicesView, ReportsView, UsersView, AccountsView},
