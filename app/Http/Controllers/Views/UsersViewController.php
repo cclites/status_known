@@ -9,7 +9,8 @@ class UsersViewController extends Controller
 {
     public function index(Request $request){
 
-        return view_component('usersview-vue', 'UsersView', [], []);
+        $users = \App\User::all()->sortBy('id')->flatten();
+        return response()->json($users);
     }
 
 }

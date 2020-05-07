@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 class AccountsViewController extends Controller
 {
     public function index(Request $request){
-
-        return view_component('accounts-vue', 'Accounts', [], []);
+        $accounts = \App\Account::all()->sortBy('id')->flatten();
+        return response()->json($accounts);
     }
 
 }

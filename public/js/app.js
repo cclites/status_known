@@ -2199,11 +2199,26 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   mixins: [],
   data: function data() {
-    return {};
+    return {
+      items: [],
+      url: 'accounts-view'
+    };
   },
   computed: {},
-  methods: {},
-  mounted: function mounted() {},
+  methods: {
+    getAccounts: function getAccounts() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        _this.items = response.data;
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getAccounts();
+  },
   watch: {}
 });
 
@@ -2223,6 +2238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_ReportsView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/ReportsView */ "./resources/js/components/views/ReportsView.vue");
 /* harmony import */ var _views_UsersView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/UsersView */ "./resources/js/components/views/UsersView.vue");
 /* harmony import */ var _views_AccountsView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/AccountsView */ "./resources/js/components/views/AccountsView.vue");
+//
 //
 //
 //
@@ -2348,17 +2364,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
   mixins: [],
   data: function data() {
-    return {};
+    return {
+      url: 'business-view',
+      items: []
+    };
   },
   computed: {},
-  methods: {},
-  mounted: function mounted() {},
+  methods: {
+    getBusinesses: function getBusinesses() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        _this.items = response.data;
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getBusinesses();
+  },
   watch: {}
 });
 
@@ -2454,17 +2484,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
   mixins: [],
   data: function data() {
-    return {};
+    return {
+      items: [],
+      url: 'invoices-view'
+    };
   },
   computed: {},
-  methods: {},
-  mounted: function mounted() {},
+  methods: {
+    getInvoices: function getInvoices() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        _this.items = response.data;
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getInvoices();
+  },
   watch: {}
 });
 
@@ -2490,11 +2534,26 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   mixins: [],
   data: function data() {
-    return {};
+    return {
+      url: 'checks-view',
+      items: []
+    };
   },
   computed: {},
-  methods: {},
-  mounted: function mounted() {},
+  methods: {
+    getReports: function getReports() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        _this.items = response.data;
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getReports();
+  },
   watch: {}
 });
 
@@ -2515,17 +2574,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
   mixins: [],
   data: function data() {
-    return {};
+    return {
+      items: [],
+      url: 'users-view'
+    };
   },
   computed: {},
-  methods: {},
-  mounted: function mounted() {},
+  methods: {
+    getUsers: function getUsers() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        _this.items = response.data;
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getUsers();
+  },
   watch: {}
 });
 
@@ -80717,7 +80790,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    AccountsView.vue Has Been Loaded\n")])
+  return _c(
+    "div",
+    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80749,10 +80826,12 @@ var render = function() {
         [
           _c(
             "b-tab",
-            { attrs: { title: "Reports", active: "" } },
-            [_c("reports-view")],
+            { attrs: { title: "Businesses", active: "" } },
+            [_c("business-view")],
             1
           ),
+          _vm._v(" "),
+          _c("b-tab", { attrs: { title: "Reports" } }, [_c("reports-view")], 1),
           _vm._v(" "),
           _c("b-tab", { attrs: { title: "Users" } }, [_c("users-view")], 1),
           _vm._v(" "),
@@ -80767,13 +80846,6 @@ var render = function() {
             "b-tab",
             { attrs: { title: "Accounts" } },
             [_c("accounts-view")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-tab",
-            { attrs: { title: "Businesses" } },
-            [_c("business-view")],
             1
           )
         ],
@@ -80863,7 +80935,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    BusinessesView.vue Has Been Loaded\n")])
+  return _c(
+    "div",
+    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80952,7 +81028,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    InvoicesView.vue has been loaded\n")])
+  return _c(
+    "div",
+    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80976,7 +81056,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    ReportsView.vue has been loaded\n")])
+  return _c(
+    "div",
+    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -81000,7 +81084,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    UsersView.vue has been loaded\n")])
+  return _c(
+    "div",
+    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

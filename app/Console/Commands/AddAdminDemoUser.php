@@ -55,8 +55,8 @@ class AddAdminDemoUser extends Command
         $user->save();
 
         $user->assignRole(R::ADMIN);
-        $role = Role::findByName(R::ADMIN);
-        $role->givePermissionTo(P::CAN_READ, P::CAN_CREATE, P::CAN_DELETE, P::CAN_UPDATE);
+
+        $user->givePermissionTo(P::CAN_READ, P::CAN_CREATE, P::CAN_DELETE, P::CAN_UPDATE);
 
     }
 }

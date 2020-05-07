@@ -1,8 +1,7 @@
 <template>
     <div>
-        BusinessesView.vue Has Been Loaded
+        <b-table striped hover :items="items"></b-table>
     </div>
-
 </template>
 
 <script>
@@ -16,14 +15,27 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+                url: 'business-view',
+                items: [],
+            }
         },
 
         computed: {},
 
-        methods: {},
+        methods: {
+            getBusinesses(){
+                axios.get(this.url)
+                    .then((response) => {
+                        this.items = response.data;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+        },
 
         mounted() {
+            this.getBusinesses();
         },
 
         watch: {},

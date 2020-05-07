@@ -1,8 +1,7 @@
 <template>
     <div>
-        InvoicesView.vue has been loaded
+        <b-table striped hover :items="items"></b-table>
     </div>
-
 </template>
 
 <script>
@@ -16,14 +15,27 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+                items: [],
+                url: 'invoices-view',
+            }
         },
 
         computed: {},
 
-        methods: {},
+        methods: {
+            getInvoices() {
+                axios.get(this.url)
+                    .then((response) => {
+                        this.items = response.data;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            }
+        },
 
         mounted() {
+            this.getInvoices();
         },
 
         watch: {},

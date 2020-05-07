@@ -1,8 +1,7 @@
 <template>
     <div>
-        UsersView.vue has been loaded
+        <b-table striped hover :items="items"></b-table>
     </div>
-
 </template>
 
 <script>
@@ -16,14 +15,27 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+                items: [],
+                url: 'users-view',
+            }
         },
 
         computed: {},
 
-        methods: {},
+        methods: {
+            getUsers() {
+                axios.get(this.url)
+                    .then((response) => {
+                        this.items = response.data;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            }
+        },
 
         mounted() {
+            this.getUsers();
         },
 
         watch: {},

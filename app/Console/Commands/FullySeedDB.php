@@ -52,6 +52,11 @@ class FullySeedDB extends Command
                         ->create()
                         ->each(function($business){
 
+                            factory(\App\Account::class)
+                                ->create([
+                                    'business_id' => $business->id
+                                ]);
+
                             $randUserCount = rand(0,5);
 
                             factory(\App\User::class, $randUserCount)->create([
@@ -70,7 +75,6 @@ class FullySeedDB extends Command
                                                     'business_id' => $business->id,
                                                     'requested_by_id' => $user->id,
                                                     'tracking' => $record->tracking,
-                                                    'amount' => $record->amount
                                                 ]);
 
                                             factory(\App\Invoice::class)->create([

@@ -1,6 +1,6 @@
 <template>
     <div>
-        ReportsView.vue has been loaded
+        <b-table striped hover :items="items"></b-table>
     </div>
 </template>
 
@@ -15,14 +15,27 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+                url: 'checks-view',
+                items: [],
+            }
         },
 
         computed: {},
 
-        methods: {},
+        methods: {
+            getReports() {
+                axios.get(this.url)
+                    .then((response) => {
+                        this.items = response.data;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            }
+        },
 
         mounted() {
+            this.getReports();
         },
 
         watch: {},

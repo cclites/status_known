@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 
 class ReportsViewController extends Controller
 {
+    //Maybe not called at all?
     public function index(Request $request){
-
-        return view_component('reports-vue', 'Reports', [], []);
+        $reports = \App\Report::all()->sortBy('id')->flatten();
+        return response()->json($reports);
     }
-
 }

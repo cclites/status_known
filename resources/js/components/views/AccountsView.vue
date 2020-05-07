@@ -1,6 +1,6 @@
 <template>
     <div>
-        AccountsView.vue Has Been Loaded
+        <b-table striped hover :items="items"></b-table>
     </div>
 </template>
 
@@ -15,15 +15,28 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+                items: [],
+                url: 'accounts-view',
+            }
         },
 
         computed: {},
 
 
-        methods: {},
+        methods: {
+            getAccounts() {
+                axios.get(this.url)
+                    .then((response) => {
+                        this.items = response.data;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            }
+        },
 
         mounted() {
+            this.getAccounts();
         },
 
         watch: {},

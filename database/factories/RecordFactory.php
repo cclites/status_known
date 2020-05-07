@@ -16,6 +16,7 @@ $factory->define(\App\Record::class, function (Faker $faker) {
         'middle_name' => $faker->firstNameFemale,
         'last_name' => $faker->lastName,
         'dob' => $faker->date(),
-        'ssn' => \Str::random(9)
+        'ssn' => \Str::random(9),
+        'amount' => $faker->randomFloat(3)
     ];
 });

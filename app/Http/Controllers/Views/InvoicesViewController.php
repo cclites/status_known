@@ -9,7 +9,8 @@ class InvoicesViewController extends Controller
 {
     public function index(Request $request){
 
-        return view_component('invoicesview-vue', 'InvoicesView', [], []);
+        $invoices = \App\Invoice::all()->sortBy('id')->flatten();
+        return response()->json($invoices);
     }
 
 }

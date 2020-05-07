@@ -1,7 +1,10 @@
 <template>
     <div>
         <b-tabs>
-            <b-tab title="Reports" active>
+            <b-tab title="Businesses" active>
+                <business-view></business-view>
+            </b-tab>
+            <b-tab title="Reports">
                 <reports-view></reports-view>
             </b-tab>
             <b-tab title="Users">
@@ -13,9 +16,7 @@
             <b-tab title="Accounts">
                 <accounts-view></accounts-view>
             </b-tab>
-            <b-tab title="Businesses">
-                <business-view></business-view>
-            </b-tab>
+
         </b-tabs>
     </div>
 
