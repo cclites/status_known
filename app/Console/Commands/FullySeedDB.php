@@ -43,7 +43,7 @@ class FullySeedDB extends Command
         $faker = new Faker();
         //generate between 6 and 10 businesses
 
-        $randBusinessCount = rand(4, 12);
+        $randBusinessCount = rand(12, 25);
 
         $provider = factory(\App\Provider::class)->create();
 
