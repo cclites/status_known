@@ -3,7 +3,7 @@
         <h3 class="text-center">Main Dashboard</h3>
 
         <admin-dashboard-vue v-if="this.role == 'admin'"></admin-dashboard-vue>
-        <business-dashboard-vue v-if="this.role == 'business'" roles="userObj.roles" permissions="'userObject.permissions"></business-dashboard-vue>
+        <business-dashboard-vue v-else-if="this.role == 'business'" roles="userObj.roles" permissions="'userObject.permissions"></business-dashboard-vue>
 
     </div>
 </template>

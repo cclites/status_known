@@ -10,7 +10,12 @@ class DashboardViewController extends Controller
     public function index(Request $request){
 
         $user = [];
-        $user = auth()->user()->load('roles', 'permissions');
+
+        if(auth()->user()){
+            $user = auth()->user()->load('roles', 'permissions');
+        }else{
+            return redirect('login');
+        }
 
         return view('views/dashboard_view', ['user'=>$user]);
     }

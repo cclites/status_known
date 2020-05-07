@@ -1,25 +1,20 @@
 <template>
     <div class="rows">
-        Admin Dashboard Users
-        <ul>
-            <li>Reports</li>
-            <li>Users</li>
-            <li>Invoices</li>
-            <li>Accounts</li>
-        </ul>
-
-        <reports-view></reports-view>
-
-        <users-view></users-view>
-
-        <invoices-view></invoices-view>
-
-        <accounts-view></accounts-view>
-
+        <b-tabs>
+            <b-tab title="Reports" active>
+                <reports-view></reports-view>
+            </b-tab>
+            <b-tab title="Users">
+                <users-view></users-view>
+            </b-tab>
+            <b-tab title="Invoices">
+                <invoices-view></invoices-view>
+            </b-tab>
+            <b-tab title="Accounts">
+                <accounts-view></accounts-view>
+            </b-tab>
+        </b-tabs>
     </div>
-
-
-
 </template>
 
 <script>
@@ -32,6 +27,8 @@
     export default {
 
         props: {
+            roles: [],
+            permissions: [],
         },
 
         components: {InvoicesView, ReportsView, UsersView, AccountsView},

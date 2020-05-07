@@ -2246,7 +2246,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2310,14 +2309,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {},
+  props: {
+    roles: [],
+    permissions: []
+  },
   components: {
     InvoicesView: _views_InvoicesView__WEBPACK_IMPORTED_MODULE_3__["default"],
     ReportsView: _views_ReportsView__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -80747,40 +80747,46 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._v("\n    Admin Dashboard Users\n\n    "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("checks-view"),
-      _vm._v(" "),
-      _c("business-view"),
-      _vm._v(" "),
-      _c("users-view"),
-      _vm._v(" "),
-      _c("invoices-view"),
-      _vm._v(" "),
-      _c("accounts-view")
+      _c(
+        "b-tabs",
+        [
+          _c(
+            "b-tab",
+            { attrs: { title: "Reports", active: "" } },
+            [_c("reports-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-tab", { attrs: { title: "Users" } }, [_c("users-view")], 1),
+          _vm._v(" "),
+          _c(
+            "b-tab",
+            { attrs: { title: "Invoices" } },
+            [_c("invoices-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tab",
+            { attrs: { title: "Accounts" } },
+            [_c("accounts-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tab",
+            { attrs: { title: "Businesses" } },
+            [_c("business-view")],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", [_vm._v("Reports")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Businesses")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Users")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Invoices")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Accounts")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -80806,36 +80812,40 @@ var render = function() {
     "div",
     { staticClass: "rows" },
     [
-      _vm._v("\n    Admin Dashboard Users\n    "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("reports-view"),
-      _vm._v(" "),
-      _c("users-view"),
-      _vm._v(" "),
-      _c("invoices-view"),
-      _vm._v(" "),
-      _c("accounts-view")
+      _vm._v("\n    Business Dashboard Users\n\n    "),
+      _c(
+        "b-tabs",
+        [
+          _c(
+            "b-tab",
+            { attrs: { title: "Reports", active: "" } },
+            [_c("reports-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-tab", { attrs: { title: "Users" } }, [_c("users-view")], 1),
+          _vm._v(" "),
+          _c(
+            "b-tab",
+            { attrs: { title: "Invoices" } },
+            [_c("invoices-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tab",
+            { attrs: { title: "Accounts" } },
+            [_c("accounts-view")],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", [_vm._v("Reports")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Users")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Invoices")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Accounts")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -80910,9 +80920,9 @@ var render = function() {
     [
       _c("h3", { staticClass: "text-center" }, [_vm._v("Main Dashboard")]),
       _vm._v(" "),
-      this.role == "admin" ? _c("admin-dashboard-vue") : _vm._e(),
-      _vm._v(" "),
-      this.role == "business"
+      this.role == "admin"
+        ? _c("admin-dashboard-vue")
+        : this.role == "business"
         ? _c("business-dashboard-vue", {
             attrs: {
               roles: "userObj.roles",

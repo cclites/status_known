@@ -1,23 +1,22 @@
 <template>
     <div>
-        Admin Dashboard Users
-
-        <ul>
-            <li>Reports</li>
-            <li>Businesses</li>
-            <li>Users</li>
-            <li>Invoices</li>
-            <li>Accounts</li>
-        </ul>
-
-        <checks-view></checks-view>
-        <business-view></business-view>
-
-        <users-view></users-view>
-        <invoices-view></invoices-view>
-        <accounts-view></accounts-view>
-
-
+        <b-tabs>
+            <b-tab title="Reports" active>
+                <reports-view></reports-view>
+            </b-tab>
+            <b-tab title="Users">
+                <users-view></users-view>
+            </b-tab>
+            <b-tab title="Invoices">
+                <invoices-view></invoices-view>
+            </b-tab>
+            <b-tab title="Accounts">
+                <accounts-view></accounts-view>
+            </b-tab>
+            <b-tab title="Businesses">
+                <business-view></business-view>
+            </b-tab>
+        </b-tabs>
     </div>
 
 </template>
