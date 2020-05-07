@@ -1,18 +1,18 @@
 <template>
     <div class="rows">
         <b-tabs>
-            <!--b-tab title="Reports" active>
+            <b-tab title="Reports" active>
                 <reports-view></reports-view>
             </b-tab>
             <b-tab title="Users">
                 <users-view></users-view>
-            </b-tab-->
+            </b-tab>
             <b-tab title="Invoices">
                 <invoices-view></invoices-view>
             </b-tab>
-            <!--b-tab title="Accounts">
+            <b-tab title="Accounts">
                 <accounts-view></accounts-view>
-            </b-tab-->
+            </b-tab>
         </b-tabs>
     </div>
 </template>
