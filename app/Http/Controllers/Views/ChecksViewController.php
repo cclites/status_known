@@ -16,7 +16,9 @@ class ChecksViewController extends Controller
             $reportsQuery->where('business_id', auth()->user()->business_id);
         }
 
-        $reports = $reportsQuery->orderBy('id')->get()->flatten();
+        $reports = $reportsQuery->orderBy('id')
+                    ->with('requested_by')
+                    ->get()->flatten();
 
         return response()->json($reports);
     }

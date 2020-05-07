@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Views;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +23,23 @@ class ReportsViewController extends Controller
             $reportsQuery->where('business_id', auth()->user()->business_id);
         }
 
-        $reports = $reportsQuery->orderBy('id')->get()->flatten();
+        $reports = $reportsQuery
+                    ->orderBy('id')
+                    ->with('requested_by', 'record')
+                    ->get()
+                    ->map(function($report){
+
+                        \Log::info($report);
+
+                        return [
+                            'report_id' => $report->id,
+                            'requested_by' => $report->requested_by->name,
+                            'requested_for' => $report->record->first_name . " " . $report->record->last_name,
+                            'request_date' => (new Carbon($report->record->created_at))->format('m-d-Y'),
+                            'completion_date' => (new Carbon($report->record->updated_at))->format('m-d-Y'),
+                        ];
+
+                    });
 
         return response()->json($reports);
     }

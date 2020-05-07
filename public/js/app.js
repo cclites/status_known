@@ -2194,6 +2194,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
@@ -2201,7 +2219,31 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [],
-      url: 'accounts-view'
+      url: 'accounts-view',
+      rows: '',
+      currentPage: 1,
+      perPage: 10,
+      fields: [{
+        label: 'Account Name',
+        key: 'account_name',
+        sortable: true
+      }, {
+        label: 'Account Number',
+        key: 'account_number',
+        sortable: true
+      }, {
+        label: 'Card Number',
+        key: 'card_number',
+        sortable: true
+      }, {
+        label: 'Added',
+        key: 'created_at',
+        sortable: true
+      }, {
+        label: 'Updated',
+        key: 'updated_at',
+        sortable: true
+      }]
     };
   },
   computed: {},
@@ -2211,6 +2253,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.url).then(function (response) {
         _this.items = response.data;
+        _this.rows = _this.items.length;
       }, function (error) {
         console.log(error);
       });
@@ -2234,10 +2277,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_BusinessView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/BusinessView */ "./resources/js/components/views/BusinessView.vue");
-/* harmony import */ var _views_ChecksView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/ChecksView */ "./resources/js/components/views/ChecksView.vue");
+/* harmony import */ var _ChecksView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChecksView */ "./resources/js/components/views/ChecksView.vue");
 /* harmony import */ var _views_ReportsView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/ReportsView */ "./resources/js/components/views/ReportsView.vue");
 /* harmony import */ var _views_UsersView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/UsersView */ "./resources/js/components/views/UsersView.vue");
 /* harmony import */ var _views_AccountsView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/AccountsView */ "./resources/js/components/views/AccountsView.vue");
+//
 //
 //
 //
@@ -2273,7 +2317,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     BusinessView: _views_BusinessView__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ChecksView: _views_ChecksView__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ChecksView: _ChecksView__WEBPACK_IMPORTED_MODULE_1__["default"],
     ReportsView: _views_ReportsView__WEBPACK_IMPORTED_MODULE_2__["default"],
     UsersView: _views_UsersView__WEBPACK_IMPORTED_MODULE_3__["default"],
     AccountsView: _views_AccountsView__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -2303,6 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_ReportsView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/ReportsView */ "./resources/js/components/views/ReportsView.vue");
 /* harmony import */ var _views_UsersView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/UsersView */ "./resources/js/components/views/UsersView.vue");
 /* harmony import */ var _views_InvoicesView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/InvoicesView */ "./resources/js/components/views/InvoicesView.vue");
+//
 //
 //
 //
@@ -2376,6 +2421,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
@@ -2383,7 +2447,43 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       url: 'business-view',
-      items: []
+      items: [],
+      rows: '',
+      currentPage: 1,
+      perPage: 10,
+      fields: [{
+        label: 'Business Name',
+        key: 'business_name',
+        sortable: true
+      }, {
+        label: 'Responsible Agent',
+        key: 'responsible_agent',
+        sortable: true
+      }, {
+        label: 'Responsible Agent Email',
+        key: 'responsible_agent_email',
+        sortable: true
+      }, {
+        label: 'Business Address',
+        key: 'formatted_address',
+        sortable: true
+      }, {
+        label: 'Business Phone',
+        key: 'business_phone',
+        sortable: true
+      }, {
+        label: 'Business Email',
+        key: 'business_email',
+        sortable: true
+      }, {
+        label: 'Since',
+        key: 'created_at',
+        sortable: true
+      }, {
+        label: 'Active',
+        key: 'active',
+        sortable: true
+      }]
     };
   },
   computed: {},
@@ -2393,6 +2493,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.url).then(function (response) {
         _this.items = response.data;
+        _this.rows = _this.items.length;
       }, function (error) {
         console.log(error);
       });
@@ -2500,6 +2601,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
@@ -2507,7 +2627,23 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [],
-      url: 'invoices-view'
+      url: 'invoices-view',
+      rows: '',
+      currentPage: 1,
+      perPage: 10,
+      fields: [{
+        label: 'Invoice Id',
+        key: 'id',
+        sortable: true
+      }, {
+        label: 'Amount',
+        key: 'amount',
+        sortable: true
+      }, {
+        label: 'Created',
+        key: 'created_at',
+        sortable: true
+      }]
     };
   },
   computed: {},
@@ -2517,6 +2653,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.url).then(function (response) {
         _this.items = response.data;
+        _this.rows = _this.items.length;
       }, function (error) {
         console.log(error);
       });
@@ -2545,14 +2682,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
   mixins: [],
   data: function data() {
     return {
-      url: 'checks-view',
-      items: []
+      url: 'reports-view',
+      items: [],
+      rows: '',
+      currentPage: 1,
+      perPage: 10,
+      fields: [{
+        label: 'Report Id',
+        key: 'report_id',
+        sortable: true
+      }, {
+        label: 'Requested By',
+        key: 'requested_by',
+        sortable: true
+      }, {
+        label: 'Requested For',
+        key: 'requested_for',
+        sortable: true
+      }, {
+        label: 'Request Date',
+        key: 'request_date',
+        sortable: true
+      }, {
+        label: 'Completion Date',
+        key: 'completion_date',
+        sortable: true
+      }]
     };
   },
   computed: {},
@@ -2562,6 +2740,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.url).then(function (response) {
         _this.items = response.data;
+        _this.rows = _this.items.length;
       }, function (error) {
         console.log(error);
       });
@@ -2590,6 +2769,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   components: {},
@@ -2597,7 +2793,27 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [],
-      url: 'users-view'
+      url: 'users-view',
+      rows: '',
+      currentPage: 1,
+      perPage: 10,
+      fields: [{
+        label: 'Name',
+        key: 'name',
+        sortable: true
+      }, {
+        label: 'Email',
+        key: 'email',
+        sortable: true
+      }, {
+        label: 'Started',
+        key: 'created_at',
+        sortable: true
+      }, {
+        label: 'Active',
+        key: 'active',
+        sortable: true
+      }]
     };
   },
   computed: {},
@@ -2607,6 +2823,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.url).then(function (response) {
         _this.items = response.data;
+        _this.rows = _this.items.length;
       }, function (error) {
         console.log(error);
       });
@@ -80808,7 +81025,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    [
+      _c("b-table", {
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.items,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          fields: _vm.fields
+        }
+      }),
+      _vm._v(" "),
+      _vm.rows > _vm.perPage
+        ? _c("b-pagination", {
+            staticClass: "mt-4",
+            attrs: {
+              "total-rows": _vm.rows,
+              "per-page": _vm.perPage,
+              "first-text": "⏮",
+              "prev-text": "⏪",
+              "next-text": "⏩",
+              "last-text": "⏭"
+            },
+            model: {
+              value: _vm.currentPage,
+              callback: function($$v) {
+                _vm.currentPage = $$v
+              },
+              expression: "currentPage"
+            }
+          })
+        : _vm._e()
+    ],
     1
   )
 }
@@ -80837,6 +81086,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h4", { staticClass: "text-center" }, [_vm._v("Admin Dashboard")]),
+      _vm._v(" "),
       _c(
         "b-tabs",
         [
@@ -80897,13 +81148,31 @@ var render = function() {
     "div",
     { staticClass: "rows" },
     [
+      _c("h4", { staticClass: "text-center" }, [_vm._v("Business Dashboard")]),
+      _vm._v(" "),
       _c(
         "b-tabs",
         [
           _c(
             "b-tab",
+            { attrs: { title: "Reports", active: "" } },
+            [_c("reports-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tab",
             { attrs: { title: "Invoices" } },
             [_c("invoices-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-tab", { attrs: { title: "Users" } }, [_c("users-view")], 1),
+          _vm._v(" "),
+          _c(
+            "b-tab",
+            { attrs: { title: "Accounts" } },
+            [_c("accounts-view")],
             1
           )
         ],
@@ -80937,7 +81206,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    [
+      _c("b-table", {
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.items,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          fields: _vm.fields
+        }
+      }),
+      _vm._v(" "),
+      _vm.rows > _vm.perPage
+        ? _c("b-pagination", {
+            staticClass: "mt-4",
+            attrs: {
+              "total-rows": _vm.rows,
+              "per-page": _vm.perPage,
+              "first-text": "⏮",
+              "prev-text": "⏪",
+              "next-text": "⏩",
+              "last-text": "⏭"
+            },
+            model: {
+              value: _vm.currentPage,
+              callback: function($$v) {
+                _vm.currentPage = $$v
+              },
+              expression: "currentPage"
+            }
+          })
+        : _vm._e()
+    ],
     1
   )
 }
@@ -81029,7 +81330,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    [
+      _c("b-table", {
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.items,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          fields: _vm.fields
+        }
+      }),
+      _vm._v(" "),
+      _vm.rows > _vm.perPage
+        ? _c("b-pagination", {
+            staticClass: "mt-4",
+            attrs: {
+              "total-rows": _vm.rows,
+              "per-page": _vm.perPage,
+              "first-text": "⏮",
+              "prev-text": "⏪",
+              "next-text": "⏩",
+              "last-text": "⏭"
+            },
+            model: {
+              value: _vm.currentPage,
+              callback: function($$v) {
+                _vm.currentPage = $$v
+              },
+              expression: "currentPage"
+            }
+          })
+        : _vm._e()
+    ],
     1
   )
 }
@@ -81057,7 +81390,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    [
+      _c("b-table", {
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.items,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          fields: _vm.fields
+        }
+      }),
+      _vm._v(" "),
+      _vm.rows > _vm.perPage
+        ? _c("b-pagination", {
+            staticClass: "mt-4",
+            attrs: {
+              "total-rows": _vm.rows,
+              "per-page": _vm.perPage,
+              "first-text": "⏮",
+              "prev-text": "⏪",
+              "next-text": "⏩",
+              "last-text": "⏭"
+            },
+            model: {
+              value: _vm.currentPage,
+              callback: function($$v) {
+                _vm.currentPage = $$v
+              },
+              expression: "currentPage"
+            }
+          })
+        : _vm._e()
+    ],
     1
   )
 }
@@ -81085,7 +81450,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("b-table", { attrs: { striped: "", hover: "", items: _vm.items } })],
+    [
+      _c("b-table", {
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.items,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          fields: _vm.fields
+        }
+      }),
+      _vm._v(" "),
+      _vm.rows > _vm.perPage
+        ? _c("b-pagination", {
+            staticClass: "mt-4",
+            attrs: {
+              "total-rows": _vm.rows,
+              "per-page": _vm.perPage,
+              "first-text": "⏮",
+              "prev-text": "⏪",
+              "next-text": "⏩",
+              "last-text": "⏭"
+            },
+            model: {
+              value: _vm.currentPage,
+              callback: function($$v) {
+                _vm.currentPage = $$v
+              },
+              expression: "currentPage"
+            }
+          })
+        : _vm._e()
+    ],
     1
   )
 }
@@ -93278,7 +93675,7 @@ Vue.component('frame-loader', __webpack_require__(/*! ./components/FrameLoader.v
 Vue.component('dashboard-vue', __webpack_require__(/*! ./components/views/DashboardView.vue */ "./resources/js/components/views/DashboardView.vue")["default"]);
 Vue.component('admin-dashboard-vue', __webpack_require__(/*! ./components/views/AdminDashboard.vue */ "./resources/js/components/views/AdminDashboard.vue")["default"]);
 Vue.component('business-dashboard-vue', __webpack_require__(/*! ./components/views/BusinessDashboard.vue */ "./resources/js/components/views/BusinessDashboard.vue")["default"]);
-Vue.component('checks-view', __webpack_require__(/*! ./components/views/ChecksView.vue */ "./resources/js/components/views/ChecksView.vue")["default"]);
+Vue.component('checks-view', __webpack_require__(/*! ./components/views/ChecksView */ "./resources/js/components/views/ChecksView.vue")["default"]);
 Vue.component('business-view', __webpack_require__(/*! ./components/views/BusinessView.vue */ "./resources/js/components/views/BusinessView.vue")["default"]);
 Vue.component('invoices-view', __webpack_require__(/*! ./components/views/InvoicesView.vue */ "./resources/js/components/views/InvoicesView.vue")["default"]);
 Vue.component('users-view', __webpack_require__(/*! ./components/views/UsersView.vue */ "./resources/js/components/views/UsersView.vue")["default"]);

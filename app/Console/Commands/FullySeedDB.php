@@ -75,6 +75,7 @@ class FullySeedDB extends Command
                                                     'business_id' => $business->id,
                                                     'requested_by_id' => $user->id,
                                                     'tracking' => $record->tracking,
+                                                    'record_id' => $record->id,
                                                 ]);
 
                                             factory(\App\Invoice::class)->create([

@@ -19,7 +19,7 @@ Vue.component('dashboard-vue', require('./components/views/DashboardView.vue').d
 Vue.component('admin-dashboard-vue', require('./components/views/AdminDashboard.vue').default);
 Vue.component('business-dashboard-vue', require('./components/views/BusinessDashboard.vue').default);
 
-Vue.component('checks-view', require('./components/views/ChecksView.vue').default);
+Vue.component('checks-view', require('./components/views/ChecksView').default);
 Vue.component('business-view', require('./components/views/BusinessView.vue').default);
 Vue.component('invoices-view', require('./components/views/InvoicesView.vue').default);
 Vue.component('users-view', require('./components/views/UsersView.vue').default);

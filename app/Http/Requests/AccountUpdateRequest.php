@@ -37,6 +37,7 @@ class AccountUpdateRequest extends FormRequest
             'account_number' => 'required|string|max:25',
             'card_number' => 'required|string|max:25',
             'tracking' => 'required|string|max:32',
+            'name' => 'required|string|max:50',
         ];
     }
 }

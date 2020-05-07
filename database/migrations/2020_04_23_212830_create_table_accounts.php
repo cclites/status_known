@@ -16,6 +16,7 @@ class CreateTableAccounts extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('business_id');
+            $table->string('account_name', 50);
             $table->string('account_number', 25);
             $table->string('card_number', 25);
             //TODO: update once payment processor is determined

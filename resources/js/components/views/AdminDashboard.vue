@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h4 class="text-center">Admin Dashboard</h4>
         <b-tabs>
             <b-tab title="Businesses" active>
                 <business-view></business-view>
@@ -25,7 +26,7 @@
 <script>
 
     import BusinessView from "../views/BusinessView";
-    import ChecksView from "../views/ChecksView";
+    import ChecksView from "./ChecksView";
     import ReportsView from "../views/ReportsView";
     import UsersView from "../views/UsersView";
     import AccountsView from "../views/AccountsView";

@@ -38,7 +38,10 @@ Route::get('/home', 'Views\DashboardViewController@index')->name('dashboard');
 Route::get('dashboard-view', 'Views\DashboardViewController@index');
 Route::get('admin-dashboard-view', 'Views\AdminDashboardViewController@index');
 Route::get('business-dashboard-view', 'Views\BusinessDashboardViewController@index');
-Route::get('checks-view', 'Views\ChecksViewController@index');
+
+Route::get('reports-view', 'Views\ReportsViewController@index');
+
+
 Route::get('business-view', 'Views\BusinessViewController@index');
 Route::get('invoices-view', 'Views\InvoicesViewController@index');
 Route::get('users-view', 'Views\UsersViewController@index');

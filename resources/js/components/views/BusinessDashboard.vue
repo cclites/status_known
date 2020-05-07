@@ -1,14 +1,15 @@
 <template>
     <div class="rows">
+        <h4 class="text-center">Business Dashboard</h4>
         <b-tabs>
             <b-tab title="Reports" active>
                 <reports-view></reports-view>
             </b-tab>
-            <b-tab title="Users">
-                <users-view></users-view>
-            </b-tab>
             <b-tab title="Invoices">
                 <invoices-view></invoices-view>
+            </b-tab>
+            <b-tab title="Users">
+                <users-view></users-view>
             </b-tab>
             <b-tab title="Accounts">
                 <accounts-view></accounts-view>

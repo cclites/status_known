@@ -10,6 +10,7 @@ $factory->define(Invoice::class, function (Faker $faker) {
     return [
         'business_id' => 999,
         'tracking' => Str::random(16),
-        'amount' => $faker->randomFloat(3)
+        'amount' => $faker->randomFloat(3),
+        'name' => $faker->words(2)
     ];
 });
