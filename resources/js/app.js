@@ -32,6 +32,10 @@ Vue.component('businesses-report', require('./components/reports/Businesses.vue'
 Vue.component('invoices-report', require('./components/reports/Invoices.vue').default);
 Vue.component('users-report', require('./components/reports/Users.vue').default);
 
+//Components
+Vue.component('pagination', require('./components/utilities/Pagination.vue').default);
+Vue.component('record-count', require('./components/utilities/RecordCount.vue').default);
+
 
 
 

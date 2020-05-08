@@ -3,16 +3,16 @@
         <h4 class="text-center">Business Dashboard</h4>
         <b-tabs>
             <b-tab title="Reports" active>
-                <reports-view></reports-view>
+                <reports-view :role="role"></reports-view>
             </b-tab>
             <b-tab title="Invoices">
-                <invoices-view></invoices-view>
+                <invoices-view :role="role"></invoices-view>
             </b-tab>
             <b-tab title="Users">
-                <users-view></users-view>
+                <users-view :role="role"></users-view>
             </b-tab>
-            <b-tab title="Accounts">
-                <accounts-view></accounts-view>
+            <b-tab title="Account">
+                <accounts-view :role="role"></accounts-view>
             </b-tab>
         </b-tabs>
     </div>
@@ -31,18 +31,7 @@
         //auth()->user().
 
         props: {
-            roles: {
-                type: Array,
-                default: function(){
-                    return []
-                }
-            },
-            permissions: {
-                type: Array,
-                default: function(){
-                    return []
-                }
-            },
+            role: ''
         },
 
         components: {InvoicesView, ReportsView, UsersView, AccountsView},

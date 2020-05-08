@@ -1,7 +1,7 @@
 <template>
     <div>
-        <admin-dashboard-vue v-if="this.role == 'admin'"></admin-dashboard-vue>
-        <business-dashboard-vue v-else-if="this.role == 'business'"></business-dashboard-vue>
+        <admin-dashboard-vue v-if="this.role == 'admin'" :role="this.role"></admin-dashboard-vue>
+        <business-dashboard-vue v-else-if="this.role == 'business'" :role="this.role"></business-dashboard-vue>
 
         <div v-else>
             <h4 class="text-center mt-5">

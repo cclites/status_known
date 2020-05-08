@@ -3,19 +3,19 @@
         <h4 class="text-center">Admin Dashboard</h4>
         <b-tabs>
             <b-tab title="Businesses" active>
-                <business-view></business-view>
+                <business-view :role="role"></business-view>
             </b-tab>
             <b-tab title="Reports">
-                <reports-view></reports-view>
+                <reports-view :role="role"></reports-view>
             </b-tab>
             <b-tab title="Users">
-                <users-view></users-view>
+                <users-view :role="role"></users-view>
             </b-tab>
             <b-tab title="Invoices">
-                <invoices-view></invoices-view>
+                <invoices-view :role="role"></invoices-view>
             </b-tab>
             <b-tab title="Accounts">
-                <accounts-view></accounts-view>
+                <accounts-view :role="role"></accounts-view>
             </b-tab>
 
         </b-tabs>
@@ -33,7 +33,7 @@
 
     export default {
         props: {
-            permissions: ''
+            role: ''
         },
 
         components: {BusinessView, ChecksView, ReportsView, UsersView, AccountsView},

@@ -1,35 +1,39 @@
 <template>
     <div>
-        <b-table striped hover
-                 :items="items"
-                 :per-page="perPage"
-                 :current-page="currentPage"
-                 :fields="fields"
-        >
-        </b-table>
+        <b-overlay :show="show" rounded="sm">
 
-        <b-pagination
-            v-if="rows>perPage"
-            v-model="currentPage"
-            :total-rows="rows"
-            :per-page="perPage"
-            first-text="⏮"
-            prev-text="⏪"
-            next-text="⏩"
-            last-text="⏭"
-            class="mt-4"
+            <record-count :records="this.items.length"></record-count>
 
-        ></b-pagination>
+            <b-table striped hover
+                     :items="items"
+                     :per-page="perPage"
+                     :current-page="currentPage"
+                     :fields="fields"
+            >
+            </b-table>
+
+            <pagination
+                :rows = "this.items.length"
+                :perPage="this.perPage"
+                :currentPage="this.currentPage"
+            >
+            </pagination>
+        </b-overlay>
     </div>
 </template>
 
 <script>
 
+    import pagination from '../utilities/Pagination';
+    import record_count from '../utilities/RecordCount';
+
     export default {
 
-        props: {},
+        props: {
+            role: ''
+        },
 
-        components: {},
+        components: {pagination, record_count},
 
         mixins: [],
 
@@ -44,7 +48,9 @@
                     {
                         label: 'Business',
                         key: 'business_name',
-                        sortable: true
+                        sortable: true,
+                        thClass: this.role !== 'admin' ? 'd-none' : '',
+                        tdClass: this.role !== 'admin' ? 'd-none' : '',
                     },
                     {
                         label: 'Invoice Id',
@@ -61,18 +67,22 @@
                         key: 'created_at',
                         sortable: true
                     },
-                ]
+                ],
+                show: false,
             }
         },
 
         computed: {},
 
         methods: {
-            getInvoices() {
+            getInvoices()
+            {
+                this.show = true;
                 axios.get(this.url)
                     .then((response) => {
                         this.items = response.data;
                         this.rows = this.items.length;
+                        this.show = false;
                     }, (error) => {
                         console.log(error);
                     });
