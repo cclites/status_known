@@ -55,4 +55,17 @@ class User extends Authenticatable
     /********************************************************
      * RELATIONSHIPS
      ********************************************************/
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
+
+    public function resolveChildRouteBinding($childType, $value, $field)
+    {
+        // TODO: Implement resolveChildRouteBinding() method.
+    }
+
+    public function business(){
+        return $this->belongsTo('\App\Business');
+    }
 }

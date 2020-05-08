@@ -42,8 +42,13 @@
                 perPage: 10,
                 fields: [
                     {
+                        label: 'Business',
+                        key: 'business_name',
+                        sortable: true
+                    },
+                    {
                         label: 'Invoice Id',
-                        key: 'id',
+                        key: 'invoice_id',
                         sortable: true
                     },
                     {

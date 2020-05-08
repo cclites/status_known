@@ -2224,8 +2224,8 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1,
       perPage: 10,
       fields: [{
-        label: 'Account Name',
-        key: 'account_name',
+        label: 'Business',
+        key: 'business_name',
         sortable: true
       }, {
         label: 'Account Number',
@@ -2632,8 +2632,12 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1,
       perPage: 10,
       fields: [{
+        label: 'Business',
+        key: 'business_name',
+        sortable: true
+      }, {
         label: 'Invoice Id',
-        key: 'id',
+        key: 'invoice_id',
         sortable: true
       }, {
         label: 'Amount',
@@ -2711,6 +2715,10 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1,
       perPage: 10,
       fields: [{
+        label: 'Business',
+        key: 'business_name',
+        sortable: true
+      }, {
         label: 'Report Id',
         key: 'report_id',
         sortable: true
@@ -2798,6 +2806,10 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1,
       perPage: 10,
       fields: [{
+        label: 'Business',
+        key: 'business_name',
+        sortable: true
+      }, {
         label: 'Name',
         key: 'name',
         sortable: true

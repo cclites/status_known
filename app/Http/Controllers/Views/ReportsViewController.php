@@ -25,13 +25,12 @@ class ReportsViewController extends Controller
 
         $reports = $reportsQuery
                     ->orderBy('id')
-                    ->with('requested_by', 'record')
+                    ->with('requested_by', 'record', 'business')
                     ->get()
                     ->map(function($report){
 
-                        \Log::info($report);
-
                         return [
+                            'business_name' => $report->business->name,
                             'report_id' => $report->id,
                             'requested_by' => $report->requested_by->name,
                             'requested_for' => $report->record->first_name . " " . $report->record->last_name,

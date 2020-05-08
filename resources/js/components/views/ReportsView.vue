@@ -40,6 +40,11 @@
                 perPage: 10,
                 fields: [
                     {
+                        label: 'Business',
+                        key: 'business_name',
+                        sortable: true
+                    },
+                    {
                         label: 'Report Id',
                         key: 'report_id',
                         sortable: true

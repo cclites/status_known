@@ -49,7 +49,7 @@ class AddDemoUser extends BaseCommand
 
         $user->name = "Demo User #1";
         $user->password = Hash::make('demo');
-        $user->business_id = 0;
+        $user->business_id = \App\Business::all()->random()->id;
         $user->email = 'demoUser@acctix.com';
 
         $user->save();

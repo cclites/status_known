@@ -24,6 +24,8 @@ class CreateTableBusinesses extends Migration
             $table->string('state', 25);
             $table->string('zip', 12);
             $table->string('phone', 32);
+            $table->string('email', 32);
+            $table->boolean('active')->default(true);
             $table->timestamps();
 
         });

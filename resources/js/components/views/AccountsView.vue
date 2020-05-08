@@ -41,8 +41,8 @@
                 perPage: 10,
                 fields: [
                     {
-                        label: 'Account Name',
-                        key: 'account_name',
+                        label: 'Business',
+                        key: 'business_name',
                         sortable: true
                     },
                     {
