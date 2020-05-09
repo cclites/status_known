@@ -27,7 +27,8 @@ class UsersViewController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'created_at' => (new Carbon($user->created_at))->format('m-d-Y'),
-                    'active' => $user->active ? "Yes" : "No"
+                    'active' => $user->active ? "Yes" : "No",
+                    'user_id' => $user->id
                 ];
 
             });

@@ -1,7 +1,9 @@
 <template>
     <div>
-        ChecksView.vue Has Been Loaded
+        <b-row>
+
     </div>
+
 </template>
 
 <script>

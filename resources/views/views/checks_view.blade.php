@@ -2,6 +2,6 @@
 
 @section('content')
 
-<checks-view></checks-view>
+<!--checks-view></checks-view-->
 
 @endsection

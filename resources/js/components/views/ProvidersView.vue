@@ -9,6 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
+                     @row-clicked="showUser"
             >
             </b-table>
 
@@ -16,9 +17,9 @@
                 :rows = "this.items.length"
                 :perPage="this.perPage"
                 :currentPage="this.currentPage"
-                @row-clicked="showBusiness"
             >
             </pagination>
+
         </b-overlay>
     </div>
 </template>
@@ -46,39 +47,24 @@
                 perPage: 10,
                 fields: [
                     {
-                        label: 'Business Name',
+                        label: 'Business',
                         key: 'business_name',
                         sortable: true,
                         thClass: this.role !== 'admin' ? 'd-none' : '',
                         tdClass: this.role !== 'admin' ? 'd-none' : '',
                     },
                     {
-                        label: 'Responsible Agent',
-                        key: 'responsible_agent',
+                        label: 'Name',
+                        key: 'name',
                         sortable: true
                     },
                     {
-                        label: 'Responsible Agent Email',
-                        key: 'responsible_agent_email',
+                        label: 'Email',
+                        key: 'email',
                         sortable: true
                     },
                     {
-                        label: 'Business Address',
-                        key: 'formatted_address',
-                        sortable: true
-                    },
-                    {
-                        label: 'Business Phone',
-                        key: 'business_phone',
-                        sortable: true
-                    },
-                    {
-                        label: 'Business Email',
-                        key: 'business_email',
-                        sortable: true
-                    },
-                    {
-                        label: 'Since',
+                        label: 'Started',
                         key: 'created_at',
                         sortable: true
                     },
@@ -89,34 +75,34 @@
                     },
                 ],
                 show: false,
-                url: 'business-view/',
-                reportUrl : 'businesses/',
+                url: 'providers-view/',
+                reportUrl : 'providers/',
             }
         },
 
         computed: {},
 
         methods: {
-            getBusinesses(){
-
+            getProviders() {
                 this.show = true;
                 axios.get(this.url)
                     .then((response) => {
                         this.items = response.data;
                         this.rows = this.items.length;
                         this.show = false;
+
                     }, (error) => {
                         console.log(error);
                     });
             },
 
-            showBusiness(row){
+            showProviders(row){
 
-                //let reportId = row.report_id;
+                let reportId = row.report_id;
 
                 //This for testing only. Would really do a download here.
                 //window.location = this.reportUrl + row.report_id
-                axios.get(this.reportUrl + row.business_id)
+                axios.get(this.reportUrl + row.report_id)
                     .then((response) => {
                         console.log(response);
                     }, (error) => {
@@ -126,7 +112,7 @@
         },
 
         mounted() {
-            this.getBusinesses();
+            this.getProviders();
         },
 
         watch: {},

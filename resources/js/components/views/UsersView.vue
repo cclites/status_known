@@ -9,6 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
+                     @row-clicked="showUser"
             >
             </b-table>
 
@@ -41,7 +42,6 @@
         data() {
             return {
                 items: [],
-                url: 'users-view',
                 rows: '',
                 currentPage: 1,
                 perPage: 10,
@@ -75,6 +75,8 @@
                     },
                 ],
                 show: false,
+                url: 'users-view/',
+                reportUrl : 'users/',
             }
         },
 
@@ -89,6 +91,18 @@
                         this.rows = this.items.length;
                         this.show = false;
 
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+
+            showUser(row){
+
+                //This for testing only. Would really do a download here.
+                //window.location = this.reportUrl + row.report_id
+                axios.get(this.reportUrl + row.user_id)
+                    .then((response) => {
+                        console.log(response);
                     }, (error) => {
                         console.log(error);
                     });

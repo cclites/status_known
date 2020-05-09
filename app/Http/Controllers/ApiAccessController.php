@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RecordRequest;
+use App\Http\Requests\ReportRequest;
 use Illuminate\Http\Request;
 
 class ApiAccessController extends Controller

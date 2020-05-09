@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Model;
 
 use App\Permission as P;
 use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReportUpdateRequest extends FormRequest
+class ReportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class ReportUpdateRequest extends FormRequest
     public function authorize()
     {
         if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->hasPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+            \Auth::user()->checkPermissionTo(P::CAN_READ)) //TODO::add all permissions
         {
             return true;
         }
@@ -32,10 +32,7 @@ class ReportUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'business_id' => 'required|numeric',
-            'record_id' => 'required|numeric',
-            'requested_by_id' => 'required|numeric',
-            'tracking' => 'required|string|max:32',
+            //
         ];
     }
 }

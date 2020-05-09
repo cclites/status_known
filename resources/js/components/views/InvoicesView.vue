@@ -9,6 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
+                     @row-clicked="showInvoice"
             >
             </b-table>
 
@@ -40,7 +41,6 @@
         data() {
             return {
                 items: [],
-                url: 'invoices-view',
                 rows: '',
                 currentPage: 1,
                 perPage: 10,
@@ -69,6 +69,8 @@
                     },
                 ],
                 show: false,
+                url: 'invoices-view/',
+                reportUrl : 'invoices/',
             }
         },
 
@@ -83,6 +85,20 @@
                         this.items = response.data;
                         this.rows = this.items.length;
                         this.show = false;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+
+            showInvoice(row){
+
+                //let reportId = row.report_id;
+
+                //This for testing only. Would really do a download here.
+                //window.location = this.reportUrl + row.report_id
+                axios.get(this.reportUrl + row.invoice_id)
+                    .then((response) => {
+                        console.log(response);
                     }, (error) => {
                         console.log(error);
                     });

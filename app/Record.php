@@ -29,7 +29,7 @@ class Record extends Model
         return $this->belongsTo('\App\Business');
     }
 
-    public function reports(){
+    public function report(){
         return $this->hasOne('\App\Report', 'tracking', 'tracking');
     }
 

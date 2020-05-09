@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Record;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RecordRequest;
+use App\Http\Requests\ReportRequest;
 use App\Jobs\RequestRecordJob;
 use App\Record;
 use Illuminate\Http\Request;
@@ -13,9 +13,9 @@ class RecordCreateController extends Controller
     /**
      * create a new record request
      *
-     * @param RecordRequest $request
+     * @param ReportRequest $request
      */
-    public function create(RecordRequest $request)
+    public function create(ReportRequest $request)
     {
         $record = new Record();
 

@@ -26,17 +26,18 @@
 <script>
 
     import BusinessView from "../views/BusinessView";
-    import ChecksView from "./ChecksView";
     import ReportsView from "../views/ReportsView";
     import UsersView from "../views/UsersView";
     import AccountsView from "../views/AccountsView";
+    import InvoicesView from "../views/InvoicesView";
+    import PaymentsView from "../views/PaymentsView";
 
     export default {
         props: {
             role: ''
         },
 
-        components: {BusinessView, ChecksView, ReportsView, UsersView, AccountsView},
+        components: {BusinessView, ReportsView, UsersView, AccountsView, InvoicesView, PaymentsView},
 
         mixins: [],
 

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Record;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RecordRequest;
+use App\Http\Requests\ReportRequest;
 use Illuminate\Http\Request;
 
 class RecordDeleteController extends Controller
 {
-    public function destroy(RecordRequest $request){
+    public function destroy(ReportRequest $request){
 
     }
 }

@@ -16,6 +16,7 @@
                 :rows = "this.items.length"
                 :perPage="this.perPage"
                 :currentPage="this.currentPage"
+                @row-clicked="showAccount"
             >
             </pagination>
         </b-overlay>
@@ -40,7 +41,6 @@
         data() {
             return {
                 items: [],
-                url: 'accounts-view',
                 rows: '',
                 currentPage: 1,
                 perPage: 10,
@@ -74,6 +74,8 @@
                     },
                 ],
                 show: false,
+                url: 'accounts-view/',
+                reportUrl : 'accounts/',
             }
         },
 
@@ -90,6 +92,20 @@
                         this.items = response.data;
                         this.rows = this.items.length;
                         this.show = false;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+
+            showAccount(row){
+
+                //let reportId = row.report_id;
+
+                //This for testing only. Would really do a download here.
+                //window.location = this.reportUrl + row.report_id
+                axios.get(this.reportUrl + row.account_id)
+                    .then((response) => {
+                        console.log(response);
                     }, (error) => {
                         console.log(error);
                     });

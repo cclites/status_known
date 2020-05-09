@@ -9,6 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
+                     @row-clicked="showReport"
             >
             </b-table>
 
@@ -40,7 +41,6 @@
 
         data() {
             return {
-                url: 'reports-view',
                 items: [],
                 rows: '',
                 currentPage: 1,
@@ -79,23 +79,17 @@
                         sortable: true
                     },
                 ],
-                show: false
+                show: false,
+                reportUrl : 'reports/',
+                url: 'reports-view/',
             }
         },
 
         computed: {
-
-            thClass(){
-                return this.role !== 'admin' ? 'd-none' : '' ;
-            },
-
-            tdClass(){
-                return this.role !== 'admin' ? 'd-none' : '';
-            },
-
         },
 
         methods: {
+
             getReports() {
 
                 this.show = true;
@@ -105,6 +99,20 @@
                         this.items = response.data;
                         this.rows = this.items.length;
                         this.show = false;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+
+            showReport(row){
+
+                let reportId = row.report_id;
+
+                //This for testing only. Would really do a download here.
+                //window.location = this.reportUrl + row.report_id
+                axios.get(this.reportUrl + row.report_id)
+                    .then((response) => {
+                        console.log(response);
                     }, (error) => {
                         console.log(error);
                     });
