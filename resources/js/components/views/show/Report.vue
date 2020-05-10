@@ -1,11 +1,11 @@
 <template>
     <div>
         <b-row>
-            <b-card header=""
+            <b-card :header="header"
                     header-text-variant="white"
                     header-bg-variant="info"
             >
-
+                <h3 class="text-center">Report Model View</h3>
             </b-card>
         </b-row>
     </div>
@@ -16,14 +16,23 @@
 
     export default {
 
-        props: {},
+        props: {
+            report: {
+                type: Object,
+                default: function() {
+                    return {}
+                }
+            }
+        },
 
         components: {},
 
         mixins: [],
 
         data() {
-            return {}
+            return {
+                header: ""
+            }
         },
 
         computed: {},

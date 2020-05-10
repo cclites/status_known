@@ -106,6 +106,8 @@
 
             showAccount(row){
 
+                window.location = this.reportUrl + row.account_id;
+                /*
                 this.show = true;
 
                 axios.get(this.reportUrl + row.account_id)
@@ -115,7 +117,7 @@
                         this.show = false;
                     }, (error) => {
                         console.log(error);
-                    });
+                    });*/
             }
         },
 

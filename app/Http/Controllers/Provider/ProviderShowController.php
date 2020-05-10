@@ -11,10 +11,13 @@ class ProviderShowController extends Controller
 {
     public function show(Provider $provider, ProviderRequest $request){
 
+        return view('show.provider_show', compact('provider'));
+
+        /*
         if($request->authorize()){
             return response()->json($provider);
         }else{
             return back(401, "You do not have permission to view this resource");
-        }
+        }*/
     }
 }

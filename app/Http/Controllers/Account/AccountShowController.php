@@ -11,6 +11,6 @@ class AccountShowController extends Controller
 {
     public function show(Account $account, AccountRequest $request){
 
-        return response()->json($account);
+        return view('show.account_show', compact('account'));
     }
 }

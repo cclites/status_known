@@ -109,12 +109,13 @@
                 window.location = this.reportUrl + row.report_id;
 
                 //Durr - I actually want to return a view with a single report.
+                /*
                 axios.get(this.reportUrl + row.report_id)
                     .then((response) => {
                         console.log(response);
                     }, (error) => {
                         console.log(error);
-                    });
+                    });*/
             }
         },
 

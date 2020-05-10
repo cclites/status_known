@@ -32,6 +32,15 @@ Vue.component('users-view', require('./components/views/UsersView.vue').default)
 Vue.component('accounts-view', require('./components/views/AccountsView.vue').default);
 Vue.component('reports-view', require('./components/views/ReportsView.vue').default);
 
+//Show
+Vue.component('business-show', require('./components/views/show/Business.vue').default);
+Vue.component('account-show', require('./components/views/show/Account.vue').default);
+Vue.component('invoice-show', require('./components/views/show/Invoice.vue').default);
+Vue.component('payment-show', require('./components/views/show/Payment.vue').default);
+Vue.component('provider-show', require('./components/views/show/Provider.vue').default);
+Vue.component('report-show', require('./components/views/show/Report.vue').default);
+Vue.component('user-show', require('./components/views/show/User.vue').default);
+
 //Reports
 //Vue.component('checks-report', require('./components/reports/Checks.vue').default);
 Vue.component('businesses-report', require('./components/reports/Businesses.vue').default);

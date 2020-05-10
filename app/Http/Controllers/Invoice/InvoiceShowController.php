@@ -11,11 +11,13 @@ class InvoiceShowController extends Controller
 {
     public function show(Invoice $invoice, InvoiceRequest $request){
 
+        return view('show.invoice_show', compact('invoice'));
+        /*
         if($request->authorize()){
             return response()->json($invoice);
         }else{
             return back(401, "You do not have permission to view this resource");
-        }
+        }*/
 
     }
 }

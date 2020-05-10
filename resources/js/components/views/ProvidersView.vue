@@ -98,16 +98,17 @@
 
             showProviders(row){
 
-                let reportId = row.report_id;
+                window.location = this.reportUrl + row.provider_id;
 
                 //This for testing only. Would really do a download here.
                 //window.location = this.reportUrl + row.report_id
-                axios.get(this.reportUrl + row.report_id)
+                /*
+                axios.get(this.reportUrl + row.provider_id)
                     .then((response) => {
                         console.log(response);
                     }, (error) => {
                         console.log(error);
-                    });
+                    });*/
             }
         },
 

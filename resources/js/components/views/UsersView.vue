@@ -98,14 +98,17 @@
 
             showUser(row){
 
+                window.location = this.reportUrl + row.user_id;
+
                 //This for testing only. Would really do a download here.
                 //window.location = this.reportUrl + row.report_id
+                /*
                 axios.get(this.reportUrl + row.user_id)
                     .then((response) => {
                         console.log(response);
                     }, (error) => {
                         console.log(error);
-                    });
+                    });*/
             }
         },
 

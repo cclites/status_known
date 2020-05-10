@@ -11,11 +11,13 @@ class PaymentShowController extends Controller
 {
     public function show(Payment $payment, PaymentRequest $request){
 
+        return view('show.payment_show', compact('payment'));
+        /*
         if($request->authorize()){
             return response()->json($payment);
         }else{
             return back(401, "You do not have permission to view this resource");
-        }
+        }*/
 
 
     }

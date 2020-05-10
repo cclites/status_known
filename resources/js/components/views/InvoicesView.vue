@@ -98,15 +98,17 @@
             showInvoice(row){
 
                 //let reportId = row.report_id;
+                window.location = this.reportUrl + row.invoice_id;
 
                 //This for testing only. Would really do a download here.
                 //window.location = this.reportUrl + row.report_id
+                /*
                 axios.get(this.reportUrl + row.invoice_id)
                     .then((response) => {
                         console.log(response);
                     }, (error) => {
                         console.log(error);
-                    });
+                    });*/
             }
         },
 

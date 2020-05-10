@@ -11,7 +11,7 @@ class UserShowController extends Controller
 {
     public function show(User $user, UserRequest $request){
 
-        return response()->json($user);
+        return view('show.user_show', compact('user'));
 
     }
 }

@@ -112,17 +112,20 @@
 
             showBusiness(row){
 
+                window.location = this.reportUrl + row.business_id;
+
                 //let reportId = row.report_id;
-                console.log(row.business_id);
+                //console.log(row.business_id);
 
                 //This for testing only. Would really do a download here.
                 //window.location = this.reportUrl + row.report_id
+                /*
                 axios.get(this.reportUrl + row.business_id)
                     .then((response) => {
                         console.log(response);
                     }, (error) => {
                         console.log(error);
-                    });
+                    });*/
             }
         },
 
