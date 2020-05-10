@@ -106,10 +106,9 @@
 
             showReport(row){
 
-                let reportId = row.report_id;
+                window.location = this.reportUrl + row.report_id;
 
-                //This for testing only. Would really do a download here.
-                //window.location = this.reportUrl + row.report_id
+                //Durr - I actually want to return a view with a single report.
                 axios.get(this.reportUrl + row.report_id)
                     .then((response) => {
                         console.log(response);

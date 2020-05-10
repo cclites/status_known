@@ -28,6 +28,8 @@ class AccountsViewController extends Controller
                                           'card_number' => $account->card_number,
                                           'created_at' => (new Carbon($account->created_at))->format('m-d-Y'),
                                           'updated_at' => (new Carbon($account->updated_at))->format('m-d-Y'),
+                                          'account_id' => $account->id,
+                                          'account_name' => $account->account_name
                                       ];
 
                                   });

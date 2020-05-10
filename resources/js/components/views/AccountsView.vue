@@ -9,6 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
+                     @row-clicked="showAccount"
             >
             </b-table>
 
@@ -16,7 +17,7 @@
                 :rows = "this.items.length"
                 :perPage="this.perPage"
                 :currentPage="this.currentPage"
-                @row-clicked="showAccount"
+
             >
             </pagination>
         </b-overlay>
@@ -58,6 +59,11 @@
                         sortable: true
                     },
                     {
+                        label: 'Account Name',
+                        key: 'account_name',
+                        sortable: true
+                    },
+                    {
                         label: 'Card Number',
                         key: 'card_number',
                         sortable: true
@@ -91,6 +97,7 @@
                     .then((response) => {
                         this.items = response.data;
                         this.rows = this.items.length;
+
                         this.show = false;
                     }, (error) => {
                         console.log(error);
@@ -99,13 +106,13 @@
 
             showAccount(row){
 
-                //let reportId = row.report_id;
+                this.show = true;
 
-                //This for testing only. Would really do a download here.
-                //window.location = this.reportUrl + row.report_id
                 axios.get(this.reportUrl + row.account_id)
                     .then((response) => {
                         console.log(response);
+
+                        this.show = false;
                     }, (error) => {
                         console.log(error);
                     });

@@ -2435,6 +2435,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2461,6 +2462,10 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         label: 'Account Number',
         key: 'account_number',
+        sortable: true
+      }, {
+        label: 'Account Name',
+        key: 'account_name',
         sortable: true
       }, {
         label: 'Card Number',
@@ -2495,11 +2500,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showAccount: function showAccount(row) {
-      //let reportId = row.report_id;
-      //This for testing only. Would really do a download here.
-      //window.location = this.reportUrl + row.report_id
+      var _this2 = this;
+
+      this.show = true;
       axios.get(this.reportUrl + row.account_id).then(function (response) {
         console.log(response);
+        _this2.show = false;
       }, function (error) {
         console.log(error);
       });
@@ -2622,8 +2628,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showBusiness: function showBusiness(row) {
       //let reportId = row.report_id;
-      //This for testing only. Would really do a download here.
+      console.log(row.business_id); //This for testing only. Would really do a download here.
       //window.location = this.reportUrl + row.report_id
+
       axios.get(this.reportUrl + row.business_id).then(function (response) {
         console.log(response);
       }, function (error) {
@@ -2698,6 +2705,10 @@ __webpack_require__.r(__webpack_exports__);
         sortable: true,
         thClass: this.role !== 'admin' ? 'd-none' : '',
         tdClass: this.role !== 'admin' ? 'd-none' : ''
+      }, {
+        label: 'For',
+        key: 'record_name',
+        sortable: true
       }, {
         label: 'Invoice Id',
         key: 'invoice_id',
@@ -2964,8 +2975,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showReport: function showReport(row) {
-      var reportId = row.report_id; //This for testing only. Would really do a download here.
-      //window.location = this.reportUrl + row.report_id
+      window.location = this.reportUrl + row.report_id; //Durr - I actually want to return a view with a single report.
 
       axios.get(this.reportUrl + row.report_id).then(function (response) {
         console.log(response);
@@ -81507,7 +81517,8 @@ var render = function() {
               "per-page": _vm.perPage,
               "current-page": _vm.currentPage,
               fields: _vm.fields
-            }
+            },
+            on: { "row-clicked": _vm.showAccount }
           }),
           _vm._v(" "),
           _c("pagination", {
@@ -81515,8 +81526,7 @@ var render = function() {
               rows: this.items.length,
               perPage: this.perPage,
               currentPage: this.currentPage
-            },
-            on: { "row-clicked": _vm.showAccount }
+            }
           })
         ],
         1
@@ -81564,7 +81574,8 @@ var render = function() {
               "per-page": _vm.perPage,
               "current-page": _vm.currentPage,
               fields: _vm.fields
-            }
+            },
+            on: { "row-clicked": _vm.showBusiness }
           }),
           _vm._v(" "),
           _c("pagination", {
@@ -81572,8 +81583,7 @@ var render = function() {
               rows: this.items.length,
               perPage: this.perPage,
               currentPage: this.currentPage
-            },
-            on: { "row-clicked": _vm.showBusiness }
+            }
           })
         ],
         1

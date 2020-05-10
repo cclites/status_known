@@ -16,7 +16,7 @@ class ReportRequest extends FormRequest
     public function authorize()
     {
         if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->checkPermissionTo(P::CAN_READ)) //TODO::add all permissions
+            \Auth::user()->can([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
         {
             return true;
         }

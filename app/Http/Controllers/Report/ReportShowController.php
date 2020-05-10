@@ -13,7 +13,7 @@ class ReportShowController extends Controller
 
         if($request->authorize()){
 
-            $record = \App\Record::where('id', $report->id)->load('report')->first();
+            $record = \App\Record::where('id', $report->id)->with('report')->first();
             return response()->json($record);
 
         }else{

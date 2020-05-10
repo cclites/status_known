@@ -53,6 +53,11 @@
                         tdClass: this.role !== 'admin' ? 'd-none' : '',
                     },
                     {
+                        label: 'For',
+                        key: 'record_name',
+                        sortable: true
+                    },
+                    {
                         label: 'Invoice Id',
                         key: 'invoice_id',
                         sortable: true

@@ -9,6 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
+                     @row-clicked="showBusiness"
             >
             </b-table>
 
@@ -16,7 +17,6 @@
                 :rows = "this.items.length"
                 :perPage="this.perPage"
                 :currentPage="this.currentPage"
-                @row-clicked="showBusiness"
             >
             </pagination>
         </b-overlay>
@@ -113,6 +113,7 @@
             showBusiness(row){
 
                 //let reportId = row.report_id;
+                console.log(row.business_id);
 
                 //This for testing only. Would really do a download here.
                 //window.location = this.reportUrl + row.report_id

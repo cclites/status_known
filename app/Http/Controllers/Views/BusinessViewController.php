@@ -40,7 +40,8 @@ class BusinessViewController extends Controller
                     'business_phone' => $business->phone,
                     'business_email' => $business->email,
                     'created_at' => (new Carbon($business->created_at))->format('m-d-Y'),
-                    'active' => $business->active ? 'Yes' : 'No'
+                    'active' => $business->active ? 'Yes' : 'No',
+                    'business_id' => $business->id
                 ];
             });
 

@@ -11,6 +11,6 @@ $factory->define(\App\Account::class, function (Faker $faker) {
         'tracking' => \Str::random(16),
         'account_number' => $faker->bankAccountNumber,
         'card_number' => $faker->creditCardNumber,
-        'account_name' => "Bob"
+        'account_name' => $faker->company,
     ];
 });

@@ -22,16 +22,20 @@ class InvoicesViewController extends Controller
         }
 
         $invoices = $invoicesQuery
-                    ->with('business')
+                    ->with('business', 'records')
                     ->orderBy('id')
                     ->get()
                     ->map(function($invoice){
 
+                        //\Log::info(json_encode($invoice));
+                        \Log::info($invoice->records->last_name);
+
                         return [
                             'business_name' => $invoice->business->name,
+                            'record_name' => $invoice->records->last_name . ", " . $invoice->records->first_name,
                             'invoice_id' => $invoice->id,
                             'amount' => $invoice->amount,
-                            'created_at' => (new Carbon($invoice->created_at))->format('m-d-Y')
+                            'created_at' => (new Carbon($invoice->created_at))->format('m-d-Y'),
                         ];
 
 
