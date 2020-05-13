@@ -50,7 +50,13 @@ class ReportFactory extends BaseCommand
     {
         $this->setup($this->argument('vue'), $this->argument('directory'));
 
-        //This is going to be a problem because we want to use the report model here.
+        $this->addVueComponent();
+
+        $this->registerComponent();
+
+        $this->addRoute();
+        /******************************
+
         $this->addClass();
 
         $this->addController();
@@ -61,9 +67,10 @@ class ReportFactory extends BaseCommand
 
         $this->addBlade();
 
-        $this->addVueComponent();
+        //$this->addVueComponent();
 
         $this->registerComponent();
+         * */
 
         /****************************************************************/
     }

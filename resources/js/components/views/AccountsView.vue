@@ -17,7 +17,6 @@
                 :rows = "this.items.length"
                 :perPage="this.perPage"
                 :currentPage="this.currentPage"
-
             >
             </pagination>
         </b-overlay>

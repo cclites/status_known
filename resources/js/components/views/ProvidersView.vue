@@ -9,7 +9,7 @@
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
-                     @row-clicked="showUser"
+                     @row-clicked="showProvider"
             >
             </b-table>
 

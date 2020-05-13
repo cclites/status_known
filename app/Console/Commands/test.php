@@ -39,7 +39,7 @@ class Test extends BaseCommand
         $this->setup($this->argument('vue'), $this->argument('directory'));
 
         $this->testAddRoute();
-        $this->testRegisterComponent();
+        //$this->testRegisterComponent();
         //$this->testAddComponent();
         //$this->testAddView();
         //$this->testAddController();

@@ -3,14 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-
-use App\Role as R;
-use App\Permission as P;
 
 
 /**
@@ -61,14 +58,12 @@ class BaseCommand extends Command
     /** Used as placeholder in app.js */
     public $placeholder = "//------- CONTENT -------//";
 
-
-
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'do-not-run';
 
     /**
      * The console command description.
@@ -98,152 +93,217 @@ class BaseCommand extends Command
     }
 
 
-    /** TESTED          */
+    /** TESTED  5/11/2020        */
     /**
-     *
+     * Add a generic vue component
      */
-    public function addVueComponent(){
+    public function addVueComponent($useListView = false){
 
-        if($this->directory){
-            $this->hasDirectory(resource_path('js/components/' . $this->lcDirectory));
+        $path = resource_path('js/components/' . $this->lcDirectory . "/");
+        $this->hasDirectory($path);
+
+        if($useListView){
+            $vue = file_get_contents(resource_path('stubs/model_list_vue.stub'));
+        }else{
+            $vue = file_get_contents(resource_path('stubs/vue.stub'));
         }
 
-        $path = resource_path('js/components/' . $this->lcDirectory);
-        $path .= "{$this->itemName}.vue";
-        $vue = file_get_contents(resource_path('stubs/vue.stub'));
+        $vue = str_replace('%MODEL%', $this->itemName, $vue);
+        $vue = str_replace('%model%', $this->kebabCase, $vue);
+        $vue = str_replace('%directory%', $this->lcDirectory, $vue);
 
-        file_put_contents($path, $vue);
+        file_put_contents($path . $this->kebabCase . "s-" . $this->lcDirectory . ".vue", $vue);
     }
 
-    /** TESTED          */
+    /** TESTED 5/11/2020         */
+    /**
+     * Register a view component
+     *
+     * @param bool $useListView
+     */
+    public function registerComponent($useListView = false){
+
+        $appJs = file_get_contents(resource_path('js/app.js'));
+
+        $component = "Vue.component('{$this->kebabCase}s-{$this->lcDirectory}',
+                        require('./components/{$this->lcDirectory}/{$this->snakeCase}s_{$this->lcDirectory}.vue'));\n";
+
+        $component .= $this->placeholder;
+
+        $appJs = str_replace($this->placeholder, $component, $appJs);
+
+        file_put_contents(resource_path('js/app.js'), $appJs);
+
+    }
+
+    /** TESTED  5/11/2020          */
+    /**
+     * Add route for controller
+     *
+     * @param bool $useListView
+     */
+    public function addRoute($useListView = false, $method = 'get', $action = 'index'){
+
+        $contents = file_get_contents(base_path('routes/web.php'));
+
+        $contents .= "\nRoute::{$method}('{$this->kebabCase}s-{$this->lcDirectory}',
+                        '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_{$this->lcDirectory}');";
+
+        file_put_contents(base_path('routes/web.php'), $contents);
+    }
+
+
+    /** TESTED  5/12/2020        */
     /**
      * Add a controller in the appropriate directory
      */
     public function addController(){
 
-        if($this->directory){
-            $this->hasDirectory(app_path("Http/Controllers/{$this->directory}"));
-        }
+        $fileName = $this->itemName . "s". $this->ucDirectorySingular ."Controller.php";
+        $path = "app/Http/Controllers/{$this->upperCase}/";
+        $fullTitle = $path . $fileName;
 
-        $path = app_path("Http/Controllers/{$this->directory}");
-
-        if($this->directory){
-            rtrim($path, '/');
-        }
-
-        $path .= $this->itemName . $this->ucDirectorySingular ."Controller.php\n";
+        $this->hasDirectory($path);
 
         $controller = file_get_contents(resource_path('stubs/controller.stub'));
-        $controller = str_replace('%MODEL%', $this->itemName, $controller);
+        $controller = str_replace('%MODEL%', "{$this->upperCase}s{$this->originalDirectory}", $controller);
         $controller = str_replace('%model%', $this->kebabCase, $controller);
-        $controller = str_replace('%NAMESPACE%', $this->directory, $controller);
+        $controller = str_replace('%NAMESPACE%', ('\\' . $this->itemName), $controller);
+        $controller = str_replace('%directory%', $this->lcDirectory, $controller);
+        $controller = str_replace('%request%', "{$this->upperCase}s{$this->originalDirectory}", $controller);
 
-        file_put_contents($path, $controller);
+        file_put_contents($fullTitle, $controller);
     }
 
 
 
-    /** TESTED          */
+    /** TESTED  5/12/2020       */
     /**
      * Add a class file
      */
     public function addClass(){
 
-        if($this->originalDirectory == 'Reports'){
-            $class = file_get_contents(resource_path("stubs/report_class.stub"));
-        }
-        else{
-            $class = file_get_contents(resource_path("stubs/class.stub"));
-        }
+        $fileName = $this->itemName .".php";
+        $path = "app/{$this->upperCase}s/";
+        $fullTitle = $path . $fileName;
+
+        $this->hasDirectory($path);
+
+        $class = file_get_contents(resource_path("stubs/class.stub"));
 
         $class = str_replace('%MODEL%', $this->itemName, $class);
         $class = str_replace('%model%', $this->kebabCase, $class);
+        $class = str_replace('%NAMESPACE%', ('\\' . $this->itemName), $class);
 
-        $temporary = "\\" . $this->originalDirectory;
-        $class = str_replace('%NAMESPACE%', $temporary, $class);
-
-        file_put_contents(app_path("{$this->directory}{$this->itemName}.php"), $class);
+        file_put_contents($fullTitle, $class);
     }
 
-    /** TESTED          */
-    public function registerComponent(){
+    /** TESTED  5/12/2020       */
+    /**
+     * Add a request object
+     * @param bool $update
+     */
+    public function addRequest($update = false){
 
-        $appJs = file_get_contents(resource_path('js/app.js'));
+        Artisan::call("make:request {$this->upperCase}s{$this->originalDirectory}Request");
 
-        $component = "Vue.component('{$this->kebabCase}{$this->kebabSuffix}',
-                        require('./components/{$this->lcDirectory}{$this->snakeCase}{$this->snakeSuffix}.vue'));\n";
-        $component .= $this->placeholder;
+        if($update){
+            Artisan::call("make:request {$this->upperCase}s{$this->originalDirectory}UpdateRequest");
+        }
+    }
 
-        $appJs = str_replace($this->placeholder, $component, $appJs);
-        file_put_contents(resource_path('js/app.js'), $appJs);
+    /** TESTED  5/12/2020          */
+    /**
+     * Add a migration to create a table
+     */
+    public function createTableMigration(){
+
+        $timestamp = Carbon::now()->format('Y_m_d_' . '000000_') . 'create_table_';
+        $fileName = $timestamp . $this->lowerCase ."s.php";
+
+        $path = "database/migrations/";
+
+        $fullTitle = $path . $fileName;
+
+        $this->hasDirectory($path);
+
+        $migration = file_get_contents(resource_path("stubs/migration.stub"));
+
+        $migration = str_replace('%MODEL%', $this->itemName, $migration);
+        $migration = str_replace('%model%', $this->kebabCase . "s", $migration);
+
+        file_put_contents($fullTitle, $migration);
 
     }
 
-    /** TESTED          */
-    public function addRoute(){
 
-        $contents = file_get_contents(base_path('routes/web.php'));
 
-        $contents .= "\nRoute::get('{$this->kebabCase}{$this->kebabSuffix}',
-                        '{$this->directory}{$this->upperCase}{$this->originalDirectory}Controller@index');";
 
-        file_put_contents(base_path('routes/web.php'), $contents);
-    }
 
     /** TESTED          */
     public function addBlade(){
 
         if($this->directory){
-            $this->hasDirectory(resource_path("views/$this->directory"));
+            $this->hasDirectory(resource_path("views/$this->lowerCase") . "s");
             $this->lcDirectory .= "/";
         }
 
         $blade = file_get_contents(resource_path('stubs/blade.stub'));
+        $blade = str_replace('%MODEL%', $this->lcDirectorySingular, $blade);
         $blade = str_replace('%model%', $this->lowerCase, $blade);
-        $path = resource_path("views/" . $this->lcDirectory) . $this->snakeCase . $this->snakeSuffix. '.blade.php';
+        $path = resource_path("views/" . $this->lowerCase) . "s/". $this->snakeCase . "s" . $this->snakeSuffix. '.blade.php';
 
         file_put_contents($path, $blade);
     }
 
-    /** TESTED          */
-    public function addRequest($update = false){
-        Artisan::call("make:request {$this->upperCase}{$this->originalDirectory}Request");
+    /** TESTED  5/12/2020          */
+    /**
+     * Generate single controller routes
+     */
+    public function generateRoutes()
+    {
+        $path = base_path('routes/web.php');
 
-        if($update){
-            Artisan::call("make:request {$this->upperCase}{$this->originalDirectory}UpdateRequest");
-        }
+        $contents = file_get_contents($path);
+
+        $contents .= "/**  {$this->originalDirectory} Routes  **/\n";
+
+        $contents .= "Route::get('{$this->kebabCase}s-show', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_show');\n";
+
+        $contents .= "Route::post('{$this->kebabCase}s-create', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_create');\n";
+
+        $contents .= "Route::patch('{$this->kebabCase}s-update', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_update');\n";
+
+        $contents .= "Route::delete('{$this->kebabCase}s-delete', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_delete');\n";
+
+
+        file_put_contents($path, $contents);
     }
 
-    /** TESTED          */
-    public function makeMigration(){
-        Artisan::call("make:migration make_table_{$this->snakeCase}s  --table={$this->snakeCase}s");
+
+    /** TESTED  5/12/2020          */
+    /**
+     * Generate single responsibility routes
+     */
+    public function generateSingleResponsibilityRoutes(){
+
+        $path = base_path('routes/web.php');
+
+        $contents = file_get_contents($path);
+
+        $contents .= "/** {$this->itemName}   **/\n";
+        $contents .= "Route::get('{$this->kebabCase}s-show', '{$this->itemName}sController@index')->name('{$this->snakeCase}s_show');\n";
+        $contents .= "Route::post('{$this->kebabCase}s-create', '{$this->itemName}sController@create')->name('{$this->snakeCase}s_create');\n";
+        $contents .= "Route::patch('{$this->kebabCase}s-update', '{$this->itemName}sController@update')->name('{$this->snakeCase}s_update');\n";
+        $contents .= "Route::delete('{$this->kebabCase}s-delete', '{$this->itemName}sController@delete')->name('{$this->snakeCase}s_delete');\n";
+
+        file_put_contents($path, $contents);
     }
 
-    /** TESTED          */
-    public function generateSingleUseRoutes(){
-
-        $contents = file_get_contents(base_path('routes/web.php'));
-
-        $path = "{$this->kebabCase}s{$this->kebabSuffix}";
-        $filePath = "{$this->originalDirectory}";
-
-        if($this->directory){
-            $binding = "/{" . $this->lcDirectorySingular . "}";
-        }else{
-            $binding='';
-        }
-
-        $contents = "/**  {$this->originalDirectory} Single Use Routes  **/\n";
-        $contents .= "Route::get('{$path}', '{$filePath}Controller@index');\n";
-        $contents .= "Route::get('{$path}{$binding}', '{$filePath}ShowController@show');\n";
-        $contents .= "Route::post('{$path}', '{$filePath}AddController@store');\n";
-        $contents .= "Route::patch('{$path}', '{$filePath}UpdateController@update');\n";
-        $contents .= "Route::delete('{$path}', '{$filePath}DeleteController@delete');\n";
-
-        file_put_contents(base_path('routes/web.php'), $contents);
-    }
-
-    /** TESTED          */
+    /** TESTED  5/12/2020          */
+    /**
+     * Generate single use controllers
+     */
     public function generateSingleUseControllers(){
 
         $this->hasDirectory(app_path("Http/Controllers/{$this->directory}{$this->upperCase}"));
@@ -251,25 +311,39 @@ class BaseCommand extends Command
         $path = "Http/Controllers/{$this->directory}{$this->upperCase}";
 
         $index = file_get_contents(resource_path('stubs/index.stub'));
-        $index = str_replace('%MODEL%', $this->upperCase, $index);
+        $index .= str_replace('%MODEL%', $this->upperCase, $index);
         file_put_contents("{$path}Controller.php", $index);
 
         $show = file_get_contents(resource_path('stubs/show.stub'));
-        $show = str_replace('%MODEL%', $this->upperCase, $show);
-        $show = str_replace('%model%', $this->lowerCase, $show);
+        $show .= str_replace('%MODEL%', $this->upperCase, $show);
+        $show .= str_replace('%model%', $this->lowerCase, $show);
         file_put_contents("{$path}ShowController.php", $show);
 
         $add = file_get_contents(resource_path('stubs/create.stub'));
-        $add = str_replace('%MODEL%', $this->upperCase, $add);
+        $add .= str_replace('%MODEL%', $this->upperCase, $add);
         file_put_contents("{$path}AddController.php", $add);
 
         $update = file_get_contents(resource_path('stubs/update.stub'));
-        $update = str_replace('%MODEL%', $this->upperCase, $update);
+        $update .= str_replace('%MODEL%', $this->upperCase, $update);
         file_put_contents("{$path}UpdateController.php", $update);
 
         $destroy = file_get_contents(resource_path('stubs/destroy.stub'));
-        $destroy = str_replace('%MODEL%', $this->upperCase, $destroy);
+        $destroy .= str_replace('%MODEL%', $this->upperCase, $destroy);
         file_put_contents("{$path}UpdateController.php", $destroy);
+    }
+
+    /** TESTED          */
+    /**
+     * Shouldn't need this function at all
+     */
+    public function addModelListRoute(){
+
+        $contents = file_get_contents(base_path('routes/web.php'));
+
+        $contents .= "\nRoute::get('{$this->kebabCase}{$this->kebabSuffix}',
+                        '{$this->directory}{$this->upperCase}{$this->originalDirectory}Controller@index');";
+
+        file_put_contents(base_path('routes/web.php'), $contents);
     }
 
     /******************************************************
@@ -282,6 +356,7 @@ class BaseCommand extends Command
      * @param $path
      */
     public function hasDirectory($path){
+
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
@@ -296,7 +371,7 @@ class BaseCommand extends Command
         $this->snakeCase = Str::snake($this->itemName);
     }
 
-    public function setDirectory($directory = ''){
+    public function setDirectoryName($directory = ''){
 
         $this->directory = $directory;
         $this->originalDirectory = $directory;
@@ -309,8 +384,9 @@ class BaseCommand extends Command
     }
 
     public function setup($itemName, $directory){
-        $this->setItemName = $itemName;
-        $this->setDirectory($directory);
+
+        $this->setItemName($itemName);
+        $this->setDirectoryName($directory);
     }
 
 
