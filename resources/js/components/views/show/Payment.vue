@@ -7,6 +7,8 @@
             >
                 <h3 class="text-center">Payment Model View</h3>
 
+                <draft-model-show :model="payment"></draft-model-show>
+
             </b-card>
         </b-row>
     </div>

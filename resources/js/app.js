@@ -25,7 +25,6 @@ Vue.component('admin-dashboard-vue', require('./components/dashboard/AdminDashbo
 Vue.component('business-dashboard-vue', require('./components/dashboard/BusinessDashboard.vue').default);
 
 //Tabs
-//Vue.component('checks-view', require('./components/views/ChecksView.vue.unused').default);
 Vue.component('business-view', require('./components/views/BusinessView.vue').default);
 Vue.component('invoices-view', require('./components/views/InvoicesView.vue').default);
 Vue.component('users-view', require('./components/views/UsersView.vue').default);
@@ -40,6 +39,8 @@ Vue.component('payment-show', require('./components/views/show/Payment.vue').def
 Vue.component('provider-show', require('./components/views/show/Provider.vue').default);
 Vue.component('report-show', require('./components/views/show/Report.vue').default);
 Vue.component('user-show', require('./components/views/show/User.vue').default);
+
+Vue.component('draft-model-show', require('./components/utilities/draft-model-show.vue').default);
 
 //Reports
 //Vue.component('checks-report', require('./components/reports/Checks.vue').default);

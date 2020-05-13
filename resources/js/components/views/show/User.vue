@@ -1,17 +1,21 @@
 <template>
+
     <div>
         <b-row>
-            <b-card header=""
+            <b-card :header="header"
                     header-text-variant="white"
                     header-bg-variant="info"
             >
+                <h3 class="text-center">Report Model View</h3>
 
-                <h3 class="text-center">User Model View</h3>
-
+                <draft-model-show :model="report"></draft-model-show>
             </b-card>
         </b-row>
     </div>
 
+
+
+  <draft-model-show :model="user"></draft-model-show>
 </template>
 
 <script>
@@ -32,7 +36,9 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+                header: '',
+            }
         },
 
         computed: {},

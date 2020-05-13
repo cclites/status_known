@@ -6,6 +6,8 @@
                     header-bg-variant="info"
             >
                 <h3 class="text-center">Report Model View</h3>
+
+                <draft-model-show :model="report"></draft-model-show>
             </b-card>
         </b-row>
     </div>

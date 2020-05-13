@@ -7,6 +7,8 @@
             >
                 <h3 class="text-center">Provider Model View</h3>
 
+                <draft-model-show :model="provider"></draft-model-show>
+
             </b-card>
         </b-row>
     </div>

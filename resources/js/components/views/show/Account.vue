@@ -6,6 +6,9 @@
                     header-bg-variant="info"
             >
                 <h3 class="text-center">Account Model View</h3>
+
+                <draft-model-show :model="account"></draft-model-show>
+
             </b-card>
         </b-row>
     </div>
