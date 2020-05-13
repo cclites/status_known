@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\All\ReportsRequest;
 
+//TODO: Move this stuff into a Base Request
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -15,7 +17,7 @@ use App\Permission as P;
 class ReportsViewController extends Controller
 {
     //Maybe not called at all?
-    public function index(Request $request){
+    public function index(ReportsRequest $request){
 
         $reportsQuery = \App\Report::query();
 

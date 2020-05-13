@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Views;
 
-use App\Http\Requests\BusinessRequest;
+use App\Http\Requests\All\BusinessesRequest;
 
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 
 class BusinessViewController extends Controller
 {
-    public function index(BusinessRequest $request){
+    public function index(BusinessesRequest $request){
 
         $businessesQuery = \App\Business::query();
 

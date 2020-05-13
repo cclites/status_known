@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
-class UsersViewController extends Controller
+class ProvidersViewController extends Controller
 {
     public function index(UsersRequest $request){
 

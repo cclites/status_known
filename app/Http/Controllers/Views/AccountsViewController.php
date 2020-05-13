@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Views;
 
+use App\Http\Requests\All\AccountsRequest;
 use App\Role as R;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AccountsViewController extends Controller
 {
-    public function index(Request $request){
+    public function index(AccountsRequest $request){
 
         $accountsQuery = \App\Account::query();
 

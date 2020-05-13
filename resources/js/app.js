@@ -15,9 +15,13 @@ Vue.use(BootstrapVue);
 //API
 Vue.component('frame-loader', require('./components/FrameLoader.vue').default);
 
+//Dev/Testing
+Vue.component('draft-model-show', require('./components/utilities/draft-model-show.vue').default);
+
 //Utilities
 Vue.component('pagination', require('./components/utilities/Pagination.vue').default);
 Vue.component('record-count', require('./components/utilities/RecordCount.vue').default);
+Vue.component('menu-bar', require('./components/utilities/MenuBar.vue').default);
 
 //Dashboards
 Vue.component('dashboard-vue', require('./components/dashboard/DashboardView.vue').default);
@@ -40,7 +44,7 @@ Vue.component('provider-show', require('./components/views/show/Provider.vue').d
 Vue.component('report-show', require('./components/views/show/Report.vue').default);
 Vue.component('user-show', require('./components/views/show/User.vue').default);
 
-Vue.component('draft-model-show', require('./components/utilities/draft-model-show.vue').default);
+
 
 //Reports
 //Vue.component('checks-report', require('./components/reports/Checks.vue').default);
