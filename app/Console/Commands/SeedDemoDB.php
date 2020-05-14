@@ -111,5 +111,11 @@ class SeedDemoDB extends BaseCommand
 
         }
 
+        //Add setup:demo_admin
+        Artisan::call("setup:demo_admin");
+        Artisan::call("setup:demo_user");
+
     }
+
+
 }
