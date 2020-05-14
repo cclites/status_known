@@ -84,8 +84,8 @@ $factory->define(\App\Record::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'middle_name' => $faker->firstNameFemale,
         'last_name' => $faker->lastName,
-        'dob' => $faker->date(),
-        'ssn' => $faker->ssn,
+        'dob' => Crypt::encrypt($faker->date()),
+        'ssn' => Crypt::encrypt($faker->ssn),
         'amount' => number_format( $faker->randomFloat(2, 20, 100) , 2),
     ];
 });

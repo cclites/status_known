@@ -27,8 +27,8 @@ class CreateTableRecords extends Migration
             $table->string('first_name', 32);
             $table->string('middle_name', 32)->nullable();
             $table->string('last_name', 32);
-            $table->string('ssn', 32);
-            $table->string('dob', 32);
+            $table->string('ssn');
+            $table->string('dob');
 
             $table->timestamps();
 

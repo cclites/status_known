@@ -8,6 +8,11 @@
                 <h3 class="text-center">Record Model View</h3>
 
                 <draft-model-show :model="record"></draft-model-show>
+
+                <div>
+                    <b-button variant="outline-primary" class="text-right">Print</b-button>
+                    <b-button variant="outline-secondary">Update</b-button>
+                </div>
             </b-card>
         </b-row>
     </div>
