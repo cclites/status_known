@@ -9,13 +9,13 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-use App\Http\Requests\All\InvoiceRequest;
+use App\Http\Requests\All\InvoicesRequest;
 
 use Carbon\Carbon;
 
 class InvoicesViewController extends Controller
 {
-    public function index(InvoiceRequest $request){
+    public function index(InvoicesRequest $request){
 
         $invoicesQuery = \App\Invoice::query();
 

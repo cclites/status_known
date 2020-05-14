@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Record_will_not_be_used;
+namespace App\Http\Controllers\Record;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

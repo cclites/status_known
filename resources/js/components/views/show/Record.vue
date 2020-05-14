@@ -1,18 +1,16 @@
 <template>
-
     <div>
         <b-row>
             <b-card :header="header"
                     header-text-variant="white"
                     header-bg-variant="info"
             >
-                <h3 class="text-center">Report Model View</h3>
+                <h3 class="text-center">Record Model View</h3>
 
-                <draft-model-show :model="user"></draft-model-show>
+                <draft-model-show :model="record"></draft-model-show>
             </b-card>
         </b-row>
     </div>
-
 
 </template>
 
@@ -21,7 +19,7 @@
     export default {
 
         props: {
-            user: {
+            record: {
                 type: Object,
                 default: function() {
                     return {}
@@ -35,7 +33,7 @@
 
         data() {
             return {
-                header: '',
+                header: ""
             }
         },
 

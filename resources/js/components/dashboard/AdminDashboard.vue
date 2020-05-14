@@ -8,6 +8,9 @@
             <b-tab title="Reports">
                 <reports-view :role="role"></reports-view>
             </b-tab>
+            <b-tab title="Records">
+                <records-view :role="role"></records-view>
+            </b-tab>
             <b-tab title="Users">
                 <users-view :role="role"></users-view>
             </b-tab>

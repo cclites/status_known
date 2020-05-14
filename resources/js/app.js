@@ -34,6 +34,7 @@ Vue.component('invoices-view', require('./components/views/InvoicesView.vue').de
 Vue.component('users-view', require('./components/views/UsersView.vue').default);
 Vue.component('accounts-view', require('./components/views/AccountsView.vue').default);
 Vue.component('reports-view', require('./components/views/ReportsView.vue').default);
+Vue.component('records-view', require('./components/views/RecordsView.vue').default);
 
 //Show
 Vue.component('business-show', require('./components/views/show/Business.vue').default);
