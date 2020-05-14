@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Support\Facades\Hash;
 
+use App\Role as R;
+use App\Permission as P;
+
 class AddDemoUser extends BaseCommand
 {
     /**

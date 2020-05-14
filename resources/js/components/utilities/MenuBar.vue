@@ -11,7 +11,7 @@
         </ul>
         <ul class="fixed-bottom">
             <li>
-                <a href="#" class="text-primary">Logout</a>
+                <a href="#" @click="logout" class="text-primary">Logout</a>
             </li>
         </ul>
     </div>
@@ -28,12 +28,17 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+            }
         },
 
         computed: {},
 
-        methods: {},
+        methods: {
+            logout: function(){
+                axios.post('/logout');
+            }
+        },
 
         mounted() {
         },

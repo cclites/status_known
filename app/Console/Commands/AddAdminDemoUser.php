@@ -5,6 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
+use App\Role as R;
+use App\Permission as P;
+
 class AddAdminDemoUser extends Command
 {
     /**
