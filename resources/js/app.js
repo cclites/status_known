@@ -43,6 +43,7 @@ Vue.component('invoice-show', require('./components/views/show/Invoice.vue').def
 Vue.component('payment-show', require('./components/views/show/Payment.vue').default);
 Vue.component('provider-show', require('./components/views/show/Provider.vue').default);
 Vue.component('report-show', require('./components/views/show/Report.vue').default);
+Vue.component('record-show', require('./components/views/show/Record.vue').default);
 Vue.component('user-show', require('./components/views/show/User.vue').default);
 
 

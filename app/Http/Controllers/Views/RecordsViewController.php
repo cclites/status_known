@@ -15,36 +15,35 @@ use Spatie\Permission\Models\Permission;
 use App\Role as R;
 use App\Permission as P;
 
-use App\Report;
+use App\Record;
 
 class RecordsViewController extends Controller
 {
     //Maybe not called at all?
-    public function index(Report $report, RecordsRequest $request){
+    public function index(Record $report, RecordsRequest $request){
 
-        $reportsQuery = \App\Report::query();
+        $recordsQuery = \App\Record::query();
 
         if(auth()->user()->hasRole(R::BUSINESS)){
-            $reportsQuery->where('business_id', auth()->user()->business_id);
+            $recordsQuery->where('business_id', auth()->user()->business_id);
         }
 
-        $reports = $reportsQuery
+        $records = $recordsQuery
                     ->orderBy('id')
-                    ->with('requested_by', 'record', 'business')
+                    ->with('created_by', 'business')
                     ->get()
-                    ->map(function($report){
+                    ->map(function($record){
 
                         return [
-                            'business_name' => $report->business->name,
-                            'report_id' => $report->id,
-                            'requested_by' => $report->requested_by->name,
-                            'requested_for' => $report->record->first_name . " " . $report->record->last_name,
-                            'request_date' => (new Carbon($report->record->created_at))->format('m-d-Y'),
-                            'completion_date' => (new Carbon($report->record->updated_at))->format('m-d-Y'),
+                            'business_name' => $record->business->name,
+                            'record_id' => $record->id,
+                            'created_by' => $record->created_by->name,
+                            'requested_for' => $record->first_name . " " . $record->last_name,
+                            'request_date' => (new Carbon($record->created_at))->format('m-d-Y'),
                         ];
 
                     });
 
-        return response()->json($reports);
+        return response()->json($records);
     }
 }
