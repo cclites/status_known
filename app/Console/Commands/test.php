@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+
 class Test extends BaseCommand
 {
     /**
@@ -35,6 +36,9 @@ class Test extends BaseCommand
      */
     public function handle()
     {
+
+        factory(\App\Record::class, 2)->create();
+        /*
 
         $this->setup($this->argument('vue'), $this->argument('directory'));
 
@@ -78,7 +82,7 @@ class Test extends BaseCommand
         //$this->testGenerateSingleUseControllers();
         //$this->testAddClass();
 
-
+        */
     }
 
     public function testAddRoute(){
@@ -193,7 +197,7 @@ class Test extends BaseCommand
             $binding='';
         }
 
-        $contents = "/**  {$this->originalDirectory} Single Use Routes  **/\n";
+
         $contents .= "Route::get('{$path}', '{$filePath}Controller@index');\n";
         $contents .= "Route::get('{$path}{$binding}', '{$filePath}ShowController@show');\n";
         $contents .= "Route::post('{$path}', '{$filePath}AddController@store');\n";
@@ -222,4 +226,5 @@ class Test extends BaseCommand
         echo app_path("{$path}DeleteController.php") . "\n";
         //file_put_contents(app_path("Http/Controllers/{$this->upperCase}/{$this->upperCase}UpdateController.php"), $destroy);
     }
+
 }

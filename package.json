@@ -25,6 +25,10 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "bootstrap-vue": "^2.13.0"
+        "bootstrap-icons": "^1.0.0-alpha3",
+        "bootstrap-vue": "^2.13.0",
+        "fibers": "^5.0.0",
+        "font-awesome": "^4.7.0",
+        "node-sass": "^4.14.1"
     }
 }

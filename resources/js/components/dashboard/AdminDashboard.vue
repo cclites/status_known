@@ -1,12 +1,8 @@
 <template>
     <div>
-        <h4 class="text-center">Admin Dashboard</h4>
         <b-tabs>
             <b-tab title="Businesses" active>
                 <business-view :role="role"></business-view>
-            </b-tab>
-            <b-tab title="Reports">
-                <reports-view :role="role"></reports-view>
             </b-tab>
             <b-tab title="Records">
                 <records-view :role="role"></records-view>
@@ -20,7 +16,6 @@
             <b-tab title="Accounts">
                 <accounts-view :role="role"></accounts-view>
             </b-tab>
-
         </b-tabs>
     </div>
 

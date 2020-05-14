@@ -55,7 +55,6 @@ class ReportFactory extends BaseCommand
         $this->registerComponent();
 
         $this->addRoute();
-        /******************************
 
         $this->addClass();
 
@@ -67,10 +66,10 @@ class ReportFactory extends BaseCommand
 
         $this->addBlade();
 
-        //$this->addVueComponent();
+        $this->addVueComponent();
 
         $this->registerComponent();
-         * */
+
 
         /****************************************************************/
     }

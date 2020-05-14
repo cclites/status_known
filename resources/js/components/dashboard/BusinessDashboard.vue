@@ -1,10 +1,6 @@
 <template>
     <div class="rows">
-        <h4 class="text-center">Business Dashboard</h4>
         <b-tabs>
-            <b-tab title="Reports" active>
-                <reports-view :role="role"></reports-view>
-            </b-tab>
             <b-tab title="Invoices">
                 <invoices-view :role="role"></invoices-view>
             </b-tab>

@@ -6,11 +6,12 @@
 
 require('./bootstrap');
 
-import BootstrapVue from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 window.Vue = require('vue');
 
 Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 //API
 Vue.component('frame-loader', require('./components/FrameLoader.vue').default);
@@ -29,6 +30,7 @@ Vue.component('admin-dashboard-vue', require('./components/dashboard/AdminDashbo
 Vue.component('business-dashboard-vue', require('./components/dashboard/BusinessDashboard.vue').default);
 
 //Tabs
+//ToDo:: business-view shold be businesses-view
 Vue.component('business-view', require('./components/views/BusinessView.vue').default);
 Vue.component('invoices-view', require('./components/views/InvoicesView.vue').default);
 Vue.component('users-view', require('./components/views/UsersView.vue').default);
@@ -46,17 +48,12 @@ Vue.component('report-show', require('./components/views/show/Report.vue').defau
 Vue.component('record-show', require('./components/views/show/Record.vue').default);
 Vue.component('user-show', require('./components/views/show/User.vue').default);
 
-
-
 //Reports
-//Vue.component('checks-report', require('./components/reports/Checks.vue').default);
 Vue.component('businesses-report', require('./components/reports/Businesses.vue').default);
 Vue.component('invoices-report', require('./components/reports/Invoices.vue').default);
 Vue.component('users-report', require('./components/reports/Users.vue').default);
 
 //------- CONTENT -------//
-
-
 const app = new Vue({
     el: '#app',
 }).$mount();

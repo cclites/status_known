@@ -5,10 +5,10 @@
 
 <body>
 
-    @include('layouts.partials.header_logo')
+    @include('layouts.partials.header_logo', ['title'=>'TODO: Add title here'])
 
-    <div id="app" class="d-flex">
-        <div class="flex-fill col-1">
+    <div id="app" class="d-flex h-100">
+        <div class="flex-fill col-1 ">
             <menu-bar></menu-bar>
         </div>
         <div class="flex-fill col-11">

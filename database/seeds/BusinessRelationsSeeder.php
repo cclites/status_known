@@ -14,7 +14,5 @@ class BusinessRelationsSeeder extends Seeder
     public function run()
     {
         $business = factory(App\Business::class)->create();
-
-        \Log::info(json_encode($business));
     }
 }

@@ -1,36 +1,17 @@
 <template>
     <div class="sidebar">
         <!-- TODO: figure out how I want to populate sidebar -->
-        <ul>
+        <ul class="text-left">
             <li>
-                <a href="/home">Dashboard</a>
+                <a href="/home" class="text-primary">Dashboard</a>
             </li>
             <li>
-                <a href="#">Businesses</a>
+                <a href="#" class="text-primary">Reports</a>
             </li>
+        </ul>
+        <ul class="fixed-bottom">
             <li>
-                <a href="#">Records</a>
-            </li>
-            <li>
-                <a href="#">Reports</a>
-            </li>
-            <li>
-                <a href="#">Records</a>
-            </li>
-            <li>
-                <a href="#">Users</a>
-            </li>
-            <li>
-                <a href="#">Invoices</a>
-            </li>
-            <li>
-                <a href="#">Accounts</a>
-            </li>
-            <li>
-                <a href="#">Providers</a>
-            </li>
-            <li>
-                <a href="#">Logout</a>
+                <a href="#" class="text-primary">Logout</a>
             </li>
         </ul>
     </div>
@@ -62,5 +43,30 @@
 </script>
 
 <style scoped>
+    .sidebar{
+        padding-top: 8px;
+        height: 100%;
+    }
 
+    li:hover{
+        color: #000;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    ul,
+    li{
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    ul.fixed-bottom{
+        left: 10px;
+    }
+
+    .sidebar ul li{
+        list-style-type: none;
+    }
 </style>

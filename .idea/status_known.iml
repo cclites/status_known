@@ -101,5 +101,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="factories" />
+    <orderEntry type="library" name="font-awesome" level="application" />
+    <orderEntry type="library" name="all" level="application" />
   </component>
 </module>
