@@ -17,6 +17,7 @@ class RecordShowController extends Controller
         $record->dob = Crypt::decrypt($record->dob);
 
         return view('show.record_show', compact('record'));
+        //return view('print.print_record', compact('record'));
 
     }
 }

@@ -3,14 +3,14 @@
     <div>
         <b-overlay :show="show" rounded="sm">
 
-            <record-count :%model%s="this.items.length"><record-count>
+            <record-count :%class%s="this.items.length"></record-count>
 
             <b-table striped hover
                      :items="items"
                      :per-page="perPage"
                      :current-page="currentPage"
                      :fields="fields"
-                     @row-clicked="show%MODEL%s"
+                     @row-clicked="show%CLASS%s"
             >
             </b-table>
 
@@ -45,8 +45,8 @@
                 currentPage: 1,
                 perPage: 10,
                 show: false,
-                url: '%model%s-%directory%/',
-                reportUrl : '%model%s/',
+                url: '%VUE%s/',
+                reportUrl : '%class%s-report/',
                 fields: [],
             }
         },
@@ -55,7 +55,7 @@
 
         methods: {
 
-            get%MODEL%s() {
+            get%CLASS%s() {
 
                 this.show = true;
 
@@ -72,16 +72,16 @@
 
             },
 
-            show%MODEL%s(row){
+            show%CLASS%s(row){
 
                 this.show = true;
-                window.location = this.reportUrl + row.%model%_id;
+                window.location = this.reportUrl + row.%class%_id;
                 this.show = false;
             }
         },
 
         mounted() {
-            this.get%MODEL%s();
+            this.get%CLASS%s();
         },
 
         watch: {},

@@ -1,16 +1,38 @@
 <?php
 
-namespace App\Http\Controllers%NAMESPACE%;
+namespace %NAMESPACE%;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\%request%Request;
+%IMPORT%
 
-class %MODEL%Controller extends BaseController
+use App\Http\Requests\%CLASS%Request;
+
+class %CLASS%Controller extends Controller
 {
-    public function index(%request%Request $request){
 
-        return view_component('%model%s-%directory%', '%MODEL%', [], []);
+    public function index(%CLASS%Request $request){
+
+        if($request->json){
+            return %CLASS%::all();
+        }
+
+        return view('%VUE%s', '%TITLE%', [], []);
     }
 
+    public function show(%CLASS%Request $request, %CLASS% $%class%){
+        return $%class%;
+    }
+
+    public function create(%CLASS%UpdateRequest $request){
+
+    }
+
+    public function update(%CLASS%UpdateRequest $request, %CLASS% $%class%){
+
+    }
+
+    public function delete(%CLASS%UpdateRequest $request, %CLASS% $%class%){
+        %class%->delete();
+    }
 }

@@ -17,43 +17,56 @@ use Illuminate\Support\Str;
 class BaseCommand extends Command
 {
     /** @var string */
-    public $itemName;
+    public $fileName;
 
     /** @var string */
-    public $upperCase;
+    public $file;
 
     /** @var string */
-    public $lowerCase;
+    public $classPath;
 
     /** @var string */
-    public $kebabCase;
+    public $vuePath;
 
     /** @var string */
-    public $snakeCase;
+    public $bladePath;
 
     /** @var string */
-    public $name;
+    public $controllerPath;
+
+    /** @var string */
+    public $classPathUrl;
+
+    /** @var string */
+    public $vuePathUrl;
+
+    /** @var string */
+    public $bladePathUrl;
+
+    /** @var string */
+    public $controllerPathUrl;
+
+    /** @var string */
+    public $classFileName;
+
+    /** @var string */
+    public $vueFileName;
+
+    /** @var string */
+    public $bladeFileName;
+
+    /** @var string */
+    public $controllerFileName;
 
     /** @var string */
     public $directory;
 
-    /** @var string */
-    public $lcDirectory;
-
-    /** @var string */
-    public $lcDirectorySingular;
-
-    /** @var string */
-    public $ucDirectorySingular;
-
-    /** @var string */
-    public $originalDirectory;
-
-    /** @var string */
-    public $snakeSuffix;
-
-    /** @var string */
-    public $kebabSuffix;
+    /** Paths */
+    const VUE_PATH = 'js/components'; //storage_path
+    const VIEW_PATH = 'views';  //storage_path
+    const CONTROLLER_PATH = 'Http/Controllers'; //app_path
+    const MIGRATION_PATH = 'database/migrations';
+    const PLURAL = 's';
 
     /** Used as placeholder in app.js */
     public $placeholder = "//------- CONTENT -------//";
@@ -89,18 +102,29 @@ class BaseCommand extends Command
      */
     public function handle()
     {
-        //Unused
+        //NOTE: Do not use this command.
     }
 
-
-    /** TESTED  5/11/2020        */
     /**
-     * Add a generic vue component
+     * @param $file
+     * @param $directory
+     */
+    public function setup($file, $directory){
+        $this->setFileName($file);
+        $this->setDirectoryName($directory);
+        $this->setPaths();
+    }
+
+    /** UPDATED  5/29/2020        */
+    /**
+     * Generates a list vue component with table and pagination,
+     * or a vue for a single component
+     *
+     * @param bool $useListView
      */
     public function addVueComponent($useListView = false){
 
-        $path = resource_path('js/components/' . $this->lcDirectory . "/");
-        $this->hasDirectory($path);
+        $vuePath = $this->vuePath;
 
         if($useListView){
             $vue = file_get_contents(resource_path('stubs/model_list_vue.stub'));
@@ -108,242 +132,225 @@ class BaseCommand extends Command
             $vue = file_get_contents(resource_path('stubs/vue.stub'));
         }
 
-        $vue = str_replace('%MODEL%', $this->itemName, $vue);
-        $vue = str_replace('%model%', $this->kebabCase, $vue);
-        $vue = str_replace('%directory%', $this->lcDirectory, $vue);
-
-        file_put_contents($path . $this->kebabCase . "s-" . $this->lcDirectory . ".vue", $vue);
+        $vue = $this->replacePlaceholders($vue);
+        file_put_contents($vuePath, $vue);
     }
 
-    /** TESTED 5/11/2020         */
+    /** UPDATED 5/29/2020         */
     /**
      * Register a view component
      *
-     * @param bool $useListView
      */
-    public function registerComponent($useListView = false){
+    public function registerComponent($view = false){
 
-        $appJs = file_get_contents(resource_path('js/app.js'));
+        $kebab = Str::kebab($this->vueFileName);
+        $fileName = $this->vueFileName;
 
-        $component = "Vue.component('{$this->kebabCase}s-{$this->lcDirectory}',
-                        require('./components/{$this->lcDirectory}/{$this->snakeCase}s_{$this->lcDirectory}.vue'));\n";
+        if($this->directory){
+            $fileName  = strtolower($this->directory) . "s/" . $this->vueFileName;
+        }
 
+        $component = file_get_contents(resource_path('js/app.js'));
+        $component = str_replace($this->placeholder, '', $component);
+        $component .= "Vue.component('{$kebab}', require('./components/{$fileName}.vue'));\n";
         $component .= $this->placeholder;
 
-        $appJs = str_replace($this->placeholder, $component, $appJs);
-
-        file_put_contents(resource_path('js/app.js'), $appJs);
+        file_put_contents(resource_path('js/app.js'), $component);
 
     }
 
-    /** TESTED  5/11/2020          */
+    /** UPDATED  5/29/2020          */
     /**
-     * Add route for controller
+     * Add route for a single controller
      *
      * @param bool $useListView
      */
-    public function addRoute($useListView = false, $method = 'get', $action = 'index'){
+    public function addRoute($method = 'get', $action = 'index'){
+
+        $route = Str::kebab($this->file);
+        $routeName = $this->controllerFileName;
+        $controllerFileName = strtolower($this->controllerFileName);
+
+        if($this->directory){
+            $route = Str::kebab($this->file . $this->directory);
+            $controllerFileName = strtolower($this->directory) . "s." . $route;
+            $routeName = ucfirst($this->directory) . "s/" . $routeName;
+        }
 
         $contents = file_get_contents(base_path('routes/web.php'));
-
-        $contents .= "\nRoute::{$method}('{$this->kebabCase}s-{$this->lcDirectory}',
-                        '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_{$this->lcDirectory}');";
-
+        $contents .= "Route::{$method}('{$route}','{$routeName}Controller@{$action}')->name('{$controllerFileName}');\n";
         file_put_contents(base_path('routes/web.php'), $contents);
     }
 
-
-    /** TESTED  5/12/2020        */
+    /** UPDATED  5/29/2020        */
     /**
      * Add a controller in the appropriate directory
      */
     public function addController(){
 
-        $fileName = $this->itemName . "s". $this->ucDirectorySingular ."Controller.php";
-        $path = "app/Http/Controllers/{$this->upperCase}/";
-        $fullTitle = $path . $fileName;
-
-        $this->hasDirectory($path);
+        $controllerPath = $this->controllerPath;
+        $this->hasDirectory($this->controllerPathUrl);
 
         $controller = file_get_contents(resource_path('stubs/controller.stub'));
-        $controller = str_replace('%MODEL%', "{$this->upperCase}s{$this->originalDirectory}", $controller);
-        $controller = str_replace('%model%', $this->kebabCase, $controller);
-        $controller = str_replace('%NAMESPACE%', ('\\' . $this->itemName), $controller);
-        $controller = str_replace('%directory%', $this->lcDirectory, $controller);
-        $controller = str_replace('%request%', "{$this->upperCase}s{$this->originalDirectory}", $controller);
+        $controller = $this->replacePlaceholders($controller);
 
-        file_put_contents($fullTitle, $controller);
+        file_put_contents($controllerPath, $controller);
     }
 
-
-
-    /** TESTED  5/12/2020       */
+    /** UPDATED  5/29/2020       */
     /**
      * Add a class file
      */
     public function addClass(){
-
-        $fileName = $this->itemName .".php";
-        $path = "app/{$this->upperCase}s/";
-        $fullTitle = $path . $fileName;
-
-        $this->hasDirectory($path);
+        $this->hasDirectory($this->classPathUrl);
 
         $class = file_get_contents(resource_path("stubs/class.stub"));
+        $class = $this->replacePlaceholders($class);
 
-        $class = str_replace('%MODEL%', $this->itemName, $class);
-        $class = str_replace('%model%', $this->kebabCase, $class);
-        $class = str_replace('%NAMESPACE%', ('\\' . $this->itemName), $class);
-
-        file_put_contents($fullTitle, $class);
+        file_put_contents($this->classPath, $class);
     }
 
-    /** TESTED  5/12/2020       */
+    /** UPDATED  5/29/2020       */
     /**
      * Add a request object
      * @param bool $update
      */
     public function addRequest($update = false){
 
-        Artisan::call("make:request {$this->upperCase}s{$this->originalDirectory}Request");
+        $file = ucfirst($this->classFileName);
+
+        //if($this->directory){
+            //$file .= ucfirst($this->directory);
+        //}
+
+        echo "FILE: $file\n";
+
+
+        Artisan::call("make:request {$file}Request");
 
         if($update){
-            Artisan::call("make:request {$this->upperCase}s{$this->originalDirectory}UpdateRequest");
+            Artisan::call("make:request {$file}UpdateRequest");
         }
     }
 
-    /** TESTED  5/12/2020          */
+    /** UPDATED  5/30/2020          */
     /**
      * Add a migration to create a table
      */
-    public function createTableMigration(){
+    public function addTableMigration(){
 
-        $timestamp = Carbon::now()->format('Y_m_d_' . '000000_') . 'create_table_';
-        $fileName = $timestamp . $this->lowerCase ."s.php";
-
-        $path = "database/migrations/";
-
-        $fullTitle = $path . $fileName;
-
-        $this->hasDirectory($path);
+        $timestamp = Carbon::now()->format('Y_m_d_h_') . 'create_table_';
+        $fileName = $timestamp . strtolower($this->file) ."s.php";
 
         $migration = file_get_contents(resource_path("stubs/migration.stub"));
+        $migration = $this->replacePlaceholders($migration);
 
-        $migration = str_replace('%MODEL%', $this->itemName, $migration);
-        $migration = str_replace('%model%', $this->kebabCase . "s", $migration);
+        $filePath = self::MIGRATION_PATH . "/" . $fileName;
 
-        file_put_contents($fullTitle, $migration);
-
+        file_put_contents($filePath, $migration);
     }
 
 
-
-
-
-    /** TESTED          */
+    /** UPDATED 5/28/2020         */
+    /**
+     * Add a blade
+     */
     public function addBlade(){
 
-        if($this->directory){
-            $this->hasDirectory(resource_path("views/$this->lowerCase") . "s");
-            $this->lcDirectory .= "/";
-        }
+        $this->hasDirectory($this->classPathUrl);
+        $bladePath = $this->bladePath;
 
-        $blade = file_get_contents(resource_path('stubs/blade.stub'));
-        $blade = str_replace('%MODEL%', $this->lcDirectorySingular, $blade);
-        $blade = str_replace('%model%', $this->lowerCase, $blade);
-        $path = resource_path("views/" . $this->lowerCase) . "s/". $this->snakeCase . "s" . $this->snakeSuffix. '.blade.php';
+        $class = file_get_contents(resource_path("stubs/blade.stub"));
+        $class = $this->replacePlaceholders($class);
 
-        file_put_contents($path, $blade);
+        file_put_contents($bladePath, $class);
     }
 
-    /** TESTED  5/12/2020          */
+    /** UPDATED  5/30/2020          */
     /**
      * Generate single controller routes
      */
     public function generateRoutes()
     {
-        $path = base_path('routes/web.php');
+        $route = Str::kebab($this->file);
+        $routeName = Str::snake($this->vueFileName);
+        $controllerFileName = strtolower($this->controllerFileName);
+        $lowerCase = strtolower($this->file);
 
-        $contents = file_get_contents($path);
+        if($this->directory){
+            $route = Str::kebab($this->file . $this->directory);
+            $controllerFileName = ucfirst($this->directory) . "s/" . ucfirst($this->file);
+            $routeName = strtolower($this->directory) . "s." . $routeName;
+        }
 
-        $contents .= "/**  {$this->originalDirectory} Routes  **/\n";
+        $contents = file_get_contents(base_path('routes/web.php'));
+        $contents .= "/** {$this->fileName}  {$this->directory} **/\n";
+        $contents .= "Route::get('{$route}s', '{$controllerFileName}Controller@index')->name('{$routeName}s');\n";
+        $contents .= "Route::get('{$route}s/{{$lowerCase}}', '{$controllerFileName}Controller@index')->name('{$routeName}s');\n";
+        $contents .= "Route::post('{$route}s', '{$controllerFileName}Controller@create')->name('{$routeName}s_create');\n";
+        $contents .= "Route::patch('{$route}s/{{$lowerCase}}', '{$controllerFileName}Controller@update')->name('{$routeName}s_update');\n";
+        $contents .= "Route::delete('{$route}s/{{$lowerCase}}', '{$controllerFileName}Controller@delete')->name('{$routeName}s_delete');\n";
 
-        $contents .= "Route::get('{$this->kebabCase}s-show', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_show');\n";
-
-        $contents .= "Route::post('{$this->kebabCase}s-create', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_create');\n";
-
-        $contents .= "Route::patch('{$this->kebabCase}s-update', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_update');\n";
-
-        $contents .= "Route::delete('{$this->kebabCase}s-delete', '{$this->directory}{$this->itemName}s{$this->originalDirectory}Controller@index')->name('{$this->snakeCase}s_delete');\n";
-
-
-        file_put_contents($path, $contents);
+        file_put_contents(base_path('routes/web.php'), $contents);
     }
 
-
-    /** TESTED  5/12/2020          */
+    /** UPDATED  5/30/2020          */
     /**
      * Generate single responsibility routes
      */
     public function generateSingleResponsibilityRoutes(){
 
+        $route = Str::kebab($this->file);
+        $routeName = Str::snake($this->vueFileName);
+        $controllerFileName = ucfirst($this->controllerFileName);
+
+        if($this->directory){
+            $route = Str::kebab($this->file . $this->directory);
+            $controllerFileName = ucfirst($this->directory) . "s/" . ucfirst($this->file);
+            $routeName = strtolower($this->directory) . "s." . $routeName;
+        }
+
         $path = base_path('routes/web.php');
 
         $contents = file_get_contents($path);
-
-        $contents .= "/** {$this->itemName}   **/\n";
-        $contents .= "Route::get('{$this->kebabCase}s-show', '{$this->itemName}sController@index')->name('{$this->snakeCase}s_show');\n";
-        $contents .= "Route::post('{$this->kebabCase}s-create', '{$this->itemName}sController@create')->name('{$this->snakeCase}s_create');\n";
-        $contents .= "Route::patch('{$this->kebabCase}s-update', '{$this->itemName}sController@update')->name('{$this->snakeCase}s_update');\n";
-        $contents .= "Route::delete('{$this->kebabCase}s-delete', '{$this->itemName}sController@delete')->name('{$this->snakeCase}s_delete');\n";
+        $contents .= "/** {$this->fileName}   **/\n";
+        $contents .= "Route::get('{$route}s-show', '{$controllerFileName}Controller@index')->name('{$routeName}s_show');\n";
+        $contents .= "Route::post('{$route}s-create', '{$controllerFileName}ShowController@create')->name('{$routeName}s_create');\n";
+        $contents .= "Route::patch('{$route}s-update', '{$controllerFileName}UpdateController@update')->name('{$routeName}s_update');\n";
+        $contents .= "Route::delete('{$route}s-delete', '{$controllerFileName}AddController@delete')->name('{$routeName}s_delete');\n";
 
         file_put_contents($path, $contents);
     }
 
-    /** TESTED  5/12/2020          */
+    /** UPDATED  5/30/2020          */
     /**
      * Generate single use controllers
      */
-    public function generateSingleUseControllers(){
+    public function generateSingleResponsibilityControllers(){
 
-        $this->hasDirectory(app_path("Http/Controllers/{$this->directory}{$this->upperCase}"));
+        $pathUrl = $this->controllerPathUrl;
+        $controllerFileName = $this->controllerFileName;
+        $fullPathToFile = $pathUrl . "/" . $controllerFileName;
 
-        $path = "Http/Controllers/{$this->directory}{$this->upperCase}";
+        $index = file_get_contents(resource_path('stubs/index_controller.stub'));
+        $index = $this->replacePlaceholders($index);
+        file_put_contents("{$fullPathToFile}Controller.php", $index);
 
-        $index = file_get_contents(resource_path('stubs/index.stub'));
-        $index .= str_replace('%MODEL%', $this->upperCase, $index);
-        file_put_contents("{$path}Controller.php", $index);
+        $show = file_get_contents(resource_path('stubs/show_controller.stub'));
+        $show = $this->replacePlaceholders($show);
+        file_put_contents("{$fullPathToFile}ShowController.php", $show);
 
-        $show = file_get_contents(resource_path('stubs/show.stub'));
-        $show .= str_replace('%MODEL%', $this->upperCase, $show);
-        $show .= str_replace('%model%', $this->lowerCase, $show);
-        file_put_contents("{$path}ShowController.php", $show);
+        $add = file_get_contents(resource_path('stubs/create_controller.stub'));
+        $add = $this->replacePlaceholders($add);
+        file_put_contents("{$fullPathToFile}AddController.php", $add);
 
-        $add = file_get_contents(resource_path('stubs/create.stub'));
-        $add .= str_replace('%MODEL%', $this->upperCase, $add);
-        file_put_contents("{$path}AddController.php", $add);
+        $update = file_get_contents(resource_path('stubs/update_controller.stub'));
+        $update = $this->replacePlaceholders($update);
+        file_put_contents("{$fullPathToFile}UpdateController.php", $update);
 
-        $update = file_get_contents(resource_path('stubs/update.stub'));
-        $update .= str_replace('%MODEL%', $this->upperCase, $update);
-        file_put_contents("{$path}UpdateController.php", $update);
-
-        $destroy = file_get_contents(resource_path('stubs/destroy.stub'));
-        $destroy .= str_replace('%MODEL%', $this->upperCase, $destroy);
-        file_put_contents("{$path}UpdateController.php", $destroy);
-    }
-
-    /** TESTED          */
-    /**
-     * Shouldn't need this function at all
-     */
-    public function addModelListRoute(){
-
-        $contents = file_get_contents(base_path('routes/web.php'));
-
-        $contents .= "\nRoute::get('{$this->kebabCase}{$this->kebabSuffix}',
-                        '{$this->directory}{$this->upperCase}{$this->originalDirectory}Controller@index');";
-
-        file_put_contents(base_path('routes/web.php'), $contents);
+        $destroy = file_get_contents(resource_path('stubs/delete_controller.stub'));
+        $destroy = $this->replacePlaceholders($destroy);
+        file_put_contents("{$fullPathToFile}DestroyController.php", $destroy);
     }
 
     /******************************************************
@@ -362,31 +369,148 @@ class BaseCommand extends Command
         }
     }
 
-    public function setItemName($itemName){
-
-        $this->itemName = $itemName;
-        $this->lowerCase = strtolower($this->itemName);
-        $this->upperCase = ucfirst($this->itemName);
-        $this->kebabCase = Str::kebab($this->itemName);
-        $this->snakeCase = Str::snake($this->itemName);
+    public function setFileName($file){
+        $this->file = $file;
     }
 
     public function setDirectoryName($directory = ''){
-
         $this->directory = $directory;
-        $this->originalDirectory = $directory;
-        $this->directory = $directory ? $this->directory .= "/" : "";
-        $this->snakeSuffix = $directory ? ("_" . rtrim(Str::snake($this->originalDirectory), 's')) : "";
-        $this->kebabSuffix = $directory ? ("-" . rtrim(Str::kebab($this->originalDirectory), 's')) : "";
-        $this->lcDirectory = $directory ? (strtolower($this->originalDirectory)) : "";
-        $this->lcDirectorySingular = $directory ? rtrim($this->lcDirectory, 's') : "";
-        $this->ucDirectorySingular  = $directory ? rtrim($this->originalDirectory, 's') : "";
     }
 
-    public function setup($itemName, $directory){
+    /**
+     * Sets global fields
+     */
+    public function setPaths()
+    {
+        $this->vuePathGenerator();
+        $this->viewPathGenerator();
+        $this->classPathGenerator();
+        $this->controllerPathGenerator();
+    }
 
-        $this->setItemName($itemName);
-        $this->setDirectoryName($directory);
+    /**
+     * Called by setPaths function
+     */
+    public function vuePathGenerator(){
+
+        $fileName = $this->generateFileName(true);
+        $path = resource_path(self::VUE_PATH);
+        $path = $this->generatePath($path, false, self::PLURAL);
+        $this->hasDirectory($path);
+
+        $this->vueFileName = $fileName;
+        $this->vuePathUrl = $path;
+        $this->vuePath = $path . "/$fileName.vue";
+    }
+
+    /**
+     * Called by setPaths function
+     */
+    public function viewPathGenerator(){
+
+        $fileName = $this->generateFileName(true);
+        $path = resource_path(self::VIEW_PATH);
+        $path = $this->generatePath($path, false, self::PLURAL);
+        $this->hasDirectory($path);
+        $snake = Str::snake($fileName);
+
+        $this->bladeFileName = $fileName;
+        $this->bladePathUrl = $path;
+        $this->bladePath = $path . "/$snake.blade.php";
+    }
+
+    /**
+     * Called by setPaths function
+     */
+    public function classPathGenerator(){
+
+        $fileName = $this->generateFileName(true);
+        $path = app_path(self::CONTROLLER_PATH);
+        $path = $this->generatePath($path, true, self::PLURAL);
+        $this->hasDirectory($path);
+
+        $this->controllerFileName = $fileName;
+        $this->controllerPathUrl = $path;
+        $this->controllerPath = $path .= "/" . $fileName . "Controller.php";
+    }
+
+    /**
+     * Called by setPaths function
+     */
+    public function controllerPathGenerator(){
+
+        $fileName = $this->generateFileName(true);
+        $path = app_path();
+        $path = $this->generatePath($path, true, self::PLURAL);
+        $this->hasDirectory($path);
+
+        $this->classFileName = $fileName;
+        $this->classPathUrl = $path;
+        $this->classPath = $path .= "/" . $fileName . ".php";
+    }
+
+    /**
+     * Generate the file name, upper case for components,
+     * and lower case for vue and blade files
+     *
+     * @param bool $upperCase
+     * @return string
+     */
+    public function generateFileName(bool $upperCase = false){
+
+        $fileName = '';
+
+        if($this->directory){
+            $fileName .= $upperCase ? ucfirst($this->directory) : strtolower($this->directory);
+        }
+
+        return $fileName;
+    }
+
+    /**
+     * Generate path to url, upper case for classes,
+     * and lower case for vue and blade files
+     *
+     * @param String $path
+     * @param bool|null $upperCase
+     * @param String|null $plural
+     * @return string
+     */
+    public function generatePath(String $path, ?bool $upperCase = false, ?String $plural = null){
+
+        if($this->directory){
+            $path .= $upperCase ? ( "/" . ucfirst($this->directory) . $plural ) : ( "/" . strtolower($this->directory) . $plural );
+        }
+
+        return $path;
+    }
+
+
+    public function toString(){
+
+        echo "\n\n*****************************************\n";
+        echo "FULL CLASS PATH: $this->classPath\n";
+        echo "FULL CONTROLLER PATH: $this->controllerPath\n";
+        echo "FULL VIEW PATH: $this->bladePath\n";
+        echo "FULL VUE PATH: $this->vuePath\n";
+
+        echo "\n\nCLASS URL: $this->classPathUrl\n";
+        echo "CONTROLLER URL: $this->controllerPathUrl\n";
+        echo "VIEW URL: $this->bladePathUrl\n";
+        echo "VUE URL: $this->vuePathUrl\n";
+
+        echo "\n\nCLASS FILE NAME: $this->classFileName\n";
+        echo "CONTROLLER FILE NAME: $this->controllerFileName\n";
+        echo "VIEW FILE NAME: $this->bladeFileName\n";
+        echo "VUE FILE NAME: $this->vueFileName\n";
+    }
+
+    /**
+     * Write paths to routes when installing list view components
+     */
+    public function installUtilities(){
+        //Vue.component('pagination', require('./components/utilities/Pagination.vue').default);
+        //Vue.component('record-count', require('./components/utilities/RecordCount.vue').default);
     }
 
 

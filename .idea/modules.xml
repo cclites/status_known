@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../factories/.idea/factories.iml" filepath="$PROJECT_DIR$/../factories/.idea/factories.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RumRunner/.idea/RumRunner.iml" filepath="$PROJECT_DIR$/../RumRunner/.idea/RumRunner.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/status_known.iml" filepath="$PROJECT_DIR$/.idea/status_known.iml" />
     </modules>
   </component>

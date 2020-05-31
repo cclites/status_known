@@ -2449,7 +2449,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utilities_draft_model_show__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utilities/draft-model-show */ "./resources/js/components/utilities/draft-model-show.vue");
 //
 //
 //
@@ -2459,14 +2458,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//import DraftModelShow from '../utilities/draft-model-show';
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     model: ''
   },
-  components: {
-    DraftModelShow: _utilities_draft_model_show__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
+  //components: {DraftModelShow},
   mixins: [],
   data: function data() {
     return {
@@ -3580,6 +3594,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     record: {
@@ -3593,11 +3641,16 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [],
   data: function data() {
     return {
-      header: ""
+      header: "",
+      print_url: '/record-print'
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    print: function print() {
+      window.location = this.print_url + "/" + this.record.id;
+    }
+  },
   mounted: function mounted() {},
   watch: {}
 });
@@ -82195,18 +82248,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "p-5" },
-    _vm._l(_vm.items, function(value, key) {
-      return _c("b-row", { key: "key" }, [
-        _vm._v("\n       " + _vm._s(key + ": " + value) + "\n    ")
+  return _c("div", [
+    _c("table", [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("tr", [
+          _c("td", [_vm._v(_vm._s(_vm.model.first_name))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm.model.middle_name))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm.model.last_name))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm.model.dob))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm.model.ssn))])
+        ])
       ])
-    }),
-    1
-  )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("First Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Middle Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Last Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("DOB")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("SSN")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -82901,6 +82982,7 @@ var render = function() {
           _c(
             "b-card",
             {
+              staticClass: "w-100",
               attrs: {
                 header: _vm.header,
                 "header-text-variant": "white",
@@ -82908,13 +82990,56 @@ var render = function() {
               }
             },
             [
-              _c("h3", { staticClass: "text-center" }, [
-                _vm._v("Record Model View")
+              _c("div", [
+                _c("table", { staticClass: "w-100" }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("First Name")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Middle Name")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Last Name")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("DOB")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("SSN")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [_vm._v(_vm._s(_vm.record.first_name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.record.middle_name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.record.last_name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.record.dob))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.record.ssn))])
+                    ])
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _c("draft-model-show", { attrs: { model: _vm.record } })
-            ],
-            1
+              _c("div", [_c("table", [_c("thead", [_c("tr")])])]),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-right",
+                      attrs: { variant: "outline-primary" },
+                      on: { click: _vm.print }
+                    },
+                    [_vm._v("Print")]
+                  )
+                ],
+                1
+              )
+            ]
           )
         ],
         1
@@ -96926,14 +97051,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/components/views/show/Record.vue ***!
   \*******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Record_vue_vue_type_template_id_f160d432_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Record.vue?vue&type=template&id=f160d432&scoped=true& */ "./resources/js/components/views/show/Record.vue?vue&type=template&id=f160d432&scoped=true&");
 /* harmony import */ var _Record_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Record.vue?vue&type=script&lang=js& */ "./resources/js/components/views/show/Record.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Record_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Record_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -96963,7 +97089,7 @@ component.options.__file = "resources/js/components/views/show/Record.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/components/views/show/Record.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

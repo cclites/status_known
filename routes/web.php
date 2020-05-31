@@ -60,8 +60,9 @@ Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
 
 //Reports (No reports yet - ignore these routes for now
 //These routes are called when user decides to print a report
-Route::get('businesses-report', 'Reports\BusinessesReportController@index');
-Route::get('invoices-report', 'Reports\InvoicesReportController@index');
-Route::get('users-report', 'Reports\UsersReportController@index');
-Route::get('reports-report', 'Reports\ReportsReportController@index');
-Route::get('records-report', 'Reports\RecordsReportController@index');
+//Route::get('businesses-report', 'Reports\BusinessesReportController@index');
+//Route::get('invoices-report', 'Reports\InvoicesReportController@index');
+//Route::get('users-report', 'Reports\UsersReportController@index');
+//Route::get('reports-report', 'Reports\ReportsReportController@index');
+
+Route::get('record-print/{record}', 'Record\RecordController@download');

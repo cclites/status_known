@@ -12,16 +12,16 @@ $factory->define(\App\Record::class, function (Faker $faker) {
     $data = [
         'addresses' => [
             [
-            'address_1' => $faker->streetAddress,
-            'city' => $faker->city,
-            'state' => $faker->state,
-            'zip' => $faker->postcode
+                'address_1' => $faker->streetAddress,
+                'city' => $faker->city,
+                'state' => $faker->state,
+                'zip' => $faker->postcode,
             ],
             [
                 'address_1' => $faker->streetAddress,
                 'city' => $faker->city,
                 'state' => $faker->state,
-                'zip' => $faker->postcode
+                'zip' => $faker->postcode,
             ],
             [
                 'address_1' => $faker->streetAddress,

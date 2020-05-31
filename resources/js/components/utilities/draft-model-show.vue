@@ -1,15 +1,35 @@
+<!--
+For demonstration purposes only
+-->
 <template>
-    <div class="p-5">
-        <b-row v-for="(value, key) in items" key="key">
-           {{ key + ": " + value }}
-        </b-row>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>DOB</th>
+                    <th>SSN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ model.first_name }}</td>
+                    <td>{{ model.middle_name }}</td>
+                    <td>{{ model.last_name }}</td>
+                    <td>{{ model.dob }}</td>
+                    <td>{{ model.ssn }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </template>
 
 <script>
 
-    import DraftModelShow from '../utilities/draft-model-show';
+    //import DraftModelShow from '../utilities/draft-model-show';
 
     export default {
 
@@ -17,7 +37,7 @@
             model: '',
         },
 
-        components: {DraftModelShow},
+        //components: {DraftModelShow},
 
         mixins: [],
 
@@ -27,7 +47,8 @@
             }
         },
 
-        computed: {},
+        computed: {
+        },
 
         methods: {},
 

@@ -22,7 +22,7 @@ Vue.component('draft-model-show', require('./components/utilities/draft-model-sh
 //Utilities
 Vue.component('pagination', require('./components/utilities/Pagination.vue').default);
 Vue.component('record-count', require('./components/utilities/RecordCount.vue').default);
-Vue.component('menu-bar', require('./components/utilities/MenuBar.vue').default);
+Vue.component('menu-bar', require('./components/utilities/MenuSideBar.vue').default);
 
 //Dashboards
 Vue.component('dashboard-vue', require('./components/dashboard/DashboardView.vue').default);

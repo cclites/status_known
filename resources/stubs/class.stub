@@ -1,31 +1,13 @@
 <?php
 
-namespace App%NAMESPACE%;
+namespace %NAMESPACE%;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Requests\%MODEL%Request;
-use App\Http\Requests\%MODEL%UpdateRequest;
+use App\Http\Requests\%CLASS%Request;
+use App\Http\Requests\%CLASS%UpdateRequest;
 
-class %MODEL% extends BaseModel
+
+class %CLASS% extends Model
 {
-    public function index(%MODEL%Request $request){
 
-        return %MODEL%::all();
-    }
-
-    public function show(%MODEL%Request $request, %MODEL% $%model%){
-        return $%model%;
-    }
-
-    public function create(%MODEL%UpdateRequest $request){
-
-    }
-
-    public function update(%MODEL%UpdateRequest $request, %MODEL% $%model%){
-
-    }
-
-    public function delete(%MODEL%UpdateRequest $request, %MODEL% $%model%){
-
-    }
 }
