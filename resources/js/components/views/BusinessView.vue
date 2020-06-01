@@ -4,6 +4,8 @@
 
             <record-count :records="this.items.length"></record-count>
 
+            <filters-component :filters="filters"></filters-component>
+
             <b-table striped hover
                      :items="items"
                      :per-page="perPage"
@@ -25,8 +27,9 @@
 
 <script>
 
-    import pagination from '../utilities/Pagination';
-    import record_count from '../utilities/RecordCount';
+    import Pagination from '../utilities/Pagination';
+    import RecordCount from '../utilities/RecordCount';
+    import FilterView from '../filters/Filters';
 
     export default {
 
@@ -34,7 +37,7 @@
             role: ''
         },
 
-        components: {pagination, record_count},
+        components: {Pagination, RecordCount, FilterView},
 
         mixins: [],
 
@@ -91,6 +94,7 @@
                 show: false,
                 url: 'business-view/',
                 reportUrl : 'businesses/',
+                filters: ['start','end','business','user']
             }
         },
 

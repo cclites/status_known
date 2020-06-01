@@ -21,7 +21,7 @@ class UsersViewController extends Controller
         }
 
         $users = $userQuery
-            ->orderBy('id')
+            ->orderBy('name')
             ->with('business')
             ->get()->map(function($user){
 

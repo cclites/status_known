@@ -1,23 +1,27 @@
 <template>
     <div>
-        <b-tabs>
-            <b-tab title="Businesses" active>
-                <business-view :role="role"></business-view>
-            </b-tab>
-            <b-tab title="Records">
-                <records-view :role="role"></records-view>
-            </b-tab>
-            <b-tab title="Users">
-                <users-view :role="role"></users-view>
-            </b-tab>
-            <b-tab title="Invoices">
-                <invoices-view :role="role"></invoices-view>
-            </b-tab>
-            <b-tab title="Accounts">
-                <accounts-view :role="role"></accounts-view>
-            </b-tab>
-        </b-tabs>
+        <div>
+            <b-tabs>
+                <b-tab title="Businesses" active>
+                    <business-view :role="role"></business-view>
+                </b-tab>
+                <b-tab title="Records">
+                    <records-view :role="role"></records-view>
+                </b-tab>
+                <b-tab title="Users">
+                    <users-view :role="role"></users-view>
+                </b-tab>
+                <b-tab title="Invoices">
+                    <invoices-view :role="role"></invoices-view>
+                </b-tab>
+                <b-tab title="Accounts">
+                    <accounts-view :role="role"></accounts-view>
+                </b-tab>
+            </b-tabs>
+        </div>
     </div>
+
+
 
 </template>
 
@@ -40,7 +44,8 @@
         mixins: [],
 
         data() {
-            return {}
+            return {
+            }
         },
 
         computed: {},

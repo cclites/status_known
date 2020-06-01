@@ -39,6 +39,9 @@ class Factory extends BaseCommand
     public function handle()
     {
         $this->setup($this->argument('file'), $this->argument('directory'));
+
+        $this->addVueComponent();
+        $this->registerComponent();
         /*
         $this->addVueComponent();
         $this->registerComponent(true);

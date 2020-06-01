@@ -152,7 +152,7 @@ class BaseCommand extends Command
 
         $component = file_get_contents(resource_path('js/app.js'));
         $component = str_replace($this->placeholder, '', $component);
-        $component .= "Vue.component('{$kebab}', require('./components/{$fileName}.vue'));\n";
+        $component .= "Vue.component('{$kebab}', require('./components/{$fileName}.vue').default);\n";
         $component .= $this->placeholder;
 
         file_put_contents(resource_path('js/app.js'), $component);
@@ -458,10 +458,12 @@ class BaseCommand extends Command
      */
     public function generateFileName(bool $upperCase = false){
 
-        $fileName = '';
+        $fileName = $this->file;
 
         if($this->directory){
             $fileName .= $upperCase ? ucfirst($this->directory) : strtolower($this->directory);
+        }else{
+            $fileName .= "-vue";
         }
 
         return $fileName;
@@ -483,6 +485,41 @@ class BaseCommand extends Command
         }
 
         return $path;
+    }
+
+    /**
+     * Replace placeholders in stubs
+     *
+     * @param $stub
+     * @return string|string[]
+     */
+    public function replacePlaceholders($stub){
+
+        $vueFileName = $this->vueFileName;
+        $classFileName = $this->classFileName;
+        $vue = Str::kebab($vueFileName);
+
+        if(!$this->directory){
+            $vue .= "-vue";
+        }
+
+        $namespace = $this->directory ? "App\\" . ucfirst($this->directory) . "s" : 'App';
+        $import = $this->directory ? "use App\\" . ucfirst($this->directory) . "s;" : '';
+
+        $stub = str_replace('%CLASS%', $classFileName, $stub );
+        $stub = str_replace('%VUE%', Str::kebab($vueFileName), $stub );
+        $stub = str_replace('%NAMESPACE%', $namespace, $stub);
+        $stub = str_replace('%IMPORT%', $import, $stub);
+        $stub = str_replace('%class%', strtolower($vue), $stub);
+        $stub = str_replace('%vue%', strtolower($this->file), $stub );
+
+        $title = preg_replace('/(?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]/', ' $0', $classFileName);
+
+        $stub = str_replace('%TITLE%', $title, $stub);
+        $stub = str_replace('%COMPONENT%', Str::snake($classFileName), $stub);
+
+        return $stub;
+
     }
 
 

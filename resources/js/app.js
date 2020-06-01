@@ -9,6 +9,7 @@ require('./bootstrap');
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 window.Vue = require('vue');
+window.moment = require('moment');
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -30,7 +31,7 @@ Vue.component('admin-dashboard-vue', require('./components/dashboard/AdminDashbo
 Vue.component('business-dashboard-vue', require('./components/dashboard/BusinessDashboard.vue').default);
 
 //Tabs
-//ToDo:: business-view shold be businesses-view
+//ToDo:: business-view should be businesses-view
 Vue.component('business-view', require('./components/views/BusinessView.vue').default);
 Vue.component('invoices-view', require('./components/views/InvoicesView.vue').default);
 Vue.component('users-view', require('./components/views/UsersView.vue').default);
@@ -53,7 +54,21 @@ Vue.component('businesses-report', require('./components/reports/Businesses.vue'
 Vue.component('invoices-report', require('./components/reports/Invoices.vue').default);
 Vue.component('users-report', require('./components/reports/Users.vue').default);
 
-//------- CONTENT -------//
+//Filters
+Vue.component('filters-component', require('./components/filters/Filters.vue').default);
+Vue.component('date-filter', require('./components/filters/DateFilter.vue').default);
+Vue.component('business-filter', require('./components/filters/BusinessFilter.vue').default);
+Vue.component('account-filter', require('./components/filters/AccountFilter.vue').default);
+Vue.component('user-filter', require('./components/filters/UserFilter.vue').default);
+Vue.component('record-filter', require('./components/filters/RecordFilter.vue').default);
+Vue.component('report-filter', require('./components/filters/ReportFilter.vue').default);
+
+const EventBus = new Vue();
+export default EventBus;
+
 const app = new Vue({
     el: '#app',
 }).$mount();
+
+
+//------- CONTENT -------//

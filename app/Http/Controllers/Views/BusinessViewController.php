@@ -22,7 +22,7 @@ class BusinessViewController extends Controller
             $businessesQuery->where('business_id', auth()->user()->business_id);
         }
 
-        $businesses = $businessesQuery->orderBy('id')
+        $businesses = $businessesQuery->orderBy('name')
             ->with('responsibleAgent')
             ->get()
             ->map(function($business){
@@ -30,8 +30,7 @@ class BusinessViewController extends Controller
                 $formattedAddress = $business->address_1 . ", " .
                                     //$business->address_2 ? ($business->address_2 . "<br>") : '' .
                                     $business->city . ", " . $business->state . " " . $business->zip;
-
-
+                
                 return [
                     'business_name' => $business->name,
                     'responsible_agent' => $business->responsibleAgent->name,
