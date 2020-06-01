@@ -7,7 +7,7 @@ use App\Http\Requests\All\BusinessesRequest;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use App\Business;
 use App\Role as R;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,8 +18,12 @@ class BusinessViewController extends Controller
 
         $businessesQuery = \App\Business::query();
 
-        if(auth()->user()->hasRole(R::BUSINESS)){
-            $businessesQuery->where('business_id', auth()->user()->business_id);
+        if(auth()->user()->hasRole(R::BUSINESS)){ //can only see their business if not admin
+            $businessesQuery->where('id', auth()->user()->business_id);
+        }
+
+        if($request->business && auth()->user()->hasRole(R::ADMIN)){
+            $businessesQuery->where('id', $request->business);
         }
 
         $businesses = $businessesQuery->orderBy('name')
@@ -30,7 +34,7 @@ class BusinessViewController extends Controller
                 $formattedAddress = $business->address_1 . ", " .
                                     //$business->address_2 ? ($business->address_2 . "<br>") : '' .
                                     $business->city . ", " . $business->state . " " . $business->zip;
-                
+
                 return [
                     'business_name' => $business->name,
                     'responsible_agent' => $business->responsibleAgent->name,

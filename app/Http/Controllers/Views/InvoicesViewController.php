@@ -19,8 +19,24 @@ class InvoicesViewController extends Controller
 
         $invoicesQuery = \App\Invoice::query();
 
+        if($request->business && auth()->user()->hasRole(R::ADMIN)){
+            $invoicesQuery->where('business_id', $request->business);
+        }
+
         if(auth()->user()->hasRole(R::BUSINESS)){
             $invoicesQuery->where('business_id', auth()->user()->business_id);
+        }
+
+        if (auth()->user()->hasRole(R::ADMIN) && $request->business){
+            $invoicesQuery->where('business_id', $request->business);
+        }
+
+        if($request->start_date){
+
+            $start_date = (new Carbon($request->start_date))->startOfDay();
+            $end_date = (new Carbon($request->end_date))->endOfDay();
+
+            $invoicesQuery->whereBetween('created_at', [$start_date, $end_date]);
         }
 
         $invoices = $invoicesQuery
@@ -28,9 +44,6 @@ class InvoicesViewController extends Controller
                     ->orderBy('id')
                     ->get()
                     ->map(function($invoice){
-
-                        //\Log::info(json_encode($invoice));
-                        \Log::info($invoice->records->last_name);
 
                         return [
                             'business_name' => $invoice->business->name,

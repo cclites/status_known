@@ -11,6 +11,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 window.Vue = require('vue');
 window.moment = require('moment');
 
+const EventBus = new Vue();
+export default EventBus;
+
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
@@ -63,8 +66,7 @@ Vue.component('user-filter', require('./components/filters/UserFilter.vue').defa
 Vue.component('record-filter', require('./components/filters/RecordFilter.vue').default);
 Vue.component('report-filter', require('./components/filters/ReportFilter.vue').default);
 
-const EventBus = new Vue();
-export default EventBus;
+
 
 const app = new Vue({
     el: '#app',

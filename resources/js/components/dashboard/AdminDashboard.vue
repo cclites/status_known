@@ -14,9 +14,9 @@
                 <b-tab title="Invoices">
                     <invoices-view :role="role"></invoices-view>
                 </b-tab>
-                <b-tab title="Accounts">
+                <!--b-tab title="Accounts">
                     <accounts-view :role="role"></accounts-view>
-                </b-tab>
+                </b-tab-->
             </b-tabs>
         </div>
     </div>

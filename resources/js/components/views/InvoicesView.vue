@@ -4,6 +4,8 @@
 
             <record-count :records="this.items.length"></record-count>
 
+            <filters-component :filters="filters" :filter-type="invoice"></filters-component>
+
             <b-table striped hover
                      :items="items"
                      :per-page="perPage"
@@ -27,6 +29,8 @@
 
     import pagination from '../utilities/Pagination';
     import record_count from '../utilities/RecordCount';
+    import FilterView from '../filters/Filters';
+    import EventBus from "../../classes/eventBus";
 
     export default {
 
@@ -76,6 +80,9 @@
                 show: false,
                 url: 'invoices-view/',
                 reportUrl : 'invoices/',
+                invoice: 'invoice',
+                filters: ['start', 'end', 'business'],
+                params: ''
             }
         },
 
@@ -109,11 +116,33 @@
                     }, (error) => {
                         console.log(error);
                     });*/
-            }
+            },
+
+            getFilteredResults(){
+
+                axios.get(this.url, {
+                    params: this.params
+                })
+                    .then((response) => {
+                        this.items = response.data;
+                        this.rows = this.items.length;
+                        this.show = false;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
         },
 
         mounted() {
             this.getInvoices();
+
+            EventBus.$on('UPDATE_INVOICES', (payload) => {
+
+                this.params = payload;
+                console.log(JSON.stringify(payload));
+
+                this.getFilteredResults();
+            });
         },
 
         watch: {},

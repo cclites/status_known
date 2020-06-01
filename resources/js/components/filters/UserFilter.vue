@@ -1,10 +1,10 @@
 <template>
     <div>
-        <b-form-group label="User Select" class="pt-3">
+        <b-form-group label="Select User">
             <div >
-                <b-form-select v-model="user">
+                <b-form-select v-model="user" @change="emit">
                     <option value="">No user Selected</option>
-                    <option v-for="item in items" value="item.id">{{ item.name }}</option>
+                    <option v-for="item in items" :value="item.user_id" :key="item.user_id">{{ item.name }}</option>
                 </b-form-select>
             </div>
         </b-form-group>
@@ -13,6 +13,8 @@
 </template>
 
 <script>
+
+    import EventBus from "../../classes/eventBus";
 
     export default {
 
@@ -26,21 +28,31 @@
             return {
                 user: '',
                 items: [],
-                url: 'users-view'
+                url: 'users-view',
+
             }
         },
 
         computed: {},
 
-        methods: {},
+        methods: {
+            emit(){
+                EventBus.$emit('USER_FILTER_EVENT', this.user);
+            },
+
+            getUsers(){
+                axios.get(this.url)
+                    .then((response) => {
+                        this.items = response.data;
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+
+        },
 
         mounted() {
-            axios.get(this.url)
-                .then((response) => {
-                    this.items = response.data;
-                }, (error) => {
-                    console.log(error);
-                });
+            this.getUsers();
         },
 
         watch: {},
@@ -48,8 +60,5 @@
 </script>
 
 <style scoped>
-    select{
-        position: relative;
-        top: 4px;
-    }
+
 </style>

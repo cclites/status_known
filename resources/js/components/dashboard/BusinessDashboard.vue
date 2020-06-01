@@ -7,8 +7,8 @@
             <b-tab title="Users">
                 <users-view :role="role"></users-view>
             </b-tab>
-            <b-tab title="Account">
-                <accounts-view :role="role"></accounts-view>
+            <b-tab title="Records">
+                <records-view :role="role"></records-view>
             </b-tab>
         </b-tabs>
     </div>
@@ -22,9 +22,6 @@
     import InvoicesView from "../views/InvoicesView";
 
     export default {
-
-        //Not sure if I need to pass roles or permissions to anything. Seems like I could just stick with
-        //auth()->user().
 
         props: {
             role: ''

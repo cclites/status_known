@@ -4,7 +4,7 @@
 
             <record-count :records="this.items.length"></record-count>
 
-            <filters-component :filters="filters"></filters-component>
+            <filters-component :filters="filters" :filter-type="business"></filters-component>
 
             <b-table striped hover
                      :items="items"
@@ -30,6 +30,7 @@
     import Pagination from '../utilities/Pagination';
     import RecordCount from '../utilities/RecordCount';
     import FilterView from '../filters/Filters';
+    import EventBus from "../../classes/eventBus";
 
     export default {
 
@@ -94,7 +95,9 @@
                 show: false,
                 url: 'business-view/',
                 reportUrl : 'businesses/',
-                filters: ['start','end','business','user']
+                filters: ['business'],
+                params: '',
+                business: 'business'
             }
         },
 
@@ -130,11 +133,41 @@
                     }, (error) => {
                         console.log(error);
                     });*/
+            },
+
+            getFilteredResults(){
+
+                axios.get(this.url, {
+                    params: {
+                        business: this.params.business,
+                    }
+                })
+
+                    .then((response) => {
+                        this.items = response.data;
+                        this.rows = this.items.length;
+                        this.show = false;
+                        this.$emit('CLEAR_SELECTED_EVENT', true);
+
+                    }, (error) => {
+                        console.log(error);
+                    });
+
             }
+
         },
 
         mounted() {
+
             this.getBusinesses();
+
+            EventBus.$on('UPDATE_BUSINESSES', (payload) => {
+
+                this.params = payload;
+                console.log(JSON.stringify(payload));
+
+                this.getFilteredResults();
+            });
         },
 
         watch: {},

@@ -19,13 +19,23 @@ class ReportsViewController extends Controller
     //Maybe not called at all?
     public function index(ReportsRequest $request){
 
+        //\Log::info(json_encode($request->all()));
+
         $reportsQuery = \App\Report::query();
 
         if(auth()->user()->hasRole(R::BUSINESS)){
             $reportsQuery->where('business_id', auth()->user()->business_id);
         }
 
+        if (auth()->user()->hasRole(R::ADMIN)){
+            $reportsQuery->where('id', $request->user);
+        }
+
+        $start = (new Carbon($request->start_date));
+        $end = (new Carbon($request->end_date));
+
         $reports = $reportsQuery
+                    ->whereBetween('created_at', [$start, $end])
                     ->orderBy('id')
                     ->with('requested_by', 'record', 'business')
                     ->get()

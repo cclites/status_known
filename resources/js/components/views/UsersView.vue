@@ -4,6 +4,8 @@
 
             <record-count :records="this.items.length"></record-count>
 
+            <filters-component :filters="filters" :filter-type="user"></filters-component>
+
             <b-table striped hover
                      :items="items"
                      :per-page="perPage"
@@ -28,6 +30,7 @@
 
     import pagination from '../utilities/Pagination';
     import record_count from '../utilities/RecordCount';
+    import EventBus from "../../classes/eventBus";
 
     export default {
 
@@ -77,12 +80,16 @@
                 show: false,
                 url: 'users-view/',
                 reportUrl : 'users/',
+                filters: ['user'],
+                params: '',
+                user: 'user',
             }
         },
 
         computed: {},
 
         methods: {
+
             getUsers() {
                 this.show = true;
                 axios.get(this.url)
@@ -98,11 +105,37 @@
 
             showUser(row){
                 window.location = this.reportUrl + row.user_id;
-            }
+            },
+
+            getFilteredResults(){
+
+                axios.get(this.url, {
+                        params: this.params
+                    })
+                    .then((response) => {
+                        this.items = response.data;
+                        this.rows = this.items.length;
+                        this.show = false;
+                        this.$emit('CLEAR_SELECTED_EVENT', true);
+                    }, (error) => {
+                        console.log(error);
+                    });
+            },
+
         },
 
         mounted() {
+
             this.getUsers();
+
+            EventBus.$on('UPDATE_USERS', (payload) => {
+
+                console.log('USER FILTER EVENT HAS BEEN CALLED. SHOW PARAMS: ' + "\n");
+                this.params = payload;
+                console.log(payload);
+
+                this.getFilteredResults();
+            });
         },
 
         watch: {},

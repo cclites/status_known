@@ -20,6 +20,10 @@ class UsersViewController extends Controller
             $userQuery->where('business_id', auth()->user()->business_id);
         }
 
+        if ($request->user && auth()->user()->hasRole(R::ADMIN)){
+            $userQuery->where('id', $request->user);
+        }
+
         $users = $userQuery
             ->orderBy('name')
             ->with('business')

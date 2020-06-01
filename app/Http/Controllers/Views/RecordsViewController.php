@@ -19,13 +19,28 @@ use App\Record;
 
 class RecordsViewController extends Controller
 {
-    //Maybe not called at all?
-    public function index(Record $report, RecordsRequest $request){
+    public function index(RecordsRequest $request){
 
         $recordsQuery = \App\Record::query();
 
+        if($request->business && auth()->user()->hasRole(R::ADMIN)){
+            $recordsQuery->where('business_id', $request->business);
+        }
+
         if(auth()->user()->hasRole(R::BUSINESS)){
             $recordsQuery->where('business_id', auth()->user()->business_id);
+        }
+
+        if (auth()->user()->hasRole(R::ADMIN) && $request->record){
+            $recordsQuery->where('id', $request->record);
+        }
+
+        if($request->start_date){
+
+            $start_date = (new Carbon($request->start_date))->startOfDay();
+            $end_date = (new Carbon($request->end_date))->endOfDay();
+
+            $recordsQuery->whereBetween('created_at', [$start_date, $end_date]);
         }
 
         $records = $recordsQuery
