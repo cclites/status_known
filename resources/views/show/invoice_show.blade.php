@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <invoice-show :invoice="{{ $invoice }}"></invoice-show>
+    <invoice-show :invoice="{{ json_encode($invoice) }}"></invoice-show>
 @endsection

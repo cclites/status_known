@@ -8,6 +8,9 @@
             <li>
                 <a href="#" class="text-primary">Reports</a>
             </li>
+            <li>
+                <a href="settings" class="text-primary">Settings</a>
+            </li>
         </ul>
         <ul class="fixed-bottom">
             <li>
@@ -37,6 +40,7 @@
         methods: {
             logout: function(){
                 axios.post('/logout');
+                window.location = '/login';
             }
         },
 
