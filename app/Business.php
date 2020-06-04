@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Business extends Model
 {
 
+    protected $fillable = ['responsible_agent_id'];
     /********************************************************
      * RELATIONSHIPS
      ********************************************************/

@@ -47,7 +47,7 @@ class RecordCompleted extends Notification
 
         $api_token = $record->business->api_token;
 
-        $url = 'http://sk.test/api/records?api_token=' . $record->business->api_token . '&tracking=' . $record->tracking;
+        $url = 'http://sk.test/api/record-print?api_token=' . $record->business->api_token . '&tracking=' . $record->tracking;
 
         return (new MailMessage)
                     ->line('Report for ' . $record->last_name . ", " . $record->first_name . " is complete.")

@@ -2,11 +2,13 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
 use Faker\Generator as Faker;
 
 use \Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use database\factories\RecordDataFactory;
+
 
 $factory->define(\App\Record::class, function (Faker $faker) {
 
@@ -81,7 +83,7 @@ $factory->define(\App\Record::class, function (Faker $faker) {
         'provider_id' => 999,
         'business_id' => 999,
         'data' => Crypt::encrypt($data),
-        'tracking' => \Str::random(32),
+        'tracking' => Str::random(32),
         'first_name' => $faker->firstName,
         'middle_name' => $faker->firstNameFemale,
         'last_name' => $faker->lastName,

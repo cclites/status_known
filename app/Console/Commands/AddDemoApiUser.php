@@ -45,10 +45,17 @@ class AddDemoAPIUser extends BaseCommand
 
         $user->name = "Demo API User";
         $user->password = Hash::make('demo');
-        $user->business_id = \App\Business::all()->random()->id;
+
+        $business = \App\Business::all()->random();
+
+        $user->business_id = $business->id;
         $user->email = 'demoApiUser@acctix.com';
 
         $user->save();
+
+        echo "API TOKEN: " . $business->api_token . "\n";
+
+        $business->update(['responsible_agent_id' => $user->id]);
 
         $user->assignRole(R::API);
         $user->givePermissionTo(P::CAN_READ, P::CAN_CREATE);

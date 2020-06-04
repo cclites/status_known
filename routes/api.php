@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
     Route::post('records', 'Record\RecordCreateController@create');
     Route::get('records', 'Record\RecordShowController@show');
+    Route::get('record-print', 'Record\RecordPrintController@download');
+
+    //Route::get('record-print', 'Record\RecordController@download');
+
 
 //});
 

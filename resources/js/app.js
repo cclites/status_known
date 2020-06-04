@@ -77,10 +77,20 @@ if(!appElement){
     newAppElement.setAttribute('id', 'app');
 }*/
 
-const loader = new Vue({
-    el: 'loader',
-}).$mount();
+if(document.getElementById('loader')){
+    const loader = new Vue({
+        el: '#loader',
+    }).$mount();
+}else{
+    console.log("No element named loader");
+}
 
-const app = new Vue({
-    el: 'app',
-}).$mount();
+if(document.getElementById('app')){
+    const app = new Vue({
+        el: '#app',
+    }).$mount();
+}else{
+    console.log("No element named app");
+}
+
+

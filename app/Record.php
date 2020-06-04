@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Faker\Factory as Faker;
 
 class Record extends Model
 {
@@ -45,6 +46,81 @@ class Record extends Model
         return $this->hasOne('\App\User', 'id', 'created_by_id');
     }
 
+    /********************************************************
+     *  TEST DATA
+     ********************************************************/
 
+    public function testRecord(){
 
+        $faker = Faker::create();
+
+        $data = [
+            'addresses' => [
+                [
+                    'address_1' => $faker->streetAddress,
+                    'city' => $faker->city,
+                    'state' => $faker->state,
+                    'zip' => $faker->postcode,
+                ],
+                [
+                    'address_1' => $faker->streetAddress,
+                    'city' => $faker->city,
+                    'state' => $faker->state,
+                    'zip' => $faker->postcode,
+                ],
+                [
+                    'address_1' => $faker->streetAddress,
+                    'city' => $faker->city,
+                    'state' => $faker->state,
+                    'zip' => $faker->postcode
+                ],
+            ],
+            'driving' => [
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(25)
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(25)
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(25)
+                ],
+            ],
+            'criminal' => [
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(50),
+                    'disposition' => $faker->text(45),
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(50),
+                    'disposition' => $faker->text(45),
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(50),
+                    'disposition' => $faker->text(45),
+                ],
+            ]
+        ];
+
+        return $data;
+
+    }
 }

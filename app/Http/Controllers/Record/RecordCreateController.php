@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Record;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\All\RecordsRequest;
 use App\Jobs\RequestRecordJob;
+use database\factories\RecordDataFactory;
 use \Illuminate\Support\Facades\Crypt;
+use \Illuminate\Support\Facades\Auth;
 use App\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use Faker\Generator as Faker;
+
 
 class RecordCreateController extends Controller
 {
@@ -28,10 +34,12 @@ class RecordCreateController extends Controller
         $record->ssn = $request->ssn ? Crypt::encrypt($request->ssn) : null;
 
         /* Add additional record info */
-        $record->created_by_id = \Auth::user()->id;
-        $record->business_id = \Auth::user()->business_id;
+        $record->created_by_id = Auth::user()->id;
+        $record->business_id = Auth::user()->business_id;
         $record->provider_id = $request->provider_id;
-        $record->tracking = \Str::random(32);
+        $record->tracking = Str::random(32);
+        $record->data = Crypt::encrypt($record->testRecord());
+
 
         if(!$record->save()){
             return response()->json(['message'=>'Unable to dispatch request.', 'status' => 500]);
@@ -42,6 +50,8 @@ class RecordCreateController extends Controller
         return response()->json(['message'=>'Request complete.', 'status' => 200]);
 
     }
+
+
 }
 
 

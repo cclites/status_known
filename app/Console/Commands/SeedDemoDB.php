@@ -1,9 +1,9 @@
 <?php
 namespace App\Console\Commands;
 
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
-
 use Faker\Generator as Faker;
 
 use App\Role as R;
@@ -50,20 +50,29 @@ class SeedDemoDB extends BaseCommand
         //Run migrations
         Artisan::call("migrate");
 
-        //Seed the DB
-        $faker = new Faker();
+        echo "Migrations complete.\n";
+        //return;
 
-        $randBusinessCount = rand(2, 6);
+        //$randBusinessCount = rand(2, 6);
+        $randBusinessCount = 1;
 
         for($i=0; $i < $randBusinessCount; $i += 1){
+
+            echo "Creating business.\n";
 
             $business = factory(\App\Business::class)
                 ->create();
 
+            echo "Business has been created\n";
+
+
+
+            /*
             factory(\App\Account::class)
                 ->create([
-                    'business_id' => $business->id
-                ]);
+                    'business_id' => $business->id,
+                    'data' => Crypt::encrypt($this->makeData())
+                ]);*/
 
             $randUserCount = rand(1,5);
 
@@ -80,6 +89,7 @@ class SeedDemoDB extends BaseCommand
                 $user[0]->givePermissionTo(P::CAN_READ, P::CAN_CREATE, P::CAN_DELETE, P::CAN_UPDATE);
 
 
+                /*
                 $randRecordsCount = rand(1, 5);
 
                 for($k=0; $k<$randRecordsCount; $k += 1){
@@ -104,15 +114,87 @@ class SeedDemoDB extends BaseCommand
                         'amount' => $record['amount'],
                     ]);
                 }
-
+*/
             }
 
         }
 
-        //Add setup:demo_admin
         Artisan::call("setup:demo_admin");
         Artisan::call("setup:demo_user");
         Artisan::call("setup:demo_api_user");
+
+    }
+
+    public function makeData(Faker $faker){
+
+
+        $data = [
+            'addresses' => [
+                [
+                    'address_1' => $faker->streetAddress,
+                    'city' => $faker->city,
+                    'state' => $faker->state,
+                    'zip' => $faker->postcode,
+                ],
+                [
+                    'address_1' => $faker->streetAddress,
+                    'city' => $faker->city,
+                    'state' => $faker->state,
+                    'zip' => $faker->postcode,
+                ],
+                [
+                    'address_1' => $faker->streetAddress,
+                    'city' => $faker->city,
+                    'state' => $faker->state,
+                    'zip' => $faker->postcode
+                ],
+            ],
+            'driving' => [
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(25)
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(25)
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(25)
+                ],
+            ],
+            'criminal' => [
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(50),
+                    'disposition' => $faker->text(45),
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(50),
+                    'disposition' => $faker->text(45),
+                ],
+                [
+                    'date' => $faker->year,
+                    'county' => $faker->firstNameFemale,
+                    'state' => $faker->state,
+                    'violation' => $faker->text(50),
+                    'disposition' => $faker->text(45),
+                ],
+            ]
+        ];
+
+        return $data;
 
     }
 

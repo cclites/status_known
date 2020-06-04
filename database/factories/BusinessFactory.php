@@ -2,10 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
-use Faker\Generator as Faker;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 $factory->define(\App\Business::class, function (Faker $faker) {
+
     return [
         'name' => $faker->company,
         'responsible_agent_id' => 1,
@@ -16,6 +18,6 @@ $factory->define(\App\Business::class, function (Faker $faker) {
         'zip' => $faker->postcode,
         'phone' => $faker->phoneNumber,
         'email' => $faker->companyEmail,
-        'api_token' => \Hash::make(\Str::random(32)),
+        'api_token' => Hash::make(Str::random(32)),
     ];
 });
