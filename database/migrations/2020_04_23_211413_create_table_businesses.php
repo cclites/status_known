@@ -26,6 +26,8 @@ class CreateTableBusinesses extends Migration
             $table->string('phone', 32);
             $table->string('email', 64);
             $table->boolean('active')->default(true);
+            $table->string('api_token');
+            $table->boolean('api_access')->default(false);
             $table->timestamps();
 
         });

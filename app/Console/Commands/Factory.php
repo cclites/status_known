@@ -42,6 +42,11 @@ class Factory extends BaseCommand
 
         $this->addVueComponent();
         $this->registerComponent();
+        $this->addController();
+        $this->addRequest();
+        $this->addClass();
+
+
         /*
         $this->addVueComponent();
         $this->registerComponent(true);

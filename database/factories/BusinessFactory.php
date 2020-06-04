@@ -15,6 +15,7 @@ $factory->define(\App\Business::class, function (Faker $faker) {
         'state' => $faker->state,
         'zip' => $faker->postcode,
         'phone' => $faker->phoneNumber,
-        'email' => $faker->companyEmail
+        'email' => $faker->companyEmail,
+        'api_token' => \Hash::make(\Str::random(32)),
     ];
 });

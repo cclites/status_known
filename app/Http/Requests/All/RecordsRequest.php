@@ -20,8 +20,8 @@ class RecordsRequest extends FormRequest
      */
     public function authorize()
     {
-        if(auth()->user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            auth()->user()->can([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
+        if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS, R::API]) &&
+            \Auth::user()->hasAnyDirectPermission(P::CAN_CREATE, P::CAN_READ))
         {
             return true;
         }
@@ -37,7 +37,14 @@ class RecordsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'required|string|max:32',
+            'middle_name' => 'nullable|string|max:32',
+            'last_name' => 'required|string|max:32',
+            'dob' => 'required|string|max:10',
+            'ssn' => 'required|string|max:11',
+            'tracking' => 'nullable|string',
+            'provider_id' => 'required|numeric',
+            'business_id' => 'required|numeric',
         ];
     }
 }

@@ -14,7 +14,7 @@ class ApiAccessController extends Controller
     public function loader(Request $request)
     {
         $js = file_get_contents(public_path('js/gate.js'));
-        $js = str_replace('%TOKEN%', $request->token, $js);
+        $js = str_replace('%TOKEN%', $request->api_token, $js);
         return $js;
     }
 
@@ -24,7 +24,20 @@ class ApiAccessController extends Controller
      */
     public function gateway(Request $request)
     {
-        $business = \App\Business::where('id', \Auth::user()->business_id)->first();
-        return view('form_view', compact('request', 'business'));
+        $business = \App\Business::where('api_token', $request->api_token)->with('responsibleAgent')->first();
+
+        $token = $request->api_token;
+        /*
+        $businessData = [
+            'name' => $business->name,
+            'api_token' => $business->api_token,
+        ];
+
+        $business = json_encode($businessData);
+        */
+
+
+
+        return view('form_view', compact('token', 'business'));
     }
 }

@@ -41,7 +41,7 @@ class Record extends Model
         return $this->hasOne('\App\Invoice', 'tracking', 'tracking');
     }
 
-    public function created_by(){
+    public function createdBy(){
         return $this->hasOne('\App\User', 'id', 'created_by_id');
     }
 

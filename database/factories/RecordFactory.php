@@ -6,6 +6,7 @@ use App\Model;
 use Faker\Generator as Faker;
 
 use \Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 $factory->define(\App\Record::class, function (Faker $faker) {
 
@@ -79,13 +80,13 @@ $factory->define(\App\Record::class, function (Faker $faker) {
         'created_by_id' => 999,
         'provider_id' => 999,
         'business_id' => 999,
-        'data' => Crypt::encrypt( json_encode($data) ),
-        'tracking' => $faker->password, //Possibly was going to use this to seed the encryption
+        'data' => Crypt::encrypt($data),
+        'tracking' => \Str::random(32),
         'first_name' => $faker->firstName,
         'middle_name' => $faker->firstNameFemale,
         'last_name' => $faker->lastName,
         'dob' => Crypt::encrypt($faker->date()),
         'ssn' => Crypt::encrypt($faker->ssn),
-        'amount' => number_format( $faker->randomFloat(2, 20, 100) , 2),
+        'amount' => number_format( $faker->randomFloat(2, 32, 100) , 2),
     ];
 });

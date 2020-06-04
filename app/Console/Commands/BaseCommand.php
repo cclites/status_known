@@ -66,7 +66,7 @@ class BaseCommand extends Command
     const VIEW_PATH = 'views';  //storage_path
     const CONTROLLER_PATH = 'Http/Controllers'; //app_path
     const MIGRATION_PATH = 'database/migrations';
-    const PLURAL = 's';
+    const PLURAL = 'es';
 
     /** Used as placeholder in app.js */
     public $placeholder = "//------- CONTENT -------//";

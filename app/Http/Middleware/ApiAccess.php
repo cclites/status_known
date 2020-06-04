@@ -15,10 +15,11 @@ class ApiAccess
      */
     public function handle($request, Closure $next)
     {
-        $user = \App\User::where('token', $request->token)->where('active', true)->first();
+        $business = \App\Business::where('api_token', $request->api_token)->with('responsibleAgent')->first();
+        $user = $business->responsibleAgent;
 
         //TODO:: create scopes in user model
-        if($user){
+        if($business){
             \Auth::login($user, true);
             return $next($request);
         }else{

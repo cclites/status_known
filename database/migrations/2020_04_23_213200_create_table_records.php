@@ -23,6 +23,7 @@ class CreateTableRecords extends Migration
             $table->double('amount')->nullable();
             $table->binary('data')->nullable();
             $table->string('tracking', 32);
+            $table->string('provider_tracking_id')->nullable();
 
             $table->string('first_name', 32);
             $table->string('middle_name', 32)->nullable();

@@ -1,0 +1,57 @@
+<template>
+    <div>
+        FRAME LOADER
+    </div>
+
+</template>
+
+<script>
+
+    export default {
+
+        props: {
+            token: '',
+            business: {},
+        },
+
+        components: {},
+
+        mixins: [],
+
+        data() {
+            return {
+            }
+        },
+
+        computed: {
+        },
+
+        methods: {
+            submitRequest(){
+
+            },
+
+            clearForm(){
+
+            }
+        },
+
+        mounted() {
+
+        },
+
+        watch: {
+        },
+    }
+</script>
+
+<style scoped>
+    div.container{
+        max-width:none;
+    }
+
+    .submitRequest{
+        position: relative;
+        top: 30px;
+    }
+</style>

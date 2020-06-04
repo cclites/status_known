@@ -7,8 +7,8 @@
 require('./bootstrap');
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
 window.Vue = require('vue');
+
 window.moment = require('moment');
 
 const EventBus = new Vue();
@@ -18,7 +18,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 //API
-Vue.component('frame-loader', require('./components/FrameLoader.vue').default);
+//Vue.component('frame-loader', require('./components/FrameLoader.vue.modified').default);
 
 //Dev/Testing
 Vue.component('draft-model-show', require('./components/utilities/draft-model-show.vue').default);
@@ -66,11 +66,21 @@ Vue.component('user-filter', require('./components/filters/UserFilter.vue').defa
 Vue.component('record-filter', require('./components/filters/RecordFilter.vue').default);
 Vue.component('report-filter', require('./components/filters/ReportFilter.vue').default);
 
+//Vue.component('settings-business', require('./components/business/SettingsBusiness.vue').default);
+//------- CONTENT -------//
 
+/*
+let appElement = document.getElementById('app');
 
-const app = new Vue({
-    el: '#app',
+if(!appElement){
+    var newAppElement = document.createElement('div');
+    newAppElement.setAttribute('id', 'app');
+}*/
+
+const loader = new Vue({
+    el: 'loader',
 }).$mount();
 
-
-//------- CONTENT -------//
+const app = new Vue({
+    el: 'app',
+}).$mount();

@@ -17,8 +17,8 @@ $directories = glob( $path , GLOB_ONLYDIR);
 
 foreach ($directories as $directory)
 {
-    $baseName = basename($directory);
-    require $directory . "/" . $baseName . ".php";
+    //$baseName = basename($directory);
+   // require $directory . "/" . $baseName . ".php";
 }
 
 Route::get('/', function () {
@@ -66,3 +66,16 @@ Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
 //Route::get('reports-report', 'Reports\ReportsReportController@index');
 
 Route::get('record-print/{record}', 'Record\RecordController@download');
+
+/** Business Settings**/
+Route::get('settings-businesss', 'Business/SettingsController@index')->name('business.settings_businesss');
+Route::get('settings-businesss/{settings}', 'Business/SettingsController@index')->name('business.settings_businesss');
+Route::post('settings-businesss', 'Business/SettingsController@create')->name('business.settings_businesss_create');
+Route::patch('settings-businesss/{settings}', 'Business/SettingsController@update')->name('business.settings_businesss_update');
+Route::delete('settings-businesss/{settings}', 'Business/SettingsController@delete')->name('business.settings_businesss_delete');
+
+
+//Route::get('api/loader', 'ApiAccessController@loader');
+
+
+//Route::post('api/records', 'Record\RecordCreateController@create');

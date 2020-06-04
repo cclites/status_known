@@ -10,4 +10,5 @@ class Role extends Model
     const BUSINESS = 'business';
     const SYSTEM = 'system';
     const GUEST = 'guest';
+    const API = 'api';
 }

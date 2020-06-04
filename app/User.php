@@ -68,4 +68,8 @@ class User extends Authenticatable
     public function business(){
         return $this->belongsTo('\App\Business');
     }
+
+    public function getPermissions(){
+        return $this->getAllPermissions();
+    }
 }
