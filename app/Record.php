@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Faker\Factory as Faker;
+use PDF;
+use Illuminate\Support\Facades\Crypt;
 
 class Record extends Model
 {
@@ -45,6 +47,25 @@ class Record extends Model
 
     public function createdBy(){
         return $this->hasOne('\App\User', 'id', 'created_by_id');
+    }
+
+    /********************************************************
+     * Print
+     ********************************************************/
+
+    public function print(){
+
+
+        $this->load('business');
+
+        $this->data = Crypt::decrypt($this->data);
+        $this->ssn = Crypt::decrypt($this->ssn);
+        $this->dob = Crypt::decrypt($this->dob);
+
+        $record = $this;
+
+        $pdf = PDF::loadView('print.print_record', compact('record'));
+        return $pdf->download('test_record.pdf');
     }
 
     /********************************************************
