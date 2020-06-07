@@ -6,7 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\All\RecordsRequest;
+//All = view all records
+
 
 //TODO: Move this stuff into a Base Request
 use Spatie\Permission\Models\Role;
@@ -16,10 +17,11 @@ use App\Role as R;
 use App\Permission as P;
 
 use App\Record;
+use App\Http\Requests\Model\RecordRequest;
 
 class RecordsViewController extends Controller
 {
-    public function index(RecordsRequest $request){
+    public function index(RecordRequest $request){
 
         $recordsQuery = \App\Record::query();
 
@@ -45,16 +47,19 @@ class RecordsViewController extends Controller
 
         $records = $recordsQuery
                     ->orderBy('id')
-                    ->with('created_by', 'business')
+                    ->with('createdBy', 'business')
                     ->get()
                     ->map(function($record){
 
+                        $record = $record->toArray();
+
                         return [
-                            'business_name' => $record->business->name,
-                            'record_id' => $record->id,
-                            'created_by' => $record->created_by->name,
-                            'requested_for' => $record->first_name . " " . $record->last_name,
-                            'request_date' => (new Carbon($record->created_at))->format('m-d-Y'),
+                            'business_name' => $record['business']['name'],
+                            'tracking_id' => $record['tracking'],
+                            'requested_by' => $record['created_by']['name'],
+                            'requested_for' => $record['last_name'] . ", " . $record['first_name'],
+                            'request_date' => (new Carbon($record['created_at']))->format('m-d-Y g:i:s'),
+                            'record_id' => $record['id'],
                         ];
 
                     });

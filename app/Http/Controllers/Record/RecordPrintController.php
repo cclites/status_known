@@ -7,38 +7,59 @@ use App\Record;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\App;
 
+//use Barryvdh\DomPDF\Facade\PDF;
+use PDF;
+
+use App\Http\Requests\Api\RecordRequest;
+
+
+/**
+ * Handles downloads for records from API
+ *
+ * Class RecordPrintController
+ * @package App\Http\Controllers\Record
+ */
 class RecordPrintController extends Controller
 {
-    public function download(Request $request)
+    public function download(RecordRequest $request, Record $record)
     {
 
-        \Log::info('Download record');
+        if($request->tracking){
+            \Log::info("Don't have a record");
+            $record = Record::where('tracking', $request->tracking)->first();
+        }else{
+            \Log::info("Record Exists");
+        }
 
-        $record = Record::where('tracking', $request->tracking)->first();
+        if(!$record){
+            \Log::error("There is an error in the record.");
+            return;
+        }
 
-        /*
+        $record->load('business');
+
+        $record->data = Crypt::decrypt($record->data);
+        $record->ssn = Crypt::decrypt($record->ssn);
+        $record->dob = Crypt::decrypt($record->dob);
+
+        $pdf = PDF::loadView('print.print_record', compact('record'));
+        return $pdf->download('test_record.pdf');
+
+
+//        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf-amd64');
+//        header('Content-Type: application/pdf');
+//        header('Content-Disposition: attachment; filename="file.pdf"');
+//        $file = $snappy->getOutput($html);
+//
+//
+//        return "";
+        //return $file;
+
         //$snappy = App::make('snappy.pdf');
-        $html = '<h1>test</h1><p>test from test</p>';
-
-        //$pdf = PDF::loadView('pdf.invoice', $data);
-        $pdf = new PDF('/vendor/h4cc/wkhtmltoimage-amd64/bin');
-        $pdf->generateFromHtml($html);
-
-        return $pdf->download('invoice.pdf');
-        */
-
-        $html = response(view('print.print_record', [
-            'record' => $record,
-        ]))->getContent();
-
-        \Log::info($html);
-
-        $snappy = App::make('snappy.pdf');
-
+        /*
         return new Response(
             $snappy->getOutputFromHtml($html),
             200,
@@ -46,8 +67,6 @@ class RecordPrintController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'attachment; filename="test_record.pdf"'
             )
-        );
-
-
+        );*/
     }
 }

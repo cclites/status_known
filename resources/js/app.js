@@ -56,6 +56,7 @@ Vue.component('user-show', require('./components/views/show/User.vue').default);
 Vue.component('businesses-report', require('./components/reports/Businesses.vue').default);
 Vue.component('invoices-report', require('./components/reports/Invoices.vue').default);
 Vue.component('users-report', require('./components/reports/Users.vue').default);
+Vue.component('record-report', require('./components/views/show/Record.vue').default);
 
 //Filters
 Vue.component('filters-component', require('./components/filters/Filters.vue').default);

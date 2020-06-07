@@ -18,7 +18,7 @@ class ReportShowController extends Controller
      */
     public function show(Report $report, ReportRequest $request){
 
-        $report = \App\Record::where('id', $report->id)->with('report')->first();
+        $report = $report->with('report')->first();
         return view('show.report_show', compact('report'));
 
         /*

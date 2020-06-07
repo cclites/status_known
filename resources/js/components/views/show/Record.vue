@@ -6,7 +6,7 @@
                     header-bg-variant="info"
                     class="w-100"
             >
-                <div>
+                <section>
                     <table class="w-100">
                         <thead>
                         <tr>
@@ -19,28 +19,89 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{{ record.first_name }}</td>
-                            <td>{{ record.middle_name }}</td>
-                            <td>{{ record.last_name }}</td>
-                            <td>{{ record.dob }}</td>
-                            <td>{{ record.ssn }}</td>
+                            <td>{{ record_data.first_name }}</td>
+                            <td>{{ record_data.middle_name }}</td>
+                            <td>{{ record_data.last_name }}</td>
+                            <td>{{ record_data.dob }}</td>
+                            <td>{{ record_data.ssn }}</td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
-                <div>
+                </section>
+                <section>
+                    <h4>Addresses</h4>
                     <table>
                         <thead>
                             <tr>
-
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <tr v-for="record in record_data.data.addresses">
+                                <td>{{ record.address_1 }}</td>
+                                <td>{{ record.city }}</td>
+                                <td>{{ record.state }}</td>
+                                <td>{{ record.zip }}</td>
+                            </tr>
+                        </tbody>
                     </table>
-                </div>
+                </section>
+                <section>
+                    <h4>Charges</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>County</th>
+                                <th>Date</th>
+                                <th>Disposition</th>
+                                <th>State</th>
+                                <th>Violation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="record in record_data.data.criminal">
+                                <td>{{ record.county }}</td>
+                                <td>{{ record.date }}</td>
+                                <td>{{ record.disposition }}</td>
+                                <td>{{ record.state }}</td>
+                                <td>{{ record.violation }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h4>Driving Infractions</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>County</th>
+                                <th>Date</th>
+                                <th>State</th>
+                                <th>Violation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="record in record_data.data.criminal">
+                                <td>{{ record.county }}</td>
+                                <td>{{ record.date }}</td>
+                                <td>{{ record.state }}</td>
+                                <td>{{ record.violation }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
 
                 <div>
-                    <b-button @click="print" variant="outline-primary" class="text-right">Print</b-button>
-                    <!--b-button variant="outline-secondary">Update</b-button-->
+                    <b-button
+                        variant="outline-primary"
+                        class="text-right"
+                        @click="print"
+                    >
+                        Print
+                    </b-button>
                 </div>
             </b-card>
         </b-row>
@@ -54,11 +115,8 @@
 
         props: {
             record: {
-                type: Object,
-                default: function() {
-                    return {
-                    }
-                }
+                type: String,
+                default: ''
             }
         },
 
@@ -69,16 +127,38 @@
         data() {
             return {
                 header: "",
-                print_url: '/record-print'
+                print_url: '/record-print',
+                record_data: JSON.parse(this.record),
             }
         },
 
-        computed: {},
+        computed: {
+            url(){
+                return this.print_url + "/" + this.record_data.id;
+            },
+
+            filename(){
+                return this.record.last_name + "_" + this.record.first_name + '.pdf'
+            }
+        },
 
         methods: {
 
             print(){
-                window.location = this.print_url + "/" + this.record.id;
+                axios(this.url, {
+                    method: 'get',
+                    responseType: 'blob'
+                })
+                .then(response => {
+                    let blob = new Blob([response.data], { type: 'application/pdf' });
+                    let link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = this.filename;
+                    link.click();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
             }
         },
 

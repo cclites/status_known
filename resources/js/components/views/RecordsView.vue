@@ -59,7 +59,7 @@
                     },
                     {
                         label: 'Report Id',
-                        key: 'report_id',
+                        key: 'tracking_id',
                         sortable: true
                     },
                     {
@@ -77,11 +77,12 @@
                         key: 'request_date',
                         sortable: true
                     },
+                    /*
                     {
                         label: 'Completion Date',
                         key: 'completion_date',
                         sortable: true
-                    },
+                    },*/
                 ],
                 show: false,
                 reportUrl : 'records/',
@@ -108,11 +109,12 @@
                         this.show = false;
                     }, (error) => {
                         console.log(error);
+                        this.show = false;
                     });
             },
 
             showRecord(row){
-                window.location = this.reportUrl + row.record_id;
+                window.location.href = this.reportUrl + row.record_id;
             },
 
             getFilteredResults(){

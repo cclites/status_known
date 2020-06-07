@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Crypt;
 
 class RecordShowController extends Controller
 {
-    //We are really downloading a record here.
+    //We are showing a printable record here
     public function show(Record $record, RecordRequest $request){
 
-        $record = \App\Record::where('tracking', $request->tracking)->first();
+        $record->load('business');
 
-        $record->data = Crypt::decrypt($record->data);
-        $record->ssn = "***-**-5556";
         $record->dob = Crypt::decrypt($record->dob);
+        //TODO: Create a mask for the ssn
+        $record->ssn = "***-**-****";
+        $record->data = Crypt::decrypt($record->data);
 
         return view('show.record_show', compact('record'));
     }
