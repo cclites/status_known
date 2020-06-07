@@ -4,6 +4,7 @@
                 header-text-variant="white"
                 header-bg-variant="info"
                 class="w-100"
+                style="margin: 0 auto;"
         >
             <b-container>
                 <b-row>
@@ -40,7 +41,7 @@
                             </b-input>
                         </b-form-group>
                     </b-col>
-                    <b-col class="">
+                    <b-col lg="auto">
                         <b-btn @click="submitRequest()" class="submitRequest" variant="info" :disabled="disabled">Submit Request</b-btn>
                     </b-col>
                 </b-row>

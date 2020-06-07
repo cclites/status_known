@@ -18,12 +18,16 @@
 </head>
 <body>
     <header>
-
+        <div>
+            <b-col>
+                <h4>App Name</h4>
+            </b-col>
+        </div>
     </header>
 
     <div id="loader_app" class="w-100">
         <b-container style="max-width: 100% !important;">
-            <b-row class="w-100">
+            <b-row class="w-100" class="container-lg">
                 <b-col>
                     <b-form-group label="First Name" for="first_name">
                         <b-input id="first_name" v-model="data.form.first_name"></b-input>
@@ -194,7 +198,7 @@
         }
 
         #loader_app{
-            padding-top: 20px;
+            padding-top: 6px;
             margin: 0 auto;
         }
 
@@ -204,6 +208,17 @@
             top: 10px;
             left: 16px;
         }
+
+        h4{
+            margin-top:4px;
+            margin-bottom: 0;
+            padding-left: 16px;
+        }
+
+        small{
+            color: darkred;
+        }
+
     </style>
 
 </body>

@@ -7,7 +7,7 @@
             >
                 <h3 class="text-center">Business Model View</h3>
 
-                <draft-model-show :model="business"></draft-model-show>
+                
 
             </b-card>
         </b-row>
