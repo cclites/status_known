@@ -33,6 +33,8 @@ Vue.component('dashboard-vue', require('./components/dashboard/DashboardView.vue
 Vue.component('admin-dashboard-vue', require('./components/dashboard/AdminDashboard.vue').default);
 Vue.component('business-dashboard-vue', require('./components/dashboard/BusinessDashboard.vue').default);
 
+Vue.component('business-settings-vue', require('./components/business/BusinessSettings.vue').default);
+
 //Tabs
 //ToDo:: business-view should be businesses-view
 Vue.component('business-view', require('./components/views/BusinessView.vue').default);
@@ -51,6 +53,10 @@ Vue.component('provider-show', require('./components/views/show/Provider.vue').d
 Vue.component('report-show', require('./components/views/show/Report.vue').default);
 Vue.component('record-show', require('./components/views/show/Record.vue').default);
 Vue.component('user-show', require('./components/views/show/User.vue').default);
+
+//Show relatations data
+Vue.component('addresses-show', require('./components/views/show/Address.vue').default);
+Vue.component('phone-numbers-show', require('./components/views/show/PhoneNumber.vue').default);
 
 //Reports
 Vue.component('businesses-report', require('./components/reports/Businesses.vue').default);

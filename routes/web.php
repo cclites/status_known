@@ -39,7 +39,7 @@ Route::get('dashboard-view', 'Views\DashboardViewController@index');
 Route::get('admin-dashboard-view', 'Views\AdminDashboardViewController@index');
 Route::get('business-dashboard-view', 'Views\BusinessDashboardViewController@index');
 
-// Requests to create vue table with all() types of a model.
+// Requests to display vue table with all() types of a model.
 Route::get('reports-view', 'Views\ReportsViewController@index');
 Route::get('records-view', 'Views\RecordsViewController@index');
 Route::get('business-view', 'Views\BusinessViewController@index');
@@ -65,14 +65,20 @@ Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
 //Route::get('users-report', 'Reports\UsersReportController@index');
 //Route::get('reports-report', 'Reports\ReportsReportController@index');
 
+Route::get('business-edit/{business}', 'Business\BusinessSettingsController@show');
+
 Route::get('record-print/{record}', 'Record\RecordPrintController@download');
 
 /** Business Settings**/
-Route::get('settings-businesss', 'Business/SettingsController@index')->name('business.settings_businesss');
-Route::get('settings-businesss/{settings}', 'Business/SettingsController@index')->name('business.settings_businesss');
-Route::post('settings-businesss', 'Business/SettingsController@create')->name('business.settings_businesss_create');
-Route::patch('settings-businesss/{settings}', 'Business/SettingsController@update')->name('business.settings_businesss_update');
-Route::delete('settings-businesss/{settings}', 'Business/SettingsController@delete')->name('business.settings_businesss_delete');
+Route::put('business', 'Business/BusinessUpdateController@update')->name('business.business-update');
+
+/*
+Route::get('settings-businesss', 'Business/SettingsController@index')->name('business.settings_business');
+Route::get('settings-businesss/{settings}', 'Business/SettingsController@index')->name('business.settings_business');
+Route::post('settings-businesss', 'Business/SettingsController@create')->name('business.settings_business_create');
+Route::patch('settings-businesss/{settings}', 'Business/SettingsController@update')->name('business.settings_business_update');
+Route::delete('settings-businesss/{settings}', 'Business/SettingsController@delete')->name('business.settings_business_delete');
+*/
 
 
 //Route::get('api/loader', 'ApiAccessController@loader');

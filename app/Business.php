@@ -38,4 +38,12 @@ class Business extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
+
+    public function addresses(){
+        return $this->hasMany(Address::class);
+    }
+
+    public function phone_numbers(){
+        return $this->hasMany(PhoneNumber::class);
+    }
 }

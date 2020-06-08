@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <settings></settings>
-
+    <business-settings-vue :business="{{$business}}"></business-settings-vue>
 @endsection
+

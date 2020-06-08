@@ -95,9 +95,10 @@
                 show: false,
                 url: 'business-view/',
                 reportUrl : 'businesses/',
+                editUrl: 'business-edit/',
                 filters: ['business'],
                 params: '',
-                business: 'business'
+                business: 'business',
             }
         },
 
@@ -118,21 +119,7 @@
             },
 
             showBusiness(row){
-
-                window.location = this.reportUrl + row.business_id;
-
-                //let reportId = row.report_id;
-                //console.log(row.business_id);
-
-                //This for testing only. Would really do a download here.
-                //window.location = this.reportUrl + row.report_id
-                /*
-                axios.get(this.reportUrl + row.business_id)
-                    .then((response) => {
-                        console.log(response);
-                    }, (error) => {
-                        console.log(error);
-                    });*/
+                window.location = this.editUrl + row.business_id;
             },
 
             getFilteredResults(){

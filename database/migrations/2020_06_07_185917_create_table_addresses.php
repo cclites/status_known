@@ -22,7 +22,8 @@ class CreateTableAddresses extends Migration
             $table->string('city', 100);
             $table->string('state', 100);
             $table->string('zip', 14);
-            $table->string('type', 14); //eg. mailing, primary, secondary
+            $table->string('type', 24); //eg. mailing, primary, secondary
+            $table->unsignedBigInteger('business_id');
         });
     }
 

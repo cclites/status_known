@@ -11,15 +11,13 @@ class BusinessShowController extends Controller
 {
     public function show(Business $business, BusinessRequest $request){
 
-        //**********************************************************
-        //**********************************************************
-        return view('show.business_show', compact('business'));
+        $business = $business->load('addresses', 'phone_numbers');
 
-        /*
-        if($request->authorize()){
-            return view('show.business_show', compact('business'));
-        }else{
-            return back(401, "You do not have permission to view this resource");
-        }*/
+        if($request->json){
+            return $business;
+        }
+
+        return view('business.settings_business', compact('business'));
+
     }
 }
