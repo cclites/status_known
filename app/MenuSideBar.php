@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MenuBar extends BaseModel
 {
 
+    //Not used
     protected $menu = [];
 
     const DASHBOARD_LINK = 'welcome';

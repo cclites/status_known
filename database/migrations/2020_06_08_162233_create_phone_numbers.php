@@ -18,6 +18,8 @@ class CreatePhoneNumbers extends Migration
             $table->timestamps();
 
             $table->string('type', 24); //eg. primary, secondary, emergency
+            $table->string('number', 24)->notNull();
+            $table->string('extension')->nullable();
             $table->string('contact_name', 100);
             $table->unsignedBigInteger('business_id');
         });

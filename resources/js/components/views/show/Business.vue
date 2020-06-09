@@ -67,27 +67,19 @@
                     responsible_agent_id: this.business.responsible_agent_id || '',
                     agent_email : this.business.responsible_agent.email || '',
                     email : this.business.email || '',
+                    business_id : this.business.id || '',
                 }
             }
         },
 
-        computed: {},
+        computed: {
+        },
 
         methods: {
 
-            getBusinessData(){
-
-                axios.get('businesses/{' + this.business.id + "}")
-                    .then((response) => {
-                        this.items = response.data;
-                    }, (error) => {
-                        console.log(error);
-                    });
-            },
-
             updateBusinessData(){
 
-                axios.get('businesses/{' + this.business.id + "}")
+                axios.patch('/business-edit', this.form)
                     .then((response) => {
                         this.items = response.data;
                     }, (error) => {
@@ -97,9 +89,22 @@
 
             deleteBusinessData(){},
 
-            updateAgentEmail(){
+            updateAgentEmail() {
 
-            }
+                let self = this;
+
+                self.business.users.every(
+                    (user) => {
+
+                        if(user.id === self.form.responsible_agent_id){
+                            self.form.agent_email = user.email;
+                            return false;
+                        }
+
+                        return true;
+                    }
+                );
+            },
 
         },
 

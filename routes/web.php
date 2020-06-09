@@ -65,12 +65,13 @@ Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
 //Route::get('users-report', 'Reports\UsersReportController@index');
 //Route::get('reports-report', 'Reports\ReportsReportController@index');
 
-Route::get('business-edit/{business}', 'Business\BusinessSettingsController@show');
+
 
 Route::get('record-print/{record}', 'Record\RecordPrintController@download');
 
 /** Business Settings**/
-Route::put('business', 'Business/BusinessUpdateController@update')->name('business.business-update');
+Route::patch('business-edit', 'Business\BusinessUpdateController@update')->name('business.business-update');
+Route::get('business-edit/{business}', 'Business\BusinessSettingsController@show');
 
 /*
 Route::get('settings-businesss', 'Business/SettingsController@index')->name('business.settings_business');

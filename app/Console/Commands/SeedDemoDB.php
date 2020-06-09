@@ -65,6 +65,12 @@ class SeedDemoDB extends BaseCommand
 
             echo "Business has been created\n";
 
+            factory(\App\Address::class)
+                    ->create(['business_id'=>$business->id]);
+
+            factory(\App\PhoneNumber::class)
+                    ->create(['business_id'=>$business->id]);
+
 
 
             /*

@@ -84,6 +84,10 @@
                         key: 'number',
                     },
                     {
+                        label: 'Extension',
+                        key: 'extension'
+                    },
+                    {
                         label: 'Contact Name',
                         key: 'contact_name'
                     },
