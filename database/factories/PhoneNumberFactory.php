@@ -6,8 +6,13 @@ use App\PhoneNumber;
 use Faker\Generator as Faker;
 
 $factory->define(PhoneNumber::class, function (Faker $faker) {
+
+    $types = ['Primary', 'Secondary', 'Emergency'];
+    $typeIndex = array_rand($types);
+    $type = $types[$typeIndex];
+
     return [
-        'type'=> array_rand(['Primary', 'Secondary', 'Emergency']),
+        'type'=> $type,
         'number'=> $faker->phoneNumber,
         'extension' => '',
         'contact_name'=>$faker->name('male')

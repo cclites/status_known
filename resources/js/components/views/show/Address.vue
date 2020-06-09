@@ -10,51 +10,38 @@
                      :fields="fields"
                      responsive
             >
-                <template v-slot:cell(type)="data">
-                    <b-select v-model="form.type">
+                <template v-slot:cell(type)="row">
+                    <b-select v-model="row.item.type">
                         <option value="">Select a Type</option>
-                        <option v-for="type in types"
-                                :value="type.type">{{ type }}</option>
+                        <option v-for="type in types" :value="type">{{ type }}</option>
                     </b-select>
                 </template>
 
-                <template v-slot:cell(address_1)="data">
-                    <b-input v-model="form.address_1"
-                             :value="data.address_1"
-                    >
-                    </b-input>
+                <template v-slot:cell(address_1)="row">
+                    <b-form-input v-model="row.item.address_1"></b-form-input>
                 </template>
 
-                <template v-slot:cell(address_2)="data">
-                    <b-input v-model="form.address_2"
-                             :value="data.address_2"
-                    >
-                    </b-input>
+                <template v-slot:cell(address_2)="row">
+                    <b-form-input v-model="row.item.address_2"></b-form-input>
                 </template>
 
-                <template v-slot:cell(city)="data">
-                    <b-input v-model="form.city"
-                             :value="data.city"
-                    >
-                    </b-input>
+                <template v-slot:cell(city)="row">
+                    <b-form-input v-model="row.item.city"></b-form-input>
                 </template>
 
-                <template v-slot:cell(state)="data">
-                    <b-input v-model="form.state"
-                             :value="data.state"
-                    >
-                    </b-input>
+                <template v-slot:cell(state)="row">
+                    <b-form-input v-model="row.item.state"></b-form-input>
                 </template>
 
-                <template v-slot:cell(zip)="data">
-                    <b-input v-model="form.zip"
-                             :value="data.zip"
-                    >
-                    </b-input>
+                <template v-slot:cell(zip)="row">
+                    <b-form-input v-model="row.item.zip"></b-form-input>
                 </template>
 
-                <template v-slot:cell(actions)="data">
-                    <!-- save, edit, delete -->
+
+                <template v-slot:cell(actions)="row">
+                    <i class="fa fa-pencil-square-o fa-2x" title="Edit" aria-hidden="true"></i>
+                    <i class="fa fa-floppy-o fa-2x" title="Save" aria-hidden="true"></i>
+                    <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
                 </template>
 
             </b-table>

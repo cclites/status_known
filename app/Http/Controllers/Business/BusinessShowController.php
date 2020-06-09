@@ -12,12 +12,13 @@ class BusinessShowController extends Controller
     public function show(Business $business, BusinessRequest $request){
 
         $business = $business->load('addresses', 'phone_numbers');
+        $title = $business->name;
 
         if($request->json){
             return $business;
         }
 
-        return view('business.settings_business', compact('business'));
+        return view('business.settings_business', compact('business', 'title'));
 
     }
 }

@@ -1,11 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 @include('layouts.partials.header')
 
+<script>
+    @auth
+        window.User = {!! json_encode(Auth::user()->with('business'), true) !!};
+    @else
+        window.User = [];
+    @endauth
+</script>
+
+
 <body>
 
-    @include('layouts.partials.header_logo', ['title'=>'TODO: Add title here'])
+    @include('layouts.partials.header_logo')
 
     <div id="app" class="d-flex h-100">
         <div class="flex-fill col-1 ">

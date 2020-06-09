@@ -12,9 +12,9 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.css') }}">
+    <!-- link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/solid.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/light.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/light.css') }}" -->
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

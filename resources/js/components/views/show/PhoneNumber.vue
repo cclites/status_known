@@ -13,33 +13,31 @@
             >
 
 
-                <template v-slot:cell(type)="data">
-                    <b-select v-model="form.type">
+                <template v-slot:cell(type)="row">
+                    <b-select v-model="row.item.type">
                         <option value="">Select a Type</option>
-                        <option v-for="type in types"
-                                  :value="type.type">{{ type }}</option>
+                        <option v-for="type in types" :value="type">{{ type }}</option>
                     </b-select>
                 </template>
 
 
-                <template v-slot:cell(number)="data">
-                    <b-input v-model="form.number"
-                             :value="data.number"
-                    >
-                    </b-input>
+                <template v-slot:cell(number)="row">
+                    <b-form-input v-model="row.item.number"></b-form-input>
                 </template>
 
-                <template v-slot:cell(contact_name)="data">
-                    <b-input v-model="form.contact_name"
-                             :value="data.contact_name"
-                    >
+                <template v-slot:cell(extension)="row">
+                    <b-form-input v-model="row.item.extension"></b-form-input>
+                </template>
 
-                    </b-input>
+                <template v-slot:cell(contact_name)="row">
+                    <b-form-input v-model="row.item.contact_name"></b-form-input>
                 </template>
 
 
-                <template v-slot:cell(actions)="data">
-                    <!-- save, edit, delete -->
+                <template v-slot:cell(actions)="row">
+                    <i class="fa fa-pencil-square-o fa-2x" title="Edit" aria-hidden="true"></i>
+                    <i class="fa fa-floppy-o fa-2x" title="Save" aria-hidden="true"></i>
+                    <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
                 </template>
             </b-table>
 

@@ -8,8 +8,8 @@
             <li>
                 <a href="#" class="text-primary">Reports</a>
             </li>
-            <li>
-                <a href="settings" class="text-primary">Settings</a>
+            <li v-if="user.business || user.business_id">
+                <a :href="href" class="text-primary">Settings</a>
             </li>
         </ul>
         <ul class="fixed-bottom">
@@ -24,7 +24,9 @@
 
     export default {
 
-        props: {},
+        props: {
+
+        },
 
         components: {},
 
@@ -32,16 +34,25 @@
 
         data() {
             return {
+                user: window.User,
             }
         },
 
-        computed: {},
+        computed: {
+            href(){
+                return 'business-edit/' +  this.user.business_id;
+            }
+        },
 
         methods: {
             logout: function(){
                 axios.post('/logout');
                 window.location = '/login';
-            }
+            },
+
+            getUser: function(){
+                //axios.get('user')
+            },
         },
 
         mounted() {

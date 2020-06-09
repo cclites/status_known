@@ -16,7 +16,7 @@ class SeedDemoDB extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'seed-demo-db';
+    protected $signature = 'seed:demo';
 
     /**
      * The console command description.
