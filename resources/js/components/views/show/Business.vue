@@ -81,13 +81,12 @@
 
                 axios.patch('/business-edit', this.form)
                     .then((response) => {
-                        this.items = response.data;
+                        this.populateForm(response.data);
                     }, (error) => {
                         console.log(error);
                     });
             },
 
-            deleteBusinessData(){},
 
             updateAgentEmail() {
 
@@ -105,6 +104,18 @@
                     }
                 );
             },
+
+            populateForm(data){
+
+                this.form = {
+                        name: data.name,
+                        responsible_agent_id: data.responsible_agent_id,
+                        agent_email : data.responsible_agent.email,
+                        email : data.email,
+                        business_id : data.id,
+                }
+
+            }
 
         },
 

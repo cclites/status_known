@@ -55,7 +55,6 @@ class Record extends Model
 
     public function print(){
 
-
         $this->load('business');
 
         $this->data = Crypt::decrypt($this->data);

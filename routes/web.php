@@ -39,7 +39,7 @@ Route::get('dashboard-view', 'Views\DashboardViewController@index');
 Route::get('admin-dashboard-view', 'Views\AdminDashboardViewController@index');
 Route::get('business-dashboard-view', 'Views\BusinessDashboardViewController@index');
 
-// Requests to display vue table with all() types of a model.
+// These display vue tables with all records in a collection.
 Route::get('reports-view', 'Views\ReportsViewController@index');
 Route::get('records-view', 'Views\RecordsViewController@index');
 Route::get('business-view', 'Views\BusinessViewController@index');
@@ -51,19 +51,9 @@ Route::get('providers-view', 'Views\ProvidersViewController@index');
 //show data for a single model type
 Route::get('reports/{report}', 'Report\ReportShowController@show');
 Route::get('records/{record}', 'Record\RecordShowController@show');
-Route::get('businesses/{business}', 'Business\BusinessShowController@show');
-Route::get('invoices/{invoice}', 'Invoice\InvoiceShowController@show');
-Route::get('users/{user}', 'User\UserShowController@show');
-Route::get('accounts/{account}', 'Account\AccountShowController@show');
+
 Route::get('providers/{provider}', 'Provider\ProviderShowController@show');
 Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
-
-//Reports (No reports yet - ignore these routes for now
-//These routes are called when user decides to print a report
-//Route::get('businesses-report', 'Reports\BusinessesReportController@index');
-//Route::get('invoices-report', 'Reports\InvoicesReportController@index');
-//Route::get('users-report', 'Reports\UsersReportController@index');
-//Route::get('reports-report', 'Reports\ReportsReportController@index');
 
 
 
@@ -73,16 +63,60 @@ Route::get('record-print/{record}', 'Record\RecordPrintController@download');
 Route::patch('business-edit', 'Business\BusinessUpdateController@update')->name('business.business-update');
 Route::get('business-edit/{business}', 'Business\BusinessSettingsController@show');
 
-/*
-Route::get('settings-businesss', 'Business/SettingsController@index')->name('business.settings_business');
-Route::get('settings-businesss/{settings}', 'Business/SettingsController@index')->name('business.settings_business');
-Route::post('settings-businesss', 'Business/SettingsController@create')->name('business.settings_business_create');
-Route::patch('settings-businesss/{settings}', 'Business/SettingsController@update')->name('business.settings_business_update');
-Route::delete('settings-businesss/{settings}', 'Business/SettingsController@delete')->name('business.settings_business_delete');
-*/
+/***********************************************************************
+ * SINGLE RESPONSIBILITY CONTROLLER ROUTES
+ ***********************************************************************/
+
+//Business
+Route::get('businesses', 'Business\BusinessController@index');
+Route::get('businesses/{business}', 'Business\BusinessShowController@show');
+Route::post('businesses', 'Business\BusinessCreateController@create');
+Route::patch('businesses/{business}', 'Business\BusinessUpdateController@update');
+Route::delete('businesses/{business}', 'Business\BusinessDeleteController@delete');
+
+//Account
+Route::get('accounts', 'Account\AccountController@index');
+Route::get('accounts/{account}', 'Account\AccountShowController@show');
+Route::post('accounts', 'Account\AccountCreateController@create');
+Route::patch('accounts/{account}', 'Account\AccountUpdateController@update');
+Route::delete('accounts/{account}', 'Account\AccountDeleteController@delete');
+
+//User
+Route::get('users', 'User\UserController@index');
+Route::get('users/{user}', 'User\UserShowController@show');
+Route::post('users', 'User\UserCreateController@create');
+Route::patch('users/{user}', 'User\UserUpdateController@update');
+Route::delete('users/{user}', 'User\UserDeleteController@delete');
+
+//Invoice
+Route::get('invoices', 'Invoice\InvoiceController@index');
+Route::get('invoices/{invoice}', 'Invoice\InvoiceShowController@show');
+Route::post('invoices', 'Invoice\InvoiceCreateController@create');
+Route::patch('invoices/{invoice}', 'Invoice\InvoiceUpdateController@update');
+Route::delete('invoices/{invoice}', 'Invoice\InvoiceDeleteController@delete');
+
+//Payment
+Route::get('users', 'Payment\PaymentController@index');
+Route::get('users/{user}', 'Payment\PaymentShowController@show');
+Route::post('users', 'Payment\PaymentCreateController@create');
+Route::patch('users/{user}', 'Payment\PaymentUpdateController@update');
+Route::delete('users/{user}', 'Payment\PaymentDeleteController@delete');
 
 
-//Route::get('api/loader', 'ApiAccessController@loader');
+/***********************************************************************
+ * SINGLE CONTROLLER ROUTES
+ ***********************************************************************/
 
+//Addresses
+Route::get('addresses', 'Address\AddressController@index');
+Route::get('addresses/{address}', 'Address\AddressController@show');
+Route::post('addresses', 'Address\AddressController@create');
+Route::patch('addresses/{address}', 'Address\AddressController@update');
+Route::delete('addresses/{address}', 'Address\AddressController@delete');
 
-//Route::post('api/records', 'Record\RecordCreateController@create');
+//Phone Numbers
+Route::get('phone_numbers', 'PhoneNumber\PhoneNumberController@index');
+Route::get('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@show');
+Route::post('phone_numbers', 'PhoneNumber\PhoneNumberController@create');
+Route::patch('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@update');
+Route::delete('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@delete');

@@ -35,9 +35,35 @@
 
 
                 <template v-slot:cell(actions)="row">
-                    <i class="fa fa-pencil-square-o fa-2x" title="Edit" aria-hidden="true"></i>
-                    <i class="fa fa-floppy-o fa-2x" title="Save" aria-hidden="true"></i>
-                    <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+
+                    <i class="fa fa-pencil-square-o fa-2x"
+                       title="Edit Phone Number"
+                       @click="editPhoneNumber(row)"
+                       aria-hidden="true"
+                       v-if="!row.item.edit && !row.item.new">
+                    </i>
+
+                    <i class="fa fa-floppy-o fa-2x"
+                       title="Save Phone Number"
+                       @click="savePhoneNumber(row)"
+                       aria-hidden="true"
+                       v-if="row.item.edit">
+                    </i>
+
+                    <i class="fa fa-floppy-o fa-2x"
+                       title="Save Phone Number"
+                       @click="updatePhoneNumber(row)"
+                       aria-hidden="true"
+                       v-if="row.item.new">
+                    </i>
+
+                    <i class="fa fa-trash-o fa-2x"
+                       title="Delete Phone Number"
+                       @click="deletePhoneNumber(row)"
+                       aria-hidden="true"
+                       v-if="!row.item.edit && !row.item.new">
+                    </i>
+
                 </template>
             </b-table>
 
@@ -110,31 +136,51 @@
 
             addNewPhoneNumberRow(){
 
-                this.items.push({   //Theoretically this will add a blank row, but I may need to push a set
-                    type: '',               //values that match the fields.
+                this.items.push({
+                    type: '',
                     number: '',
                     contact_name: '',
                     actions: '',
-                    business_id: ''
+                    business_id: '',
+                    new: true
                 });
 
             },
 
-            savePhoneNumber(){
-
+            editPhoneNumber(row){
+                row.item.edit = true;
             },
 
-            updatePhoneNumber(){
-
+            savePhoneNumber(row){
+                console.log("Save PhoneNumber");
             },
 
-            deletePhoneNumber(){
+            updatePhoneNumber(row){
+                console.log("Update PhoneNumber");
+            },
+
+            deletePhoneNumber(row){
+
+                axios.delete('phone-number/' + row.item.id)
+                console.log("delete PhoneNumber");
+            },
+
+            addFlagsToItems(){
+
+                let self = this;
+
+                //No. Need to be able to update the phone numbers
+                this.phone_numbers.every(function(number){
+                    number.new = false;
+                    number.edit = false;
+                    self.items.push(number);
+                })
 
             }
         },
 
         mounted() {
-            this.items = this.phone_numbers;
+            this.addFlagsToItems();
         },
 
         watch: {},
@@ -142,5 +188,14 @@
 </script>
 
 <style scoped>
+    i.fa{
+        position: relative;
+        top: 5px;
+    }
 
+    i.fa:hover{
+        color: #bbbbbb;
+        cursor: pointer;
+        transition-timing-function: ease-in;
+    }
 </style>

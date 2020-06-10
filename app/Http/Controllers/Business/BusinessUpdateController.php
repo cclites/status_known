@@ -4,23 +4,18 @@ namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Update\BusinessUpdateRequest;
-use Illuminate\Http\Request;
+use App\Business;
 
 class BusinessUpdateController extends Controller
 {
-    public function update(BusinessUpdateRequest $request){
-
-        $data = $request->validated();
-
-        if($request->business_id){
-            $business = \App\Business::find($request->business_id);
-            $business->update($data);
-
-        }else{
-            $business = \App\Business::make($data);
-        }
-
+    /**
+     * @param BusinessUpdateRequest $request
+     * @param Business $business
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(BusinessUpdateRequest $request, Business $business)
+    {
+        $business->update($request->toArray())->fresh();
         return response()->json($business);
-
     }
 }

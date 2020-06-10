@@ -12,7 +12,15 @@ class PhoneNumber extends Model
         'contact_name'
     ];
 
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
     public function business(){
         return $this->belongsTo(Business::class);
     }
+
+    /********************************************************
+     * VALIDATION
+     ********************************************************/
+    public function validate(){}
 }

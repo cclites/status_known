@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Record;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ReportRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\RecordRequest;
+
 
 class RecordUpdateController extends Controller
 {
-    public function update(ReportRequest $request){
-
+    public function update(RecordRequest $request){
+        //Cannot update records
     }
 }

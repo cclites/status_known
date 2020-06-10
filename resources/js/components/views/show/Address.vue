@@ -10,7 +10,9 @@
                      :fields="fields"
                      responsive
             >
+
                 <template v-slot:cell(type)="row">
+
                     <b-select v-model="row.item.type">
                         <option value="">Select a Type</option>
                         <option v-for="type in types" :value="type">{{ type }}</option>
@@ -37,11 +39,35 @@
                     <b-form-input v-model="row.item.zip"></b-form-input>
                 </template>
 
-
                 <template v-slot:cell(actions)="row">
-                    <i class="fa fa-pencil-square-o fa-2x" title="Edit" aria-hidden="true"></i>
-                    <i class="fa fa-floppy-o fa-2x" title="Save" aria-hidden="true"></i>
-                    <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-pencil-square-o fa-2x"
+                       title="Edit Address"
+                       @click="editAddress(row)"
+                       aria-hidden="true"
+                       v-if="!row.item.edit && !row.item.new">
+                    </i>
+
+                    <i class="fa fa-floppy-o fa-2x"
+                       title="Save Address"
+                       @click="updateAddress(row)"
+                       aria-hidden="true"
+                       v-if="row.item.edit">
+                    </i>
+
+                    <i class="fa fa-floppy-o fa-2x"
+                       title="Save Address"
+                       @click="saveAddress(row)"
+                       aria-hidden="true"
+                       v-if="row.item.new">
+                    </i>
+
+                    <i class="fa fa-trash-o fa-2x"
+                       title="Delete Address"
+                       @click="deleteAddress(row)"
+                       aria-hidden="true"
+                       v-if="!row.item.edit && !row.item.new">
+                    </i>
+
                 </template>
 
             </b-table>
@@ -78,7 +104,8 @@
                     address_2: '',
                     city: '',
                     state: '',
-                    zip: ''
+                    zip: '',
+                    edit: false
                 },
                 fields: [
                     {
@@ -111,39 +138,63 @@
                     }
                 ],
                 types: ['Primary', 'Mailing', 'Secondary'],
+                editing: false,
+                new : false
             }
         },
 
         computed: {},
 
         methods: {
-            addAddress(){
 
+            editAddress(row){
+                console.log("Edit address");
+                row.item.edit = true;
             },
 
-            updateAddress(){
-
+            saveAddress(row){
+                console.log("Save address");
             },
 
-            deleteAddress(){
+            updateAddress(row){
+                console.log("Update address");
+            },
 
+            deleteAddress(row){
+                console.log("delete address");
             },
 
             addNewAddressRow(){
+
                 this.items.push({   //Theoretically this will add a blank row, but I may need to push a set
                     type: '',               //values that match the fields.
                     address_1: '',
                     address_2: '',
                     city: '',
                     state: '',
-                    zip: ''
+                    zip: '',
+                    new: true,
+                    edit: false
                 });
+
+            },
+
+            addFlagsToItems(){
+
+                let self = this;
+
+                this.addresses.every(function(address){
+                    address.new = false;
+                    address.edit = false;
+                    console.log(address);
+                    self.items.push(address);
+                })
 
             }
         },
 
         mounted() {
-            this.items = this.addresses;
+            this.addFlagsToItems();
         },
 
         watch: {},
@@ -151,5 +202,14 @@
 </script>
 
 <style scoped>
+    i.fa{
+        position: relative;
+        top: 5px;
+    }
 
+    i.fa:hover{
+        color: #bbbbbb;
+        cursor: pointer;
+        transition-duration: .5s
+    }
 </style>

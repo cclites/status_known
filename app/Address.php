@@ -15,7 +15,16 @@ class Address extends Model
         'type'
     ];
 
+
+    /********************************************************
+     * RELATIONSHIPS
+     ********************************************************/
     public function business(){
         return $this->belongsTo(Business::class);
     }
+
+    /********************************************************
+     * VALIDATION
+     ********************************************************/
+    public function validate(){}
 }
