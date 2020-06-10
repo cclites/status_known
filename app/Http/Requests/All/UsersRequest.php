@@ -26,7 +26,7 @@ class UsersRequest extends FormRequest
     public function authorize()
     {
         if(auth()->user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            auth()->user()->can([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
+            auth()->user()->hasAnyDirectPermission([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
         {
             return true;
         }

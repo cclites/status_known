@@ -6,6 +6,8 @@ use App\Permission as P;
 use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Support\Facades\Auth;
+
 class PaymentUpdateRequest extends FormRequest
 {
     /**
@@ -17,7 +19,7 @@ class PaymentUpdateRequest extends FormRequest
     {
 
         if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            Auth::user()->hasPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+            Auth::user()->hasAnyDirectPermission([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
         {
             return true;
         }

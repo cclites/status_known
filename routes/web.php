@@ -53,7 +53,7 @@ Route::get('reports/{report}', 'Report\ReportShowController@show');
 Route::get('records/{record}', 'Record\RecordShowController@show');
 
 Route::get('providers/{provider}', 'Provider\ProviderShowController@show');
-Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
+//Route::get('payment/{payment}', 'Payment\PaymentShowController@show');
 
 
 
@@ -77,28 +77,28 @@ Route::delete('businesses/{business}', 'Business\BusinessDeleteController@delete
 //Account
 Route::get('accounts', 'Account\AccountController@index');
 Route::get('accounts/{account}', 'Account\AccountShowController@show');
-Route::post('accounts', 'Account\AccountCreateController@store');
+Route::post('accounts', 'Account\AccountAddController@store');
 Route::patch('accounts/{account}', 'Account\AccountUpdateController@update');
 Route::delete('accounts/{account}', 'Account\AccountDeleteController@delete');
 
 //User
 Route::get('users', 'User\UserController@index');
 Route::get('users/{user}', 'User\UserShowController@show');
-Route::post('users', 'User\UserCreateController@store');
+Route::post('users', 'User\UserAddController@store');
 Route::patch('users/{user}', 'User\UserUpdateController@update');
 Route::delete('users/{user}', 'User\UserDeleteController@delete');
 
 //Invoice
 Route::get('invoices', 'Invoice\InvoiceController@index');
 Route::get('invoices/{invoice}', 'Invoice\InvoiceShowController@show');
-Route::post('invoices', 'Invoice\InvoiceCreateController@store');
+Route::post('invoices', 'Invoice\InvoiceAddController@store');
 Route::patch('invoices/{invoice}', 'Invoice\InvoiceUpdateController@update');
 Route::delete('invoices/{invoice}', 'Invoice\InvoiceDeleteController@delete');
 
 //Payment
 Route::get('users', 'Payment\PaymentController@index');
 Route::get('users/{user}', 'Payment\PaymentShowController@show');
-Route::post('users', 'Payment\PaymentCreateController@store');
+Route::post('users', 'Payment\PaymentAddController@store');
 Route::patch('users/{user}', 'Payment\PaymentUpdateController@update');
 Route::delete('users/{user}', 'Payment\PaymentDeleteController@delete');
 

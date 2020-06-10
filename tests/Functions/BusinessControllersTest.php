@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Functions;
 
 use App\Business;
 use App\Permission as P;
@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-//use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use App\Http\Requests\Update\BusinessUpdateRequest;
+//use App\Http\Requests\Update\BusinessUpdateRequest;
 
 /**
  * Class BusinessControllersTest
@@ -37,8 +36,6 @@ class BusinessControllersTest extends TestCase
         $this->user = factory(User::class)->create();
         $this->user->assignRole(R::BUSINESS);
         Auth::login($this->user, true);
-
-
     }
 
     public function testBusinessCanBeCreated(){
