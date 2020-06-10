@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InvoiceUpdateRequest;
 use App\Invoice;
 use App\Role as R;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceAddController extends Controller
 {

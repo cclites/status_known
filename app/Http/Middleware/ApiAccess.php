@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class ApiAccess
 {
@@ -20,7 +21,7 @@ class ApiAccess
 
         //TODO:: create scopes in user model
         if($business){
-            \Auth::login($user, true);
+            Auth::login($user, true);
             return $next($request);
         }else{
             //TODO:: return a blank view of some sort.

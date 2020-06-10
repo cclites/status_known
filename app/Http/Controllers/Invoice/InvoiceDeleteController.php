@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InvoiceUpdateRequest;
 use App\Invoice;
 use App\Role as R;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceDeleteController extends Controller
 {

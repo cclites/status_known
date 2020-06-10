@@ -27,16 +27,6 @@ class ApiAccessController extends Controller
         $business = \App\Business::where('api_token', $request->api_token)->with('responsibleAgent')->first();
 
         $token = $request->api_token;
-        /*
-        $businessData = [
-            'name' => $business->name,
-            'api_token' => $business->api_token,
-        ];
-
-        $business = json_encode($businessData);
-        */
-
-
 
         return view('form_view', compact('token', 'business'));
     }

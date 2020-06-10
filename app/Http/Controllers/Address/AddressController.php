@@ -40,7 +40,7 @@ class AddressController extends Controller
      */
     public function create(AddressUpdateRequest $request)
     {
-        Address::create($request->toArray());
+        Address::create($request->validated());
 
         $addresses = $this->getAddresses();
         return response()->json($addresses);
@@ -53,7 +53,7 @@ class AddressController extends Controller
      */
     public function update(AddressUpdateRequest $request, Address $address)
     {
-        $address->update($request->toArray());
+        $address->update($request->validated());
 
         $addresses = $this->getAddresses();
         return response()->json($addresses);

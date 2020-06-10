@@ -8,11 +8,12 @@ use App\Business;
 
 class BusinessDeleteController extends Controller
 {
-    public function destroy(BusinessUpdateRequest $request, Business $business){
+    public function delete(BusinessUpdateRequest $request, Business $business)
+    {
+        if($business->delete()){
+            return response(200);
+        }
 
-        $business->delete();
-
-        $businesses = Business::all();
-        return response()->json($businesses);
+        return response(500);
     }
 }

@@ -6,6 +6,10 @@ use App\Permission as P;
 use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
 
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Auth;
+
+
 class BusinessRequest extends FormRequest
 {
     /**
@@ -15,12 +19,19 @@ class BusinessRequest extends FormRequest
      */
     public function authorize()
     {
-        if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->can([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
+        if(Auth()->user()->hasRole([R::ADMIN,R::BUSINESS]) &&
+            Auth()->user()->hasAnyDirectPermission([P::CAN_READ]));
         {
-            return true;
+            //\Log::info("Authorize");
+
+            //\Log::info(auth()->user()->getPermissionNames());
+
+            return filled(auth()->user()->getPermissionNames());
+
+            //return true;
         }
 
+        \Log::info("Do not authorize");
         return false;
     }
 

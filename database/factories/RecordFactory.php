@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use \Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use database\factories\RecordDataFactory;
+//use database\factories\RecordDataFactory;
 
 
 $factory->define(\App\Record::class, function (Faker $faker) {

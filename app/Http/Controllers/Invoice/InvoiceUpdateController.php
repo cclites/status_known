@@ -8,6 +8,7 @@ use App\Invoice;
 use App\Role as R;
 use Illuminate\Support\Facades\Auth;
 
+
 class InvoiceUpdateController extends Controller
 {
     public function update(InvoiceUpdateRequest $request, Invoice $invoice){

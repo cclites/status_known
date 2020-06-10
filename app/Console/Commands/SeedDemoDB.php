@@ -43,9 +43,9 @@ class SeedDemoDB extends BaseCommand
     public function handle()
     {
         //Drop and recreate database
-        DB::connection()->getPdo()->exec("DROP DATABASE `status_known`");
-        DB::connection()->getPdo()->exec("CREATE DATABASE `status_known`");
-        DB::connection()->getPdo()->exec("USE`status_known`");
+        DB::connection()->getPdo()->exec("DROP DATABASE `sk`");
+        DB::connection()->getPdo()->exec("CREATE DATABASE `sk`");
+        DB::connection()->getPdo()->exec("USE `sk`");
 
         //Run migrations
         Artisan::call("migrate");

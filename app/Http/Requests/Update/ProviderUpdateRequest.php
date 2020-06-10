@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Permission as P;
 use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class ProviderUpdateRequest extends FormRequest
 {

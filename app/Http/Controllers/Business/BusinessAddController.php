@@ -10,7 +10,7 @@ class BusinessAddController extends Controller
 {
     public function store(BusinessUpdateRequest $request)
     {
-        $business = Business::create($request->toArray());
+        $business = Business::create($request->validated());
         return response()->json($business);
     }
 }

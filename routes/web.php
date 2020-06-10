@@ -70,35 +70,35 @@ Route::get('business-edit/{business}', 'Business\BusinessSettingsController@show
 //Business
 Route::get('businesses', 'Business\BusinessController@index');
 Route::get('businesses/{business}', 'Business\BusinessShowController@show');
-Route::post('businesses', 'Business\BusinessCreateController@create');
+Route::post('businesses', 'Business\BusinessAddController@store');
 Route::patch('businesses/{business}', 'Business\BusinessUpdateController@update');
 Route::delete('businesses/{business}', 'Business\BusinessDeleteController@delete');
 
 //Account
 Route::get('accounts', 'Account\AccountController@index');
 Route::get('accounts/{account}', 'Account\AccountShowController@show');
-Route::post('accounts', 'Account\AccountCreateController@create');
+Route::post('accounts', 'Account\AccountCreateController@store');
 Route::patch('accounts/{account}', 'Account\AccountUpdateController@update');
 Route::delete('accounts/{account}', 'Account\AccountDeleteController@delete');
 
 //User
 Route::get('users', 'User\UserController@index');
 Route::get('users/{user}', 'User\UserShowController@show');
-Route::post('users', 'User\UserCreateController@create');
+Route::post('users', 'User\UserCreateController@store');
 Route::patch('users/{user}', 'User\UserUpdateController@update');
 Route::delete('users/{user}', 'User\UserDeleteController@delete');
 
 //Invoice
 Route::get('invoices', 'Invoice\InvoiceController@index');
 Route::get('invoices/{invoice}', 'Invoice\InvoiceShowController@show');
-Route::post('invoices', 'Invoice\InvoiceCreateController@create');
+Route::post('invoices', 'Invoice\InvoiceCreateController@store');
 Route::patch('invoices/{invoice}', 'Invoice\InvoiceUpdateController@update');
 Route::delete('invoices/{invoice}', 'Invoice\InvoiceDeleteController@delete');
 
 //Payment
 Route::get('users', 'Payment\PaymentController@index');
 Route::get('users/{user}', 'Payment\PaymentShowController@show');
-Route::post('users', 'Payment\PaymentCreateController@create');
+Route::post('users', 'Payment\PaymentCreateController@store');
 Route::patch('users/{user}', 'Payment\PaymentUpdateController@update');
 Route::delete('users/{user}', 'Payment\PaymentDeleteController@delete');
 
@@ -110,13 +110,13 @@ Route::delete('users/{user}', 'Payment\PaymentDeleteController@delete');
 //Addresses
 Route::get('addresses', 'Address\AddressController@index');
 Route::get('addresses/{address}', 'Address\AddressController@show');
-Route::post('addresses', 'Address\AddressController@create');
+Route::post('addresses', 'Address\AddressController@store');
 Route::patch('addresses/{address}', 'Address\AddressController@update');
 Route::delete('addresses/{address}', 'Address\AddressController@delete');
 
 //Phone Numbers
 Route::get('phone_numbers', 'PhoneNumber\PhoneNumberController@index');
 Route::get('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@show');
-Route::post('phone_numbers', 'PhoneNumber\PhoneNumberController@create');
+Route::post('phone_numbers', 'PhoneNumber\PhoneNumberController@store');
 Route::patch('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@update');
 Route::delete('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@delete');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Invoice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Model\InvoiceRequest;
 use App\Invoice;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class InvoiceShowController extends Controller

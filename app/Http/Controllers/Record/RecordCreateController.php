@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Record;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\All\RecordsRequest;
 use App\Jobs\RequestRecordJob;
-use database\factories\RecordDataFactory;
 use \Illuminate\Support\Facades\Crypt;
 use \Illuminate\Support\Facades\Auth;
 use App\Record;

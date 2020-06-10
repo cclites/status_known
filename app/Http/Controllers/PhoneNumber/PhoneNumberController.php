@@ -38,7 +38,7 @@ class PhoneNumberController extends Controller
      */
     public function create(PhoneNumberUpdateRequest $request)
     {
-        PhoneNumber::create($request->toArray());
+        PhoneNumber::create($request->validated());
 
         $phoneNumbers = $this->getPhoneNumbers();
         return response()->json($phoneNumbers);
@@ -50,7 +50,7 @@ class PhoneNumberController extends Controller
      */
     public function update(PhoneNumberUpdateRequest $request, PhoneNumber $phoneNumber)
     {
-        $phoneNumber->update($request->toArray());
+        $phoneNumber->update($request->validated());
 
         $phoneNumbers = $this->getPhoneNumbers();
         return response()->json($phoneNumbers);
@@ -72,12 +72,12 @@ class PhoneNumberController extends Controller
 
         $phoneNumberQuery = PhoneNumber::query();
 
-        if( Auth::user()->hasRole([R::BUSINESS]) ){
-
+        if( Auth::user()->hasRole([R::BUSINESS]) )
+        {
             $phoneNumberQuery->where('business_id', Auth::user()->business_id);
 
         }elseif(Auth::user()->hasRole([R::ADMIN])){
-
+            //UNUSED FOR NOW
         }
 
         return $phoneNumberQuery->get();
