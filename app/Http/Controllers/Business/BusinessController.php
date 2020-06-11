@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Model\BusinessRequest;
 
 /**
  * Class BusinessController
@@ -12,9 +11,11 @@ use Illuminate\Http\Request;
  *
  * MAY NOT USE
  */
-class BusinessController extends Controller
+class BusinessController extends BaseController
 {
-    public function index(){
-
+    public function index(BusinessRequest $request)
+    {
+        $businesses = $this->businesses();
+        return response()->json($businesses);
     }
 }

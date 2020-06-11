@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Model\UserRequest;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
-    public function index(){
-        $users = User::all()->sortBy('name');
-        return response()->json(users);
+    public function index(UserRequest $request)
+    {
+        $users = $this->users();
+        return response()->json($users);
     }
 }

@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Payment;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\PaymentUpdateRequest;
-use Illuminate\Http\Request;
+use App\Payment;
 
-class PaymentUpdateController extends Controller
+
+class PaymentUpdateController extends BaseController
 {
-    public function update(PaymentUpdateRequest $request){
-        $data = $request->validated();
+    public function update(PaymentUpdateRequest $request, Payment $payment)
+    {
+        $payment->update($request->validated());
+
+        $payments = $this->payments();
+        return response()->json($payments);
     }
 }

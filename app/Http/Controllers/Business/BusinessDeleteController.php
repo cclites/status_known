@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Update\BusinessUpdateRequest;
 use App\Business;
 
-class BusinessDeleteController extends Controller
+class BusinessDeleteController extends BaseController
 {
     public function delete(BusinessUpdateRequest $request, Business $business)
     {
-        if($business->delete()){
-            return response(200);
-        }
+        $business->delete();
 
-        return response(500);
+        $businesses = $this->addresses();
+        return response()->json($businesses);
     }
 }

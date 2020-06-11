@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Address;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Model\AddressRequest;
 use App\Http\Requests\Update\AddressUpdateRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Address;
-use App\Permission as P;
-use App\Role as R;
-use function App\Reports\query;
 
-class AddressController extends Controller
+
+class AddressController extends BaseController
 {
 
     /**
@@ -20,7 +17,7 @@ class AddressController extends Controller
      */
     public function index(AddressRequest $request)
     {
-        $addresses = $this->getAddresses();
+        $addresses = $this->addresses();
         return response()->json($addresses);
     }
 
@@ -42,7 +39,7 @@ class AddressController extends Controller
     {
         Address::create($request->validated());
 
-        $addresses = $this->getAddresses();
+        $addresses = $this->addresses();
         return response()->json($addresses);
     }
 
@@ -55,7 +52,7 @@ class AddressController extends Controller
     {
         $address->update($request->validated());
 
-        $addresses = $this->getAddresses();
+        $addresses = $this->addresses();
         return response()->json($addresses);
     }
 
@@ -69,21 +66,8 @@ class AddressController extends Controller
     {
         $address->delete();
 
-        $addresses = $this->getAddresses();
+        $addresses = $this->addresses();
         return response()->json($addresses);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
-     */
-    public function getAddresses()
-    {
-        $addressesQuery = Address::query();
-
-        if( Auth::user()->hasRole([R::BUSINESS]) ){
-            $addressesQuery->where('business_id', Auth::user()->business_id);
-        }
-
-        return $addressesQuery->get();
-    }
 }

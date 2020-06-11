@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Business;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Model\BusinessRequest;
 
+use App\Business;
 
-class BusinessShowController extends Controller
+class BusinessShowController extends BaseController
 {
-    public function show(Business $business, BusinessRequest $request){
-
+    public function show(Business $business, BusinessRequest $request)
+    {
         $business = $business->load('addresses', 'phone_numbers');
-
-        //For unit testing
-        if($request->input('json')){
-            return response()->json($business);
-        }
-
-        $title = $business->name;
-
-        return view('business.settings_business', compact('business', 'title'));
-
+        return response()->json($business);
     }
 }

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Record;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\RecordRequest;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Model\RecordRequest;
+use App\Record;
 
 
-class RecordUpdateController extends Controller
+class RecordUpdateController extends BaseController
 {
-    public function update(RecordRequest $request){
-        //Cannot update records
+    public function update(RecordRequest $request, Record $record)
+    {
+        return false;
     }
 }

@@ -14,7 +14,7 @@ use App\Record;
 class RecordPrintController extends Controller
 {
     //This is accessed both via web routes and API routes. A call
-    //Made from the API won't have a tracking number.
+    //made from the API won't have a tracking number.
     public function download(RecordRequest $request, Record $record)
     {
         //If coming from API

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Provider;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\ProviderUpdateRequest;
-use Illuminate\Http\Request;
+use App\Provider;
 
-class ProviderAddController extends Controller
+class ProviderAddController extends BaseController
 {
-    public function store(ProviderUpdateRequest $request){
+    public function create(ProviderUpdateRequest $request)
+    {
+        Provider::create($request->validated());
 
+        $providers = $this->providers();
+        return response()->json($providers);
     }
 }

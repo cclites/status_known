@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Invoice;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Model\InvoiceRequest;
+use App\Invoice;
 use Illuminate\Http\Request;
 
-class InvoiceController extends Controller
+class InvoiceController extends BaseController
 {
-    public function index(){
-
+    public function index(InvoiceRequest $request)
+    {
+        $invoices = $this->invoices();
+        return response()->json($invoices);
     }
 }

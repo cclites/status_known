@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Account;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\AccountUpdateRequest;
-use Illuminate\Http\Request;
+use App\Account;
 
-class AccountAddController extends Controller
+class AccountAddController extends BaseController
 {
     public function store(AccountUpdateRequest $request){
 
-        $data = $request->validated();
+        Account::create($request->validated());
 
-        //get validated data from $request and use Create to create a new account
-        $account = Account::create($data);
+        $accounts = $this->accounts();
+        return response()->json($accounts);
     }
 }

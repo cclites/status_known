@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Provider;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\ProviderUpdateRequest;
-use Illuminate\Http\Request;
+use App\Provider;
 
-class ProviderDeleteController extends Controller
+
+class ProviderDeleteController extends BaseController
 {
-    public function destroy(ProviderUpdateRequest $request){
+    public function destroy(ProviderUpdateRequest $request, Provider $provider)
+    {
+        $provider->delete();
 
+        $providers = $this->providers();
+        return response()->json($providers);
     }
 }

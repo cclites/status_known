@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Model\UserRequest;
 use App\User;
-use Illuminate\Http\Request;
 
-class UserShowController extends Controller
+class UserShowController extends BaseController
 {
-    public function show(User $user, UserRequest $request){
-
-        return view('show.user_show', compact('user'));
-
+    public function show(User $user, UserRequest $request)
+    {
+        return response()->json($user);
     }
 }

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Update\BusinessUpdateRequest;
 use App\Business;
 
-class BusinessAddController extends Controller
+class BusinessAddController extends BaseController
 {
     public function store(BusinessUpdateRequest $request)
     {
-        $business = Business::create($request->validated());
-        return response()->json($business);
+        Business::create($request->validated());
+
+        $businesses = $this->businesses();
+        return response()->json($businesses);
     }
 }
+

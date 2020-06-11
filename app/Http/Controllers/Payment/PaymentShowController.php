@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers\Payment;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Model\PaymentRequest;
 use App\Payment;
-use Illuminate\Http\Request;
 
-class PaymentShowController extends Controller
+
+class PaymentShowController extends BaseController
 {
-    public function show(Payment $payment, PaymentRequest $request){
-
-        return view('show.payment_show', compact('payment'));
-        /*
-        if($request->authorize()){
-            return response()->json($payment);
-        }else{
-            return back(401, "You do not have permission to view this resource");
-        }*/
-
-
+    public function show(Payment $payment, PaymentRequest $request)
+    {
+        return response()->json($payment);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Update\BusinessUpdateRequest;
-use App\Business;
-use Illuminate\Support\Facades\Response;
 
-class BusinessUpdateController extends Controller
+use App\Business;
+
+class BusinessUpdateController extends BaseController
 {
     /**
      * @param BusinessUpdateRequest $request

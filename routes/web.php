@@ -34,7 +34,7 @@ Auth::routes();
 
 Route::get('/home', 'Views\DashboardViewController@index')->name('dashboard');
 
-//Calls controllers to add dashboard views
+//Dashboard views
 Route::get('dashboard-view', 'Views\DashboardViewController@index');
 Route::get('admin-dashboard-view', 'Views\AdminDashboardViewController@index');
 Route::get('business-dashboard-view', 'Views\BusinessDashboardViewController@index');

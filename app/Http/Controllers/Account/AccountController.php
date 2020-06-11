@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
 
-class AccountController extends Controller
+use App\Http\Requests\Model\AccountRequest;
+use App\Account;
+
+
+class AccountController extends BaseController
 {
-    public function index(){
-
+    public function index(AccountRequest $request)
+    {
+        $accounts = $this->accounts();
+        return response()->json($accounts);
     }
 }

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountUpdateRequest;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Update\AccountUpdateRequest;
+use App\Account;
 
-class AccountDeleteController extends Controller
+class AccountDeleteController extends BaseController
 {
-    public function destroy(AccountUpdateRequest $request){
+    public function destroy(AccountUpdateRequest $request, Account $account)
+    {
+        $account->delete();
 
-        $request->authorize() = true;
-
-        $data = $request->validated();
+        $accounts = $this->accounts();
+        return response()->json($accounts);
     }
 }

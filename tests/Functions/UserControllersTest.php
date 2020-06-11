@@ -34,11 +34,9 @@ class UserControllersTest extends TestCase
 
         $newUser = factory(User::class)->make()->toArray();
 
-
         $response = $this
             ->actingAs($this->user)
             ->post('/users/', $newUser);
-
 
         $response->assertStatus(200);
 

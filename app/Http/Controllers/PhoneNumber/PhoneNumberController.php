@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\PhoneNumber;
 
-use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Model\PhoneNumberRequest;
 use App\Http\Requests\Update\PhoneNumberUpdateRequest;
-
 use App\PhoneNumber;
-use App\Role as R;
 
-use Illuminate\Support\Facades\Auth;
-
-class PhoneNumberController extends Controller
+class PhoneNumberController extends BaseController
 {
     /**
      * @param PhoneNumberRequest $request
@@ -20,7 +15,7 @@ class PhoneNumberController extends Controller
      */
     public function index(PhoneNumberRequest $request)
     {
-        $phoneNumbers = $this->getPhoneNumbers();
+        $phoneNumbers = $this->phoneNumbers();
         return response()->json($phoneNumbers);
     }
 
@@ -40,7 +35,7 @@ class PhoneNumberController extends Controller
     {
         PhoneNumber::create($request->validated());
 
-        $phoneNumbers = $this->getPhoneNumbers();
+        $phoneNumbers = $this->phoneNumbers();
         return response()->json($phoneNumbers);
     }
 
@@ -52,7 +47,7 @@ class PhoneNumberController extends Controller
     {
         $phoneNumber->update($request->validated());
 
-        $phoneNumbers = $this->getPhoneNumbers();
+        $phoneNumbers = $this->phoneNumbers();
         return response()->json($phoneNumbers);
     }
 
@@ -64,22 +59,8 @@ class PhoneNumberController extends Controller
     {
         $phoneNumber->delete();
 
-        $phoneNumbers = $this->getPhoneNumbers();
+        $phoneNumbers = $this->phoneNumbers();
         return response()->json($phoneNumbers);
     }
 
-    public function getPhoneNumbers(){
-
-        $phoneNumberQuery = PhoneNumber::query();
-
-        if( Auth::user()->hasRole([R::BUSINESS]) )
-        {
-            $phoneNumberQuery->where('business_id', Auth::user()->business_id);
-
-        }elseif(Auth::user()->hasRole([R::ADMIN])){
-            //UNUSED FOR NOW
-        }
-
-        return $phoneNumberQuery->get();
-    }
 }

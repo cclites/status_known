@@ -4,33 +4,27 @@ namespace App\Http\Controllers\Business;
 
 use App\Business;
 use App\Http\Requests\Model\BusinessRequest;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
+use App\Http\Requests\Update\BusinessUpdateRequest;
 
-
-use App\Http\Requests\BusinessUpdateRequest;
-
-class BusinessSettingsController extends Controller
+class BusinessSettingsController extends BaseController
 {
 
     public function index(BusinessRequest $request){
+
+        \Log::info("Should not be using this.");
 
         //if($request->json){
             //return SettingsBusiness::all();
         //}
 
-        return view('settings-businesss', ' Settings Business', [], []);
+        //return view('settings-businesss', ' Settings Business', [], []);
     }
 
     public function show(Business $business, BusinessRequest $request){
 
-        //\Log::Info("Business settings controller");
-
         $business->load('addresses', 'phone_numbers', 'responsibleAgent', 'users');
-
-        //\Log::info(json_encode($business));
-
 
         return view('business.settings_business', ['business' => $business]);
 

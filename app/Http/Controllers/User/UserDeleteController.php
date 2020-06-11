@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserUpdateRequest;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Update\UserUpdateRequest;
+use App\User;
 
-class UserDeleteController extends Controller
+class UserDeleteController extends BaseController
 {
-    public function destroy(\App\User $user){
+    public function destroy(UserUpdateRequest $request, User $user)
+    {
+        $user->delete();
 
+        $users = $this->users();
+        return response()->json($users);
     }
 }

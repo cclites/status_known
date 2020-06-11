@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserUpdateRequest;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Update\UserUpdateRequest;
+use App\User;
 
-class UserUpdateController extends Controller
+class UserUpdateController extends BaseController
 {
-    public function update(UserUpdateRequest $request){}
+    public function update(UserUpdateRequest $request, User $user)
+    {
+        $user->update($request->validated());
+
+        $users = $this->users();
+        return response()->json($users);
+    }
 }
