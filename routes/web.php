@@ -110,13 +110,13 @@ Route::delete('payments/{payment}', 'Payment\PaymentDeleteController@delete');
 //Addresses
 Route::get('addresses', 'Address\AddressController@index');
 Route::get('addresses/{address}', 'Address\AddressController@show');
-Route::post('addresses', 'Address\AddressController@store');
+Route::post('addresses', 'Address\AddressController@create');
 Route::patch('addresses/{address}', 'Address\AddressController@update');
 Route::delete('addresses/{address}', 'Address\AddressController@delete');
 
 //Phone Numbers
 Route::get('phone_numbers', 'PhoneNumber\PhoneNumberController@index');
 Route::get('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@show');
-Route::post('phone_numbers', 'PhoneNumber\PhoneNumberController@store');
+Route::post('phone_numbers', 'PhoneNumber\PhoneNumberController@create');
 Route::patch('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@update');
 Route::delete('phone_numbers/{phone_number}', 'PhoneNumber\PhoneNumberController@delete');

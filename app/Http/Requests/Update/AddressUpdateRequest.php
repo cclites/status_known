@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Role as R;
 use App\Permission as P;
+use App\Http\Requests\BaseFormRequest;
 
-class AddressUpdateRequest extends FormRequest
+class AddressUpdateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,8 +18,11 @@ class AddressUpdateRequest extends FormRequest
      */
     public function authorize()
     {
+        $method = $this->method();
+        $role = $this->mapRequestMethodToPermission($method);
+
         if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-           Auth::user()->hasPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+            Auth::user()->can($role))
         {
             return true;
         }
