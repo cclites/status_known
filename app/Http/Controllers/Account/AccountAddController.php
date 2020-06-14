@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\AccountUpdateRequest;
+use App\Http\Requests\Update\AccountUpdateRequest;
 use App\Account;
 
 class AccountAddController extends BaseController

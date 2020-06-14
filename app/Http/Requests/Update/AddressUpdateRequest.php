@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Update;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
 use App\Role as R;
-use App\Permission as P;
 use App\Http\Requests\BaseFormRequest;
 
 class AddressUpdateRequest extends BaseFormRequest
@@ -43,6 +41,7 @@ class AddressUpdateRequest extends BaseFormRequest
             'city' => 'required|string|max:50',
             'state' => 'required|string|max:25',
             'zip' => 'required|string|max:12',
+            'type' => 'required|string|'
         ];
     }
 }
