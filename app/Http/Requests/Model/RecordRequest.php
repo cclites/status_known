@@ -16,8 +16,8 @@ class RecordRequest extends FormRequest
      */
     public function authorize()
     {
-        if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS, R::API]) &&
-            Auth::user()->hasAnyDirectPermission(P::CAN_CREATE, P::CAN_READ))
+        if(Auth()->user()->hasRole([R::ADMIN,R::BUSINESS]) &&
+            Auth()->user()->can(P::CAN_READ) )
         {
             return true;
         }

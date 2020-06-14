@@ -5,6 +5,7 @@ namespace App\Http\Requests\Model;
 use App\Permission as P;
 use App\Role as R;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentRequest extends FormRequest
 {
@@ -15,8 +16,8 @@ class PaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->hasPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
+        if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
+            Auth::user()->can(P::CAN_READ))
         {
             return true;
         }

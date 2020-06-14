@@ -12,7 +12,8 @@ class Factory extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'factory:build {file} {directory?}';
+//    protected $signature = 'factory:build {file} {directory?}';
+    protected $signature = 'factory:build';
 
     /**
      * The console command description.
@@ -38,13 +39,30 @@ class Factory extends BaseCommand
      */
     public function handle()
     {
-        $this->setup($this->argument('file'), $this->argument('directory'));
 
-        $this->addVueComponent();
-        $this->registerComponent();
-        $this->addController();
-        $this->addRequest();
-        $this->addClass();
+        $business_id = 1;
+
+        $recordCount = 4;
+        $records = factory(\App\Record::class, 4)
+                        ->create(['business_id'=> $business_id])
+                        ->each(function($record) use ($business_id){
+
+                            factory(\App\Invoice::class)
+                                ->create(
+                                    [
+                                        'business_id'=> $business_id,
+                                    ]
+                                );
+                        });
+
+
+        //$this->setup($this->argument('file'), $this->argument('directory'));
+
+        //$this->addVueComponent();
+        //$this->registerComponent();
+        //$this->addController();
+        //$this->addRequest();
+        //$this->addClass();
 
 
         /*

@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Update;
 
-use App\Permission as P;
 use App\Role as R;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class InvoiceUpdateRequest extends FormRequest
+class InvoiceUpdateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,8 +15,11 @@ class InvoiceUpdateRequest extends FormRequest
      */
     public function authorize()
     {
+        $method = $this->method();
+        $role = $this->mapRequestMethodToPermission($method);
+
         if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            Auth::user()->hasPermissionTo([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+            Auth::user()->can($role))
         {
             return true;
         }
@@ -32,10 +35,10 @@ class InvoiceUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'sometimes|numeric',
             'business_id' => 'required|numeric',
             'amount' => 'required|numeric',
             'tracking' => 'required|string|max:32',
-            'created_at' => 'nullable|date'
         ];
     }
 }

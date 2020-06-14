@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\PaymentUpdateRequest;
+use App\Http\Requests\Update\PaymentUpdateRequest;
 use App\Payment;
 
 

@@ -12,7 +12,7 @@ class BusinessDeleteController extends BaseController
     {
         $business->delete();
 
-        $businesses = $this->addresses();
+        $businesses = $this->businesses();
         return response()->json($businesses);
     }
 }

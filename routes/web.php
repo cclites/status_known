@@ -96,11 +96,11 @@ Route::patch('invoices/{invoice}', 'Invoice\InvoiceUpdateController@update');
 Route::delete('invoices/{invoice}', 'Invoice\InvoiceDeleteController@delete');
 
 //Payment
-Route::get('users', 'Payment\PaymentController@index');
-Route::get('users/{user}', 'Payment\PaymentShowController@show');
-Route::post('users', 'Payment\PaymentAddController@store');
-Route::patch('users/{user}', 'Payment\PaymentUpdateController@update');
-Route::delete('users/{user}', 'Payment\PaymentDeleteController@delete');
+Route::get('payments', 'Payment\PaymentController@index');
+Route::get('payments/{payment}', 'Payment\PaymentShowController@show');
+Route::post('payments', 'Payment\PaymentAddController@store');
+Route::patch('payments/{payment}', 'Payment\PaymentUpdateController@update');
+Route::delete('payments/{payment}', 'Payment\PaymentDeleteController@delete');
 
 
 /***********************************************************************

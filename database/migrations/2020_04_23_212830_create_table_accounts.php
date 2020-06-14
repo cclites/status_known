@@ -23,7 +23,7 @@ class CreateTableAccounts extends Migration
             $table->string('tracking', 32);
             $table->timestamps();
 
-            $table->foreign('business_id')->references('id')->on('businesses');
+            //$table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 

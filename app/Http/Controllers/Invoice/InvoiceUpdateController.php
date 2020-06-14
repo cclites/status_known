@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Invoice;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\InvoiceUpdateRequest;
+use App\Http\Requests\Update\InvoiceUpdateRequest;
 use App\Invoice;
 
 class InvoiceUpdateController extends BaseController

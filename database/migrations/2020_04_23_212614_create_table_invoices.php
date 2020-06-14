@@ -21,7 +21,7 @@ class CreateTableInvoices extends Migration
             $table->dateTime('created_on')->nullable();
             $table->timestamps();
 
-            $table->foreign('business_id')->references('id')->on('businesses');
+            //$table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 

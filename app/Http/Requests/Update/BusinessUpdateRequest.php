@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Update;
 
-use App\Permission as P;
 use App\Role as R;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\BaseFormRequest;
 
-class BusinessUpdateRequest extends FormRequest
+class BusinessUpdateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,8 +15,11 @@ class BusinessUpdateRequest extends FormRequest
      */
     public function authorize()
     {
+        $method = $this->method();
+        $role = $this->mapRequestMethodToPermission($method);
+
         if(Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            Auth::user()->hasAnyDirectPermission([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]))
+            Auth::user()->can($role))
         {
             return true;
         }

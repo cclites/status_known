@@ -15,11 +15,9 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        if(\Auth::user()->hasRole([R::ADMIN,R::BUSINESS]) &&
-            \Auth::user()->can([P::CAN_UPDATE, P::CAN_DELETE, P::CAN_CREATE, P::CAN_READ]));
+        if(Auth()->user()->hasRole([R::ADMIN,R::BUSINESS]) &&
+            Auth()->user()->can(P::CAN_READ) )
         {
-            //TODO: Make sure user is allowed to see a particular report. How?
-
             return true;
         }
 

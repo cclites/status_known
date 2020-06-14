@@ -9,7 +9,8 @@ use App\Invoice;
 
 class InvoiceShowController extends BaseController
 {
-    public function show(Invoice $invoice, InvoiceRequest $request){
+    public function show(Invoice $invoice, InvoiceRequest $request)
+    {
         return response()->json($invoice);
     }
 }

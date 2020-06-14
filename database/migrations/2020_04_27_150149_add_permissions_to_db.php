@@ -29,8 +29,6 @@ class AddPermissionsToDb extends Migration
      */
     public function down()
     {
-
         Permission::truncate();
-
     }
 }

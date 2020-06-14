@@ -24,8 +24,8 @@ class CreateTablePayments extends Migration
 
             $table->timestamps();
 
-            $table->foreign('business_id')->references('id')->on('businesses');
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            //$table->foreign('business_id')->references('id')->on('businesses');
+            //$table->foreign('invoice_id')->references('id')->on('invoices');
         });
     }
 
