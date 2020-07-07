@@ -6,15 +6,15 @@
     <testsuites>
         <!--testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
+        </testsuite-->
 
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
-        </testsuite-->
-
-        <testsuite name="Functions">
-            <directory suffix="Test.php">./tests/Functions</directory>
         </testsuite>
+
+        <!--testsuite name="Functions">
+            <directory suffix="Test.php">./tests/Functions</directory>
+        </testsuite-->
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

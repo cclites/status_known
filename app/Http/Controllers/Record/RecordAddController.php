@@ -10,7 +10,7 @@ use App\Jobs\RequestRecordJob;
 use App\Record;
 
 
-class RecordCreateController extends BaseController
+class RecordAddController extends BaseController
 {
     /**
      * create a new record request
@@ -19,7 +19,8 @@ class RecordCreateController extends BaseController
      */
     public function create(RecordsRequest $request)
     {
-        //This needs a transformer
+        //This needs a transformer resource
+
         $record = Record::create($request->validated());
 
         $record->dob = Crypt::encrypt($request->dob);

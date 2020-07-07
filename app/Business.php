@@ -16,7 +16,7 @@ class Business extends Model
     }
 
     public function responsibleAgent(){
-        return $this->hasOne(User::class, 'id', 'responsible_agent_id');
+        return $this->hasOne(User::class,'id', 'responsible_agent_id');
     }
 
     public function account(){

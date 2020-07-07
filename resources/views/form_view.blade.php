@@ -131,6 +131,7 @@
             message: '',
             show_message: false,
             errors: '',
+            api_base_path: '{{ env('API_BASE_PATH') }}',
         };
 
 
@@ -150,7 +151,7 @@
             data.disabled = true;
             let self = this;
 
-            axios.post('records?api_token=' + data.token, data.form)
+            axios.post(this.api_base_path + '/records?api_token=' + data.token, data.form)
                 .then((response)=>{
 
                     if(response.status == '200'){

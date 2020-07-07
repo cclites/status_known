@@ -21,11 +21,13 @@ foreach ($directories as $directory)
    // require $directory . "/" . $baseName . ".php";
 }
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
-Route::get('test', function () {
+Route::get('/', function () {
     return view('test');
 });
 
@@ -101,6 +103,13 @@ Route::get('payments/{payment}', 'Payment\PaymentShowController@show');
 Route::post('payments', 'Payment\PaymentAddController@store');
 Route::patch('payments/{payment}', 'Payment\PaymentUpdateController@update');
 Route::delete('payments/{payment}', 'Payment\PaymentDeleteController@delete');
+
+//Record
+Route::get('records', 'Record\RecordController@index');
+Route::get('records/{record}', 'Record\RecordShowController@show');
+Route::post('records', 'Record\RecordAddController@store');
+Route::patch('records/{record}', 'Record\RecordUpdateController@update');
+Route::delete('records/{record}', 'Record\RecordDeleteController@delete');
 
 
 /***********************************************************************

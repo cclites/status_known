@@ -4,8 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Business;
 
-class ApiAccess
+use Illuminate\Database\Eloquent\Model;
+
+class ApiAccess extends Model
 {
     /**
      * Handle an incoming request.
@@ -16,7 +19,7 @@ class ApiAccess
      */
     public function handle($request, Closure $next)
     {
-        $business = \App\Business::where('api_token', $request->api_token)->with('responsibleAgent')->first();
+        $business = Business::where('api_token', $request->api_token)->first();
         $user = $business->responsibleAgent;
 
         //TODO:: create scopes in user model
